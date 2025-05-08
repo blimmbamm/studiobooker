@@ -1,0 +1,3 @@
+- When loading the app, isAuthenticated is always false initially / the user gets redirected to /auth/login in the authguard, even if the auth check succeeds --> try something with location: from
+-  try setting auth route prefix to empty string, this should work since dashboard routes match first; however this may be problematic with a wildcard route
+- generic fetch thing: be sure that no runtime errors occur and maybe construct url path safely with respect to slashes etc
