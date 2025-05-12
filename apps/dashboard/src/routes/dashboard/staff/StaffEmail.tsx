@@ -1,0 +1,52 @@
+import { TextField, Typography } from '@mui/material';
+import { useStaffProperty } from './useStaffProperty';
+import { Staff } from '../../../types/staff';
+
+export default function StaffEmail(props: { staff: Staff }) {
+  /**
+   * Checks if `value` is valid initial part of an email
+   */
+  function isValidPartialEmailOrEmpty(value: string) {
+    const conditions = [
+      /^[A-Za-z0-9][A-Za-z0-9._-]*$/, // local part
+      /^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?@([A-Za-z0-9-]+(?:\.[A-Za-z]*)?)?$/, // full part
+    ];
+
+    return (
+      !value ||
+      conditions.some((re) => re.test(value)) && !value.includes('..')
+    );
+  }
+
+  /**
+   * Checks if value represents valid full email
+   */
+  function isValidFullEmailOrEmpty(value: string) {
+    const validMailRegex =
+      /^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?@[A-Za-z0-9-]+\.[A-Za-z]{2,}$/;
+
+    return !value || validMailRegex.test(value);
+  }
+
+  const { value, handleChange, hasError, checkErrors } = useStaffProperty({
+    staff: props.staff,
+    property: 'email',
+    updateValueIf: isValidPartialEmailOrEmpty,
+    submitValueIf: isValidFullEmailOrEmpty,
+  });
+
+  return (
+    <>
+      <Typography>E-mail</Typography>
+      <TextField
+        variant="outlined"
+        value={value}
+        onChange={handleChange}
+        onBlur={checkErrors}
+        error={hasError}
+        helperText={hasError && 'Invalid e-mail. This is not saved.'}
+        autoComplete="off"
+      />
+    </>
+  );
+}

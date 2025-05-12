@@ -28,7 +28,6 @@ export default function StaffList() {
           </ListItemButton>
         ))}
       </List>
-
       <AddStaff />
     </Card>
   );

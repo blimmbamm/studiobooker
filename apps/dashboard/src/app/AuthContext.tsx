@@ -18,13 +18,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export default function AuthProvider(props: PropsWithChildren) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     // verify authentication status by fetching /auth/company
     async function checkAuthentication() {
+      console.log('checking auth')
       setLoading(true);
 
       const response = await fetch('http://localhost:3000/auth/company', {

@@ -20,16 +20,16 @@ export default function AddStaff() {
     addStaffMutation.reset();
     setOpen(false);
   }
-
-  function handleAddStaff() {
-    // Optimize: check if valid = at least one character before sending request
-    addStaffMutation.mutate({ name: inputRef.current?.value || '' });
-  }
-
+  
   function handleChange() {
     if (addStaffMutation.error) {
       addStaffMutation.reset();
     }
+  }
+  
+  function handleAddStaff() {
+    // Optimize: check if valid = at least one character before sending request
+    addStaffMutation.mutate({ name: inputRef.current?.value || '' });
   }
 
   return (

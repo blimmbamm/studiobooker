@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000/';
 
 async function _fetch<T>(config: {
   path: string;
-  method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+  method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   body?: any;
   timeout?: number;
 }): Promise<T> {
@@ -35,4 +35,8 @@ export function get<T>(path: string) {
 
 export function post<T>(path: string, body: any): Promise<T> {
   return _fetch<T>({ path, method: 'POST', body });
+}
+
+export function patch<T>(path: string, body: any): Promise<T> {
+  return _fetch<T>({path, method: 'PATCH', body})
 }

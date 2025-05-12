@@ -1,3 +1,8 @@
 - When loading the app, isAuthenticated is always false initially / the user gets redirected to /auth/login in the authguard, even if the auth check succeeds --> try something with location: from
 -  try setting auth route prefix to empty string, this should work since dashboard routes match first; however this may be problematic with a wildcard route
 - generic fetch thing: be sure that no runtime errors occur and maybe construct url path safely with respect to slashes etc
+- What to do in staff details if query fails because staff with that id doesn't exist?
+- actual problem is redirecting to /auth/login (and then back to /dashboard/staff): if only checking for isAuthenticated, this will be initially false, but why the hack is this even called when having check on loading even before? Also, change to tanstack query 
+- add check auth endpoint
+- use react query in auth context
+- in staff details: How to add a check if any errors are present, when the user wants to navigate away. In specific: If the user sets the name of a staff member to "" and, without blurring, wants to navigate to e.g. services, how to stop navigation, stay on the page and make error visible?

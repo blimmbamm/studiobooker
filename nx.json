@@ -88,7 +88,7 @@
       },
       "library": {
         "style": "css",
-        "linter": "eslint"
+        "unitTestRunner": "vitest"
       }
     }
   }

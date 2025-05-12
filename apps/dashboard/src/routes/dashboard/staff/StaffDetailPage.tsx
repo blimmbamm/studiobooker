@@ -1,8 +1,27 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import { useStaff } from '../../../hooks/staff.queries';
+import { Box, CircularProgress } from '@mui/material';
+import StaffDetails from './StaffDetails';
 
 export default function StaffDetailPage() {
-  const params = useParams<{id: string}>();
+  const { id: staffId } = useParams<{ id: string }>();
+
+  // if (!staffId) return <Navigate to={'..'} />;
+  if(!staffId) return <CircularProgress />
+
+  const { data: staff } = useStaff(+staffId);
+
   return (
-    <div>StaffDetailPage for staff with id {params.id}</div>
-  )
+    <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'}>
+      <Box width={400}>
+        {/* Maybe use skeletons while staff is undefined; 
+            If using a loading spinner, it would be better to pass 
+            a potentially undefined staff prop to StaffDetails, s.t. 
+            loading spinner can be displayed in there, e.g. within the card */}
+        {staff && <StaffDetails staff={staff} />}
+        {/* <StaffWorkingHours /> */}
+      </Box>
+      <Box>{/* <StaffServices /> */}</Box>
+    </Box>
+  );
 }

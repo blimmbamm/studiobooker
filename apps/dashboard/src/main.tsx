@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import AuthProvider from './app/AuthContext';
-import DashboardRoot from './routes/dashboard/DashboardLayout';
+import DashboardLayout from './routes/dashboard/DashboardLayout';
 import GuestRoute from './app/GuestRoute';
 import ProtectedRoute from './app/ProtectedRoute';
 import AuthRoot from './routes/auth/AuthLayout';
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: (
           <ProtectedRoute>
-            <DashboardRoot />
+            <DashboardLayout />
           </ProtectedRoute>
         ),
         children: [
