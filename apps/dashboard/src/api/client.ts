@@ -29,14 +29,35 @@ async function _fetch<T>(config: {
   }
 }
 
-export function get<T>(path: string) {
-  return _fetch<T>({ path, method: 'GET' });
-}
+// function get<T>(path: string) {
+//   return _fetch<T>({ path, method: 'GET' });
+// }
 
-export function post<T>(path: string, body: any): Promise<T> {
-  return _fetch<T>({ path, method: 'POST', body });
-}
+// function post<T>(path: string, body?: any): Promise<T> {
+//   return _fetch<T>({ path, method: 'POST', body });
+// }
 
-export function patch<T>(path: string, body: any): Promise<T> {
-  return _fetch<T>({path, method: 'PATCH', body})
-}
+// function patch<T>(path: string, body: any): Promise<T> {
+//   return _fetch<T>({ path, method: 'PATCH', body });
+// }
+
+// function remove<T>(path: string, body: any): Promise<T> {
+//   return _fetch<T>({ path, method: 'DELETE', body });
+// }
+
+export const client = {
+  get: function <T>(path: string) {
+    return _fetch<T>({ path, method: 'GET' });
+  },
+  post: function <T>(path: string, body?: any): Promise<T> {
+    return _fetch<T>({ path, method: 'POST', body });
+  },
+  patch: function <T>(path: string, body: any): Promise<T> {
+    return _fetch<T>({ path, method: 'PATCH', body });
+  },
+  delete: function <T>(path: string, body: any): Promise<T> {
+    return _fetch<T>({ path, method: 'DELETE', body });
+  },
+};
+
+

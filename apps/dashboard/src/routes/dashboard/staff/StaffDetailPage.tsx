@@ -2,12 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useStaff } from '../../../hooks/staff.queries';
 import { Box, CircularProgress } from '@mui/material';
 import StaffDetails from './StaffDetails';
+import StaffServices from './StaffServices';
 
 export default function StaffDetailPage() {
   const { id: staffId } = useParams<{ id: string }>();
 
   // if (!staffId) return <Navigate to={'..'} />;
-  if(!staffId) return <CircularProgress />
+  if (!staffId) return <CircularProgress />;
 
   const { data: staff } = useStaff(+staffId);
 
@@ -21,7 +22,7 @@ export default function StaffDetailPage() {
         {staff && <StaffDetails staff={staff} />}
         {/* <StaffWorkingHours /> */}
       </Box>
-      <Box>{/* <StaffServices /> */}</Box>
+      <Box>{staff && <StaffServices staff={staff} />}</Box>
     </Box>
   );
 }

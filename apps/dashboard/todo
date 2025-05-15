@@ -6,3 +6,5 @@
 - add check auth endpoint
 - use react query in auth context
 - in staff details: How to add a check if any errors are present, when the user wants to navigate away. In specific: If the user sets the name of a staff member to "" and, without blurring, wants to navigate to e.g. services, how to stop navigation, stay on the page and make error visible?
+- do i need mutation keys?
+- examine: is it problematic that body in post is optional but nevertheless added to fetch?
