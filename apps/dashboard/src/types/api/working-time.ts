@@ -3,4 +3,5 @@ export type ApiWorkingTime = {
   weekday: string;
   start: string;
   end: string;
+  activated: boolean;
 };

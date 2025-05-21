@@ -14,7 +14,7 @@ export async function getAllStaff() {
 export async function getStaff(id: number) {
   const staff = await client.get<ApiStaffStructured>(`personnel/${id}`);
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log(staff);
 
   return mapApiToStaffStructured(staff);
 }

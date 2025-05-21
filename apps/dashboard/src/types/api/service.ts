@@ -5,3 +5,7 @@ export type ApiService = {
   duration: number | null;
   price: number | null;
 };
+
+export type ApiServiceWithStaffQualification = ApiService & {
+  staffIsQualifiedForService: boolean;
+};

@@ -1,5 +1,6 @@
-import { ApiService } from './service';
-import { ApiServiceCategory } from './service-category';
+import {
+  ApiServiceCategoryForStaff,
+} from './service-category';
 import { ApiWorkingTime } from './working-time';
 
 export type ApiStaff = {
@@ -12,9 +13,5 @@ export type ApiStaff = {
 
 export type ApiStaffStructured = ApiStaff & {
   workingTimes: ApiWorkingTime[];
-  serviceCategories: Array<
-    Omit<ApiServiceCategory, 'services'> & {
-      services: Array<ApiService & { staffIsQualifiedForService: boolean }>;
-    }
-  >;
+  serviceCategories: ApiServiceCategoryForStaff[];
 };

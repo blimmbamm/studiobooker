@@ -6,6 +6,10 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import AuthProvider from './app/AuthContext';
 import DashboardLayout from './routes/dashboard/DashboardLayout';
 import GuestRoute from './app/GuestRoute';
@@ -16,7 +20,6 @@ import StaffDetailPage from './routes/dashboard/staff/StaffDetailPage';
 import StaffDetailFallback from './routes/dashboard/staff/StaffDetailFallback';
 import RegisterPage from './routes/auth/register/RegisterPage';
 import LoginPage from './routes/auth/login/LoginPage';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -72,8 +75,10 @@ const router = createBrowserRouter([
 
 root.render(
   <StrictMode>
-    <QueryClientProvider client={new QueryClient()}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <QueryClientProvider client={new QueryClient()}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </LocalizationProvider>
   </StrictMode>
 );

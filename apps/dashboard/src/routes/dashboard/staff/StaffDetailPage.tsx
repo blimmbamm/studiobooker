@@ -3,6 +3,7 @@ import { useStaff } from '../../../hooks/staff.queries';
 import { Box, CircularProgress } from '@mui/material';
 import StaffDetails from './StaffDetails';
 import StaffServices from './StaffServices';
+import StaffWorkingTimes from './StaffWorkingTimes';
 
 export default function StaffDetailPage() {
   const { id: staffId } = useParams<{ id: string }>();
@@ -20,7 +21,7 @@ export default function StaffDetailPage() {
             a potentially undefined staff prop to StaffDetails, s.t. 
             loading spinner can be displayed in there, e.g. within the card */}
         {staff && <StaffDetails staff={staff} />}
-        {/* <StaffWorkingHours /> */}
+        {staff && <StaffWorkingTimes staff={staff} />}
       </Box>
       <Box>{staff && <StaffServices staff={staff} />}</Box>
     </Box>

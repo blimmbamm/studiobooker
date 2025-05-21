@@ -1,6 +1,15 @@
-import { Service } from "../service";
-import { ApiService } from "./service";
+import { Service, ServiceWithStaffQualification } from '../service';
+import { ApiService, ApiServiceWithStaffQualification } from './service';
 
 export function mapApiToService(service: ApiService): Service {
-  return {...service, dingens: false};
+  return { ...service, dingens: false };
+}
+
+export function mapApiToServiceWithStaffQualification(
+  service: ApiServiceWithStaffQualification
+): ServiceWithStaffQualification {
+  return {
+    ...mapApiToService(service),
+    staffIsQualifiedForService: service.staffIsQualifiedForService,
+  };
 }

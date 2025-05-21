@@ -18,6 +18,7 @@ export default function StaffDetails(props: { staff: Staff }) {
     <Card>
       <CardHeader title="Details" />
       <CardContent>
+        {/* Should I add grid display to CardContent? Would this be good or bad? */}
         <Box display={'grid'} gridTemplateColumns="auto auto">
           <StaffName staff={staff} />
           <StaffEmail staff={staff} />
