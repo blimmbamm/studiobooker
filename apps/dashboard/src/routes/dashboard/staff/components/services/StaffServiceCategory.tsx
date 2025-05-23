@@ -13,7 +13,7 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { ServiceCategoryForStaff } from '../../../types/service-category';
+import { ServiceCategoryForStaff } from '../../../../../types/service-category';
 
 export default function StaffServiceCategory(props: {
   serviceCategory: ServiceCategoryForStaff;

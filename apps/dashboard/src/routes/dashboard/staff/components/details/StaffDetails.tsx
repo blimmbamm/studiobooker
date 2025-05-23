@@ -1,4 +1,4 @@
-import { Staff } from '../../../types/staff';
+import { Staff } from '../../../../../types/staff';
 import {
   Box,
   Card,

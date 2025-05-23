@@ -1,6 +1,6 @@
 import { TextField, Typography } from '@mui/material';
-import { useStaffProperty } from './useStaffProperty';
-import { Staff } from '../../../types/staff';
+import { useStaffProperty } from '../../hooks/useStaffProperty';
+import { Staff } from '../../../../../types/staff';
 
 export default function StaffPhone(props: {staff: Staff}) {
   function isNumberString(value: string) {

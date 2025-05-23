@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { useAddStaff } from '../../../hooks/staff.queries';
+import { useAddStaff } from '../../../../../hooks/staff.queries';
 
 export default function AddStaff() {
   const [open, setOpen] = useState(false);
@@ -37,7 +37,8 @@ export default function AddStaff() {
       <Button
         onClick={() => setOpen(true)}
         variant="contained"
-        sx={{ transform: 'translateY(50%)' }}
+        sx={{ transform: 'translateY(50%)', m: 'auto' }}
+        
       >
         Add staff
       </Button>

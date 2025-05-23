@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, List } from '@mui/material';
 
-import { StaffStructured } from '../../../types/staff';
+import { StaffStructured } from '../../../../../types/staff';
 import StaffServiceCategory from './StaffServiceCategory';
-import { useManageStaffServices } from '../../../hooks/service.queries';
+import { useManageStaffServices } from '../../../../../hooks/service.queries';
 
 export default function StaffServices(props: { staff: StaffStructured }) {
   const { serviceCategories, id: staffId } = props.staff;

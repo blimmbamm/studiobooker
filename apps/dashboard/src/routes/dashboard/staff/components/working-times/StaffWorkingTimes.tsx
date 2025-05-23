@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
-import { StaffStructured } from '../../../types/staff';
 import StaffWorkingTime from './StaffWorkingTime';
+import { StaffStructured } from '../../../../../types/staff';
 
 export default function StaffWorkingHours(props: { staff: StaffStructured }) {
   const {

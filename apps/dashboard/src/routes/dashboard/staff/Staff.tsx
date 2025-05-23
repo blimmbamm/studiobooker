@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useStaff } from '../../../hooks/staff.queries';
 import { Box, CircularProgress } from '@mui/material';
-import StaffDetails from './StaffDetails';
-import StaffServices from './StaffServices';
-import StaffWorkingTimes from './StaffWorkingTimes';
+import StaffDetails from './components/details/StaffDetails';
+import StaffServices from './components/services/StaffServices';
+import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
 
 export default function StaffDetailPage() {
   const { id: staffId } = useParams<{ id: string }>();

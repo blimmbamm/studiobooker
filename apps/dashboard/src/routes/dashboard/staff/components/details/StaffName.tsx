@@ -1,6 +1,6 @@
 import { TextField, Typography } from '@mui/material';
-import { Staff } from '../../../types/staff';
-import { useStaffProperty } from './useStaffProperty';
+import { Staff } from '../../../../../types/staff';
+import { useStaffProperty } from '../../hooks/useStaffProperty';
 
 export default function StaffName(props: { staff: Staff }) {
   const { value, hasError, handleChange, checkErrors } = useStaffProperty({

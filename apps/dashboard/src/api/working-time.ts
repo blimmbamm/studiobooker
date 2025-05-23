@@ -9,7 +9,7 @@ export async function editWorkingTime(id: number, inputs: EditWorkingTimeDto) {
     inputs
   );
 
-  // await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 3000));
 
   return mapApiToWorkingTime(workingTime);
 }

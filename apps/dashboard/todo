@@ -11,3 +11,6 @@
 - rename StaffDetails to StaffPage or so
 - with checkboxes in services or working times: Should they have a separate state that reflects immediate state updates? When clicking a checkbox really fast, how to ensure that the ultimate 'selected' is propagated to handlers? Does onMutate ensure that any changes are already made for any subsequent changes, e.g. in selected state, that is derived from props?
 - unify delay of debounced mutate functions
+- maybe it would be beneficial to have start and end time of working time already as Dayjs in the type --> use mapper to map appropriately 
+- src/app folder contents must be put somewhere else
+- use a snackbar to display errors; e.g. errors for changing/toggling working times currently aren't handled at all
