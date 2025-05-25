@@ -1,10 +1,5 @@
 import { Staff } from '../../../../../types/staff';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-} from '@mui/material';
+import { Box, Card, CardContent, CardHeader } from '@mui/material';
 
 import StaffName from './StaffName';
 import StaffNotes from './StaffNotes';
@@ -15,14 +10,14 @@ export default function StaffDetails(props: { staff: Staff }) {
   const { staff } = props;
 
   return (
-    <Card>
+    <Card sx={{overflow: 'visible'}}>
       <CardHeader title="Details" />
       <CardContent>
         {/* Should I add grid display to CardContent? Would this be good or bad? */}
         <Box display={'grid'} gridTemplateColumns="auto auto">
           <StaffName staff={staff} />
           <StaffEmail staff={staff} />
-          <StaffPhone staff={staff}/>
+          <StaffPhone staff={staff} />
           <StaffNotes staff={staff} />
         </Box>
       </CardContent>

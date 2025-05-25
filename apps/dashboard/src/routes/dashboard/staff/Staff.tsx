@@ -13,17 +13,28 @@ export default function StaffDetailPage() {
 
   const { data: staff } = useStaff(+staffId);
 
-  return (
-    <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'}>
-      <Box width={400}>
-        {/* Maybe use skeletons while staff is undefined; 
+  {
+    /* Maybe use skeletons while staff is undefined; 
             If using a loading spinner, it would be better to pass 
             a potentially undefined staff prop to StaffDetails, s.t. 
-            loading spinner can be displayed in there, e.g. within the card */}
-        {staff && <StaffDetails staff={staff} />}
-        {staff && <StaffWorkingTimes staff={staff} />}
-      </Box>
-      <Box>{staff && <StaffServices staff={staff} />}</Box>
-    </Box>
+            loading spinner can be displayed in there, e.g. within the card */
+  }
+
+  return (
+    // <Box
+    //   // display={'flex'}
+    //   // flexDirection={'column'}
+    //   // flexWrap={'wrap'}
+    //   // gap={2}
+    //   marginTop={2}
+    //   marginBottom={4}
+    // >
+    <>
+      {/* <Box marginTop={2} /> */}
+      {staff && <StaffDetails staff={staff} />}
+      {staff && <StaffWorkingTimes staff={staff} />}
+      {staff && <StaffServices staff={staff} />}
+    </>
+    // </Box>
   );
 }

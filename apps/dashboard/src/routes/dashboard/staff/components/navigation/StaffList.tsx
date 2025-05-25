@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  Typography,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useAllStaff } from '../../../../../hooks/staff.queries';
@@ -13,36 +14,30 @@ import AddStaff from './AddStaff';
 export default function StaffList() {
   const { isPending, staff } = useAllStaff();
 
-  /**
-   * - Fixed width of 250px or so for card
-   * - scroll staff list
-   * - list item overflow ellipsis
-   * - are list item labels centered?
-   */
-
   return (
-    <Card    
+    <Card
       sx={{
-        border: 1,
-        // borderColor: , // how to set this to some theme color?
+        width: 250,
         margin: 2,
         marginBottom: 4,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'visible'
+        overflow: 'visible',
       }}
     >
       <CardHeader title="Staff" />
       {isPending && <CircularProgress />}
-      <List sx={{flex: 1}}>
+      <List sx={{ flex: 1, overflowY: 'auto' }}>
         {staff?.map((s) => (
           <ListItemButton key={s.id}>
             <ListItem
               component={NavLink}
               to={s.id.toString()}
-              sx={{ color: 'inherit' }}
+              sx={{
+                color: 'inherit',
+              }}
             >
-              {s.name}
+              <Typography noWrap>{s.name}</Typography>
             </ListItem>
           </ListItemButton>
         ))}
