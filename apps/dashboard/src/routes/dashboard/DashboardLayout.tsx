@@ -31,7 +31,7 @@ export default function DashboardRoot() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Box flex={1} overflow={'hidden'} >
+      <Box flex={1} overflow={'auto'} height={"100%"} >
         <Outlet />
       </Box>
     </Box>

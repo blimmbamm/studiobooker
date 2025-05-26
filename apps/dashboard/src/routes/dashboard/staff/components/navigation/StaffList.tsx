@@ -20,9 +20,15 @@ export default function StaffList() {
         width: 250,
         margin: 2,
         marginBottom: 4,
+        marginTop: 0,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'visible',
+        overflow: 'visible', // only for bottom button
+        position: 'sticky',
+        // top: 0,
+        // bottom: 0,
+        height: "100%",
+        top: "1rem"
       }}
     >
       <CardHeader title="Staff" />
