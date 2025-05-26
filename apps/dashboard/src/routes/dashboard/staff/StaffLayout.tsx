@@ -4,7 +4,13 @@ import StaffList from './components/navigation/StaffList';
 
 export default function StaffLayout() {
   return (
-    <Box display="flex" flexDirection="row" height={'100%'}>
+    <Box
+      display="flex"
+      flexDirection="row"
+      height={'100%'}
+      maxWidth={800}
+      margin={'auto'}
+    >
       <StaffList />
       <Box
         display={'flex'}
@@ -14,8 +20,6 @@ export default function StaffLayout() {
         overflow={'auto'}
         gap={2}
         flex={1}
-        // height={"100%"}
-        // minHeight={0}
       >
         <Outlet />
       </Box>

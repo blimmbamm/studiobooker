@@ -10,7 +10,6 @@ export default function DashboardRoot() {
       display={'flex'}
       flexDirection={'column'}
       height={'100dvh'}
-      // overflow={'hidden'}
     >
       <CssBaseline />
       <AppBar position="static">
