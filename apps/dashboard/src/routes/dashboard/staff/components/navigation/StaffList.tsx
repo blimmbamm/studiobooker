@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  Toolbar,
   Typography,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
@@ -18,20 +19,25 @@ export default function StaffList() {
     <Card
       sx={{
         width: 250,
-        margin: 2,
-        marginBottom: 4,
-        marginTop: 0,
+        // margin: 2,
+        // marginBottom: 4,
+        // marginTop: 0,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'visible', // only for bottom button
-        position: 'sticky',
-        height: {
-          xs: 'calc(100dvh - 48px - 56px)',
-          sm: 'calc(100dvh - 48px - 64px)',
-        },
-        top: '1rem',
+        // overflow: 'visible', // only for bottom button
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        // height: "100dvh",
+        // position: 'sticky',
+        // height: {
+        //   xs: 'calc(100dvh - 48px - 56px)',
+        //   sm: 'calc(100dvh - 48px - 64px)',
+        // },
+        // top: '1rem',
       }}
     >
+      <Toolbar />
       <CardHeader title="Staff" />
       {isPending && <CircularProgress />}
       <List sx={{ flex: 1, overflowY: 'auto' }}>
