@@ -15,7 +15,7 @@ export default function StaffServices(props: { staff: StaffStructured }) {
   }
 
   return (
-    <Card sx={{overflow: 'visible'}}>
+    <Card sx={{overflow: 'visible', overflowX: 'auto'}}>
       <CardHeader title="Services" />
       <List disablePadding>
         {serviceCategories.map((sc) => (

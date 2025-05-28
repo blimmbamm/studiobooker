@@ -6,11 +6,7 @@ export default function DashboardRoot() {
   const { logout } = useAuth();
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      height={'100dvh'}
-    >
+    <Box display={'flex'} flexDirection={'column'} height={'100dvh'}>
       <CssBaseline />
       <AppBar position="static">
         <Toolbar>
@@ -31,7 +27,12 @@ export default function DashboardRoot() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Box flex={1} overflow={'auto'} height={"100%"} >
+      <Box
+        flex={1}
+        overflow={'auto'}
+        height={'100%'}
+        // sx={{ overflowY: 'auto', overflowX: 'hidden' }}
+      >
         <Outlet />
       </Box>
     </Box>

@@ -25,10 +25,11 @@ export default function StaffList() {
         flexDirection: 'column',
         overflow: 'visible', // only for bottom button
         position: 'sticky',
-        // top: 0,
-        // bottom: 0,
-        height: "100%",
-        top: "1rem"
+        height: {
+          xs: 'calc(100dvh - 48px - 56px)',
+          sm: 'calc(100dvh - 48px - 64px)',
+        },
+        top: '1rem',
       }}
     >
       <CardHeader title="Staff" />

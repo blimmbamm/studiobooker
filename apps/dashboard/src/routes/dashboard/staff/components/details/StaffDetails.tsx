@@ -10,7 +10,7 @@ export default function StaffDetails(props: { staff: Staff }) {
   const { staff } = props;
 
   return (
-    <Card sx={{overflow: 'visible'}}>
+    <Card sx={{overflow: 'visible', overflowX: 'auto'}}>
       <CardHeader title="Details" />
       <CardContent>
         {/* Should I add grid display to CardContent? Would this be good or bad? */}

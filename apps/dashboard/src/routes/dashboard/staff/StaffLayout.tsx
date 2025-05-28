@@ -7,8 +7,6 @@ export default function StaffLayout() {
     <Box
       display="flex"
       flexDirection="row"
-      // height={'100%'}
-      // height={'fit-content'}
       maxWidth={800}
       margin={'auto'}
       overflow={'visible'}      
@@ -21,6 +19,7 @@ export default function StaffLayout() {
         paddingBottom={4}
         gap={2}
         flex={1}
+        overflow={'hidden'}
       >
         <Outlet />
       </Box>

@@ -8,7 +8,7 @@ export default function StaffWorkingHours(props: { staff: StaffStructured }) {
   } = props;
 
   return (
-    <Card sx={{overflow: 'visible'}}>
+    <Card sx={{overflow: 'visible', overflowX: 'auto'}}>
       <CardHeader title="Working times" />
       <CardContent>
         <Box display="grid" gridTemplateColumns="repeat(3, auto)">
