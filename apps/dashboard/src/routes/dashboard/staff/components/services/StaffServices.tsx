@@ -1,8 +1,9 @@
-import { Card, CardContent, CardHeader, List } from '@mui/material';
+import { List } from '@mui/material';
 
 import { StaffStructured } from '../../../../../types/staff';
 import StaffServiceCategory from './StaffServiceCategory';
 import { useManageStaffServices } from '../../../../../hooks/service.queries';
+import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
 
 export default function StaffServices(props: { staff: StaffStructured }) {
   const { serviceCategories, id: staffId } = props.staff;
@@ -15,8 +16,7 @@ export default function StaffServices(props: { staff: StaffStructured }) {
   }
 
   return (
-    <Card sx={{overflow: 'visible', overflowX: 'auto'}}>
-      <CardHeader title="Services" />
+    <Section title="Services">
       <List disablePadding>
         {serviceCategories.map((sc) => (
           <StaffServiceCategory
@@ -26,7 +26,6 @@ export default function StaffServices(props: { staff: StaffStructured }) {
           />
         ))}
       </List>
-      <CardContent></CardContent>
-    </Card>
+    </Section>
   );
 }

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useStaff } from '../../../hooks/staff.queries';
-import { Box, CircularProgress } from '@mui/material';
+import { CircularProgress, Divider } from '@mui/material';
 import StaffDetails from './components/details/StaffDetails';
 import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
@@ -32,7 +32,9 @@ export default function StaffDetailPage() {
     <>
       {/* <Box marginTop={2} /> */}
       {staff && <StaffDetails staff={staff} />}
+      <Divider />
       {staff && <StaffWorkingTimes staff={staff} />}
+      <Divider />
       {staff && <StaffServices staff={staff} />}
     </>
     // </Box>

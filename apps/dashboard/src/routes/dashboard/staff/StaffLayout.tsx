@@ -4,23 +4,13 @@ import StaffList from './components/navigation/StaffList';
 
 export default function StaffLayout() {
   return (
-    <Box
-      // display="flex"
-      // flexDirection="row"
-      maxWidth={800}
-      margin={'auto'}
-      // overflow={'visible'}
-    >
+    <Box maxWidth={800} margin={'auto'} sx={{ backgroundColor: 'white' }}>
       <StaffList />
       <Box
         marginLeft={'250px'}
         display={'flex'}
         flexDirection={'column'}
-        paddingTop={2}
-        paddingBottom={4}
         gap={2}
-        flex={1}
-        // overflow={'hidden'}
       >
         <Outlet />
       </Box>
