@@ -15,11 +15,14 @@ export default function StaffWorkingHours(props: { staff: StaffStructured }) {
       contentBoxProps={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, auto)',
+        width: 'fit-content',
+        rowGap: 1,
+        columnGap: 3,
       }}
     >
       <Box />
-      <Typography>From</Typography>
-      <Typography>To</Typography>
+      <Typography textAlign='center'>From</Typography>
+      <Typography textAlign='center'>To</Typography>
       {workingTimes.map((wt) => (
         <StaffWorkingTime key={wt.id} workingTime={wt} staffId={id} />
       ))}

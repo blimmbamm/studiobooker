@@ -29,7 +29,7 @@ export default function StaffWorkingTime(props: {
             <CheckBoxOutlineBlankOutlinedIcon />
           )}
         </IconButton>
-        <Typography>{workingTime.weekday}</Typography>
+        <Typography paddingLeft={1}>{workingTime.weekday}</Typography>
       </Box>
       <StaffWorkingTimeInput
         value={time.start}
