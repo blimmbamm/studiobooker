@@ -1,6 +1,6 @@
-import { TextField, Typography } from '@mui/material';
 import { Staff } from '../../../../../types/staff';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
+import StaffProperty from './StaffProperty';
 
 export default function StaffName(props: { staff: Staff }) {
   const { value, hasError, handleChange, checkErrors } = useStaffProperty({
@@ -10,17 +10,13 @@ export default function StaffName(props: { staff: Staff }) {
   });
 
   return (
-    <>
-      <Typography>Name</Typography>
-      <TextField
-        variant="outlined"
-        value={value}
-        onChange={handleChange}
-        error={hasError}
-        helperText={hasError && 'Must not be empty.'}
-        onBlur={checkErrors}
-        autoComplete="off"
-      />
-    </>
+    <StaffProperty
+      name="Name"
+      value={value}
+      onChange={handleChange}
+      error={hasError}
+      helperText={hasError && 'Must not be empty.'}
+      onBlur={checkErrors}
+    />
   );
 }

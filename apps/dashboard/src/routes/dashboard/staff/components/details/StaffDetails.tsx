@@ -11,7 +11,14 @@ export default function StaffDetails(props: { staff: Staff }) {
   return (
     <Section
       title="Details"
-      contentBoxProps={{ display: 'grid', gridTemplateColumns: 'auto auto' }}
+      contentBoxProps={{
+        display: 'grid',
+        gridTemplateColumns: 'auto auto',
+        alignItems: 'center',
+        width: 'fit-content',
+        rowGap: 1,
+        columnGap: 3,
+      }}
     >
       <StaffName staff={staff} />
       <StaffEmail staff={staff} />

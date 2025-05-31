@@ -1,6 +1,6 @@
-import { TextField, Typography } from '@mui/material';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 import { Staff } from '../../../../../types/staff';
+import StaffProperty from './StaffProperty';
 
 export default function StaffEmail(props: { staff: Staff }) {
   /**
@@ -14,7 +14,7 @@ export default function StaffEmail(props: { staff: Staff }) {
 
     return (
       !value ||
-      conditions.some((re) => re.test(value)) && !value.includes('..')
+      (conditions.some((re) => re.test(value)) && !value.includes('..'))
     );
   }
 
@@ -36,17 +36,13 @@ export default function StaffEmail(props: { staff: Staff }) {
   });
 
   return (
-    <>
-      <Typography>E-mail</Typography>
-      <TextField
-        variant="outlined"
-        value={value}
-        onChange={handleChange}
-        onBlur={checkErrors}
-        error={hasError}
-        helperText={hasError && 'Invalid e-mail. This is not saved.'}
-        autoComplete="off"
-      />
-    </>
+    <StaffProperty
+      name="E-mail"
+      value={value}
+      onChange={handleChange}
+      onBlur={checkErrors}
+      error={hasError}
+      helperText={hasError && 'Invalid e-mail. This is not saved.'}
+    />
   );
 }
