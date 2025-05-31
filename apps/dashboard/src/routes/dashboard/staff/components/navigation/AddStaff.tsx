@@ -4,9 +4,12 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  IconButton,
   TextField,
 } from '@mui/material';
 import { useRef, useState } from 'react';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
 import { useAddStaff } from '../../../../../hooks/staff.queries';
 
 export default function AddStaff() {
@@ -34,14 +37,12 @@ export default function AddStaff() {
 
   return (
     <>
-      <Button
+      <IconButton
         onClick={() => setOpen(true)}
-        variant="contained"
-        sx={{ transform: 'translateY(50%)', m: 'auto' }}
-        
+        // variant="contained"        
       >
-        Add staff
-      </Button>
+        <PersonAddIcon fontSize='medium'/>
+      </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <TextField

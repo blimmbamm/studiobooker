@@ -1,11 +1,19 @@
 import { Box, BoxProps, Toolbar } from '@mui/material';
 
 import SectionTitle from './SectionTitle';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 
-type Props = { title: string; children: ReactNode } & BoxProps;
+type Props = {
+  title: string;
+  children: ReactNode;
+  actionComponent?: JSX.Element;
+} & BoxProps;
 
-export default function SideNavSection({ title, children }: Props) {
+export default function SideNavSection({
+  title,
+  children,
+  actionComponent,
+}: Props) {
   return (
     <Box
       borderRight={1}
@@ -19,7 +27,7 @@ export default function SideNavSection({ title, children }: Props) {
       sx={{ backgroundColor: 'white' }}
     >
       <Toolbar />
-      <SectionTitle title={title} />
+      <SectionTitle title={title} actionComponent={actionComponent} />
       {children}
     </Box>
   );

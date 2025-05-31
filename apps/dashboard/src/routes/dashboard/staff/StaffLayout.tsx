@@ -10,7 +10,7 @@ export default function StaffLayout() {
         marginLeft={'250px'}
         display={'flex'}
         flexDirection={'column'}
-        gap={2}
+        gap={1}
       >
         <Outlet />
       </Box>

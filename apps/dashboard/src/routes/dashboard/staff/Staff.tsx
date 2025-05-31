@@ -21,22 +21,12 @@ export default function StaffDetailPage() {
   }
 
   return (
-    // <Box
-    //   // display={'flex'}
-    //   // flexDirection={'column'}
-    //   // flexWrap={'wrap'}
-    //   // gap={2}
-    //   marginTop={2}
-    //   marginBottom={4}
-    // >
     <>
-      {/* <Box marginTop={2} /> */}
       {staff && <StaffDetails staff={staff} />}
       <Divider />
       {staff && <StaffWorkingTimes staff={staff} />}
       <Divider />
       {staff && <StaffServices staff={staff} />}
     </>
-    // </Box>
   );
 }
