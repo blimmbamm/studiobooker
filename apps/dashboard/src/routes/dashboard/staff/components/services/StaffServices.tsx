@@ -1,12 +1,18 @@
-import { List } from '@mui/material';
+import { List, SxProps } from '@mui/material';
 
 import { StaffStructured } from '../../../../../types/staff';
 import StaffServiceCategory from './StaffServiceCategory';
 import { useManageStaffServices } from '../../../../../hooks/service.queries';
 import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
+import { grey } from '@mui/material/colors';
 
-export default function StaffServices(props: { staff: StaffStructured }) {
-  const { serviceCategories, id: staffId } = props.staff;
+type Props = {
+  staff: StaffStructured;
+  sx?: SxProps;
+};
+
+export default function StaffServices({ staff, sx }: Props) {
+  const { serviceCategories, id: staffId } = staff;
 
   const manageStaffServicesMutation = useManageStaffServices({ staffId });
 
@@ -16,8 +22,20 @@ export default function StaffServices(props: { staff: StaffStructured }) {
   }
 
   return (
-    <Section title="Services">
-      <List disablePadding>
+    <Section
+      title="Services"
+      contentBoxProps={{
+        width: 'fit-content',
+        minWidth: '75%',
+      }}
+      sx={sx}
+    >
+      <List
+        disablePadding
+        sx={{
+          backgroundColor: grey[300],
+        }}
+      >
         {serviceCategories.map((sc) => (
           <StaffServiceCategory
             key={sc.id}

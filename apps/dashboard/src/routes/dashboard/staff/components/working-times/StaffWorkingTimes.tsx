@@ -1,13 +1,16 @@
-import { Box, Typography } from '@mui/material';
+import { Box, SxProps, Typography } from '@mui/material';
 
 import StaffWorkingTime from './StaffWorkingTime';
 import { StaffStructured } from '../../../../../types/staff';
 import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
 
-export default function StaffWorkingHours(props: { staff: StaffStructured }) {
-  const {
-    staff: { workingTimes, id },
-  } = props;
+type Props = {
+  staff: StaffStructured;
+  sx?: SxProps;
+};
+
+export default function StaffWorkingHours({ staff, sx }: Props) {
+  const { workingTimes, id } = staff;
 
   return (
     <Section
@@ -19,10 +22,11 @@ export default function StaffWorkingHours(props: { staff: StaffStructured }) {
         rowGap: 1,
         columnGap: 3,
       }}
+      sx={sx}
     >
       <Box />
-      <Typography textAlign='center'>From</Typography>
-      <Typography textAlign='center'>To</Typography>
+      <Typography textAlign="center">From</Typography>
+      <Typography textAlign="center">To</Typography>
       {workingTimes.map((wt) => (
         <StaffWorkingTime key={wt.id} workingTime={wt} staffId={id} />
       ))}
