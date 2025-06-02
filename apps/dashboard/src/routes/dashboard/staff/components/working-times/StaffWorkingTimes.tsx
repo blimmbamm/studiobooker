@@ -1,16 +1,24 @@
 import { Box, SxProps, Typography } from '@mui/material';
 
+import { Section } from '@studiobooker/utils';
 import StaffWorkingTime from './StaffWorkingTime';
 import { StaffStructured } from '../../../../../types/staff';
-import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
+import StaffWorkingTimeSkeleton from './StaffWorkingTimeSkeleton';
 
 type Props = {
-  staff: StaffStructured;
+  staff?: StaffStructured;
   sx?: SxProps;
 };
 
 export default function StaffWorkingHours({ staff, sx }: Props) {
-  const { workingTimes, id } = staff;
+  const DEFAULT_WORKING_TIMES = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
 
   return (
     <Section
@@ -27,9 +35,14 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
       <Box />
       <Typography textAlign="center">From</Typography>
       <Typography textAlign="center">To</Typography>
-      {workingTimes.map((wt) => (
-        <StaffWorkingTime key={wt.id} workingTime={wt} staffId={id} />
-      ))}
+      {staff &&
+        staff.workingTimes.map((wt) => (
+          <StaffWorkingTime key={wt.id} workingTime={wt} staffId={staff.id} />
+        ))}
+      {staff &&
+        DEFAULT_WORKING_TIMES.map((wt) => (
+          <StaffWorkingTimeSkeleton key={wt} weekday={wt} />
+        ))}
     </Section>
   );
 }

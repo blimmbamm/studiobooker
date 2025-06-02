@@ -21,7 +21,7 @@ export default function StaffDetailPage() {
 
   return (
     <>
-      {staff && <StaffDetails staff={staff} />}
+      <StaffDetails staff={staff} />
       <Divider />
       {staff && <StaffWorkingTimes staff={staff} />}
       <Divider />

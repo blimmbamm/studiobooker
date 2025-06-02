@@ -9,7 +9,7 @@ type Props = {
   sx?: SxProps;
 };
 
-export default function Section({
+export function Section({
   title,
   children,
   contentBoxProps,

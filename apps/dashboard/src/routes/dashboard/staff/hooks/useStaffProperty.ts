@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { EditStaffDto, Staff } from '../../../../types/staff';
 import { useEditStaff } from '../../../../hooks/staff.queries';
-import { useDebouncedCallback } from '../../../../../../../libs/shared/utils/src/lib/useDebouncedCallback';
+import { useDebouncedCallback } from '@studiobooker/utils';
 
 export function useStaffProperty({
   staff,

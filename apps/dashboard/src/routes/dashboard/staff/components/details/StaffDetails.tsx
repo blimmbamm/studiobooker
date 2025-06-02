@@ -1,13 +1,15 @@
+import { SxProps } from '@mui/material';
+
 import { StaffStructured } from '../../../../../types/staff';
+import { Section } from '@studiobooker/utils';
 import StaffName from './StaffName';
 import StaffNotes from './StaffNotes';
 import StaffEmail from './StaffEmail';
 import StaffPhone from './StaffPhone';
-import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
-import { SxProps } from '@mui/material';
+import StaffPropertySkeleton from './StaffPropertySkeleton';
 
 type Props = {
-  staff: StaffStructured;
+  staff: StaffStructured | undefined;
   sx?: SxProps;
 };
 
@@ -25,10 +27,22 @@ export default function StaffDetails({ staff, sx }: Props) {
       }}
       sx={sx}
     >
-      <StaffName staff={staff} />
-      <StaffEmail staff={staff} />
-      <StaffPhone staff={staff} />
-      <StaffNotes staff={staff} />
+      {staff && (
+        <>
+          <StaffPropertySkeleton name="Name" />
+          <StaffPropertySkeleton name="E-mail" />
+          <StaffPropertySkeleton name="Phone" />
+          <StaffPropertySkeleton name="Notes" />
+        </>
+      )}
+      {staff && (
+        <>
+          <StaffName staff={staff} />
+          <StaffEmail staff={staff} />
+          <StaffPhone staff={staff} />
+          <StaffNotes staff={staff} />
+        </>
+      )}
     </Section>
   );
 }

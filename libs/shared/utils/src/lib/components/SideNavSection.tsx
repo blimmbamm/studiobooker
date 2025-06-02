@@ -9,11 +9,7 @@ type Props = {
   actionComponent?: JSX.Element;
 } & BoxProps;
 
-export default function SideNavSection({
-  title,
-  children,
-  actionComponent,
-}: Props) {
+export function SideNavSection({ title, children, actionComponent }: Props) {
   return (
     <Box
       borderRight={1}

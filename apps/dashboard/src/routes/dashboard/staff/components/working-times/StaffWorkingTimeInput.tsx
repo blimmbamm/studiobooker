@@ -1,5 +1,6 @@
-import { TimePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
+
+import { TimePicker } from '@studiobooker/utils';
 
 export default function StaffWorkingTimeInput(props: {
   value: Dayjs;
@@ -8,27 +9,12 @@ export default function StaffWorkingTimeInput(props: {
 }) {
   return (
     <TimePicker
-      sx={{ m: 5 }}
       value={props.value}
       disabled={!props.activated}
       onChange={(value) => {
         if (value) {
           props.onChange(value);
         }
-      }}
-      ampm={false}
-      slots={{
-        inputAdornment: () => null,
-      }}
-      slotProps={{
-        textField: {
-          sx: {
-            '& .MuiPickersSectionList-root': {
-              width: 'fit-content',
-            },
-          },
-          size: 'small',
-        },
       }}
     />
   );

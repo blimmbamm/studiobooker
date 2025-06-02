@@ -1,10 +1,10 @@
 import { List, SxProps } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
+import { Section } from '@studiobooker/utils';
 import { StaffStructured } from '../../../../../types/staff';
 import StaffServiceCategory from './StaffServiceCategory';
 import { useManageStaffServices } from '../../../../../hooks/service.queries';
-import Section from '../../../../../../../../libs/shared/utils/src/lib/components/Section';
-import { grey } from '@mui/material/colors';
 
 type Props = {
   staff: StaffStructured;
