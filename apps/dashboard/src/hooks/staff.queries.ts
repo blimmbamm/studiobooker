@@ -14,11 +14,17 @@ export function useAllStaff() {
   };
 }
 
-export function useStaff(staffId: number) {
-  return useQuery({
+export function useStaff(staffId?: number) {
+  const query = useQuery({
     queryKey: ['staff', staffId],
-    queryFn: () => getStaff(staffId),
+    queryFn: () => getStaff(staffId!),
+    enabled: !!staffId,
   });
+
+  return {
+    ...query,
+    staff: query.data,
+  };
 }
 
 export function useAddStaff(
