@@ -12,9 +12,7 @@ export async function getAllStaff() {
 }
 
 export async function getStaff(id: number) {
-  const staff = await client.get<ApiStaffStructured>(`personnel/${id}`);
-
-  console.log(staff);
+  const staff = await client.get<ApiStaffStructured>(`personnel/${id}`, 300);
 
   return mapApiToStaffStructured(staff);
 }

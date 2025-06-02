@@ -27,7 +27,7 @@ export default function StaffDetails({ staff, sx }: Props) {
       }}
       sx={sx}
     >
-      {staff && (
+      {!staff && (
         <>
           <StaffPropertySkeleton name="Name" />
           <StaffPropertySkeleton name="E-mail" />

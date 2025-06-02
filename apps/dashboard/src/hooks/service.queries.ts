@@ -18,21 +18,23 @@ export function useServicesByCategory() {
   };
 }
 
-export function useManageStaffServices({ staffId }: { staffId: number }) {
+export function useManageStaffServices() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({
+      staffId,
       select,
       serviceId,
     }: {
+      staffId: number;
       select: boolean;
       serviceId: number;
     }) =>
       select
         ? addStaffToService(serviceId, staffId)
         : removeStaffFromService(serviceId, staffId),
-    onMutate: ({ select, serviceId }) => {
+    onMutate: ({ staffId, select, serviceId }) => {
       queryClient.cancelQueries({ queryKey: ['staff', staffId] });
 
       const prevStaff = queryClient.getQueryData<StaffStructured>([
@@ -59,10 +61,10 @@ export function useManageStaffServices({ staffId }: { staffId: number }) {
       });
       return { prevStaff };
     },
-    onSuccess: () => {
+    onSuccess: (_, { staffId }) => {
       queryClient.invalidateQueries({ queryKey: ['staff', staffId] });
     },
-    onError: (_error, _variables, context) => {
+    onError: (_error, { staffId }, context) => {
       // Todo: Add Toast with error message
       queryClient.setQueryData(['staff', staffId], context?.prevStaff);
     },

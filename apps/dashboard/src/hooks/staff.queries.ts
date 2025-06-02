@@ -21,6 +21,8 @@ export function useStaff(staffId?: number) {
     enabled: !!staffId,
   });
 
+  // Improvement: Exclude data
+
   return {
     ...query,
     staff: query.data,

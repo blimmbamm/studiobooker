@@ -23,9 +23,9 @@ export default function StaffDetailPage() {
     <>
       <StaffDetails staff={staff} />
       <Divider />
-      {staff && <StaffWorkingTimes staff={staff} />}
+      <StaffWorkingTimes staff={staff} />
       <Divider />
-      {staff && <StaffServices sx={{ marginBottom: 5 }} staff={staff} />}
+      <StaffServices sx={{ marginBottom: 5 }} staff={staff} />
     </>
   );
 }

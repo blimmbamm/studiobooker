@@ -35,13 +35,16 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
       <Box />
       <Typography textAlign="center">From</Typography>
       <Typography textAlign="center">To</Typography>
+      {/* Default working times will come from company settings later, 
+        which will be loaded on app start and will be available when this renders.
+        Hence, the skeleton could be moved to very own component */}
+      {!staff &&
+        DEFAULT_WORKING_TIMES.map((wt) => (
+          <StaffWorkingTimeSkeleton key={wt} weekday={wt} />
+        ))}
       {staff &&
         staff.workingTimes.map((wt) => (
           <StaffWorkingTime key={wt.id} workingTime={wt} staffId={staff.id} />
-        ))}
-      {staff &&
-        DEFAULT_WORKING_TIMES.map((wt) => (
-          <StaffWorkingTimeSkeleton key={wt} weekday={wt} />
         ))}
     </Section>
   );

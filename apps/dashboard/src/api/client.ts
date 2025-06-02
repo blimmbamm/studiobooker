@@ -46,8 +46,8 @@ async function _fetch<T>(config: {
 // }
 
 export const client = {
-  get: function <T>(path: string) {
-    return _fetch<T>({ path, method: 'GET' });
+  get: function <T>(path: string, timeout?: number) {
+    return _fetch<T>({ path, method: 'GET', timeout });
   },
   post: function <T>(path: string, body?: any): Promise<T> {
     return _fetch<T>({ path, method: 'POST', body });

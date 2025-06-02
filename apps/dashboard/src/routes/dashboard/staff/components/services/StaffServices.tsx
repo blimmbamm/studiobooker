@@ -1,25 +1,18 @@
 import { List, SxProps } from '@mui/material';
-import { grey } from '@mui/material/colors';
 
 import { Section } from '@studiobooker/utils';
 import { StaffStructured } from '../../../../../types/staff';
 import StaffServiceCategory from './StaffServiceCategory';
 import { useManageStaffServices } from '../../../../../hooks/service.queries';
+import StaffServicesSkeleton from './StaffServicesSkeleton';
 
 type Props = {
-  staff: StaffStructured;
+  staff?: StaffStructured;
   sx?: SxProps;
 };
 
 export default function StaffServices({ staff, sx }: Props) {
-  const { serviceCategories, id: staffId } = staff;
-
-  const manageStaffServicesMutation = useManageStaffServices({ staffId });
-
-  function handleToggleService(id: number, select: boolean) {
-    // Trigger mutation
-    manageStaffServicesMutation.mutate({ select, serviceId: id });
-  }
+  const manageStaffServicesMutation = useManageStaffServices();
 
   return (
     <Section
@@ -30,20 +23,24 @@ export default function StaffServices({ staff, sx }: Props) {
       }}
       sx={sx}
     >
-      <List
-        disablePadding
-        sx={{
-          backgroundColor: grey[300],
-        }}
-      >
-        {serviceCategories.map((sc) => (
-          <StaffServiceCategory
-            key={sc.id}
-            serviceCategory={sc}
-            onToggleService={handleToggleService}
-          />
-        ))}
-      </List>
+      {!staff && <StaffServicesSkeleton />}
+      {staff && (
+        <List disablePadding>
+          {staff.serviceCategories.map((sc) => (
+            <StaffServiceCategory
+              key={sc.id}
+              serviceCategory={sc}
+              onToggleService={(id, select) =>
+                manageStaffServicesMutation.mutate({
+                  staffId: staff.id,
+                  select,
+                  serviceId: id,
+                })
+              }
+            />
+          ))}
+        </List>
+      )}
     </Section>
   );
 }
