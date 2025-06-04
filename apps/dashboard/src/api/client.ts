@@ -1,5 +1,11 @@
 const BASE_URL = 'http://localhost:3000/';
 
+export class CustomError extends Error{  
+  constructor(message: string, public status: number){
+    super(message);
+  }
+}
+
 async function _fetch<T>(config: {
   path: string;
   method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
@@ -17,33 +23,18 @@ async function _fetch<T>(config: {
       : {}),
   });
 
-  try {
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message); // how to type this
-
-    await new Promise((resolve) => setTimeout(resolve, config.timeout || 0));
-
-    return data;
-  } catch {
-    throw new Error('Unknown error');
+  if(!response.ok) {
+    const errorData = await response.json();
+    const e = new CustomError(errorData.message, response.status);
+    throw e; // how to type this?
   }
+  
+  const data = await response.json();
+  
+  await new Promise((resolve) => setTimeout(resolve, config.timeout || 0));
+  
+  return data;
 }
-
-// function get<T>(path: string) {
-//   return _fetch<T>({ path, method: 'GET' });
-// }
-
-// function post<T>(path: string, body?: any): Promise<T> {
-//   return _fetch<T>({ path, method: 'POST', body });
-// }
-
-// function patch<T>(path: string, body: any): Promise<T> {
-//   return _fetch<T>({ path, method: 'PATCH', body });
-// }
-
-// function remove<T>(path: string, body: any): Promise<T> {
-//   return _fetch<T>({ path, method: 'DELETE', body });
-// }
 
 export const client = {
   get: function <T>(path: string, timeout?: number) {

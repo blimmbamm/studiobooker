@@ -4,7 +4,12 @@ import StaffList from './components/navigation/StaffList';
 
 export default function StaffLayout() {
   return (
-    <Box maxWidth={1000} margin={'auto'} sx={{ backgroundColor: 'white' }}>
+    <Box
+      maxWidth={1000}
+      margin={'auto'}
+      sx={{ backgroundColor: 'white' }}
+      minHeight={'100%'}
+    >
       <StaffList />
       <Box
         marginLeft={'250px'}

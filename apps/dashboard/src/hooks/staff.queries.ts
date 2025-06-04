@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addStaff, editStaff, getAllStaff, getStaff } from '../api/staff.api';
 import { EditStaffDto } from '../types/staff';
+import { CustomError } from '../api/client';
 
 export function useAllStaff() {
   const query = useQuery({
@@ -18,8 +19,18 @@ export function useStaff(staffId?: number) {
   const query = useQuery({
     queryKey: ['staff', staffId],
     queryFn: () => getStaff(staffId!),
+    retry: (count, error) => {
+      const e = error as CustomError;
+      if (e.status === 404) {
+        return false;
+      } else {
+        return count <= 3;
+      }
+    },
     enabled: !!staffId,
   });
+
+  console.log(query.error?.message);
 
   // Improvement: Exclude data
 

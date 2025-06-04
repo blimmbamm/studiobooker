@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-} from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
 import AuthProvider from './app/AuthContext';
 import DashboardLayout from './routes/dashboard/DashboardLayout';
@@ -10,10 +6,10 @@ import GuestRoute from './app/GuestRoute';
 import ProtectedRoute from './app/ProtectedRoute';
 import AuthRoot from './routes/auth/AuthLayout';
 import StaffLayout from './routes/dashboard/staff/StaffLayout';
-import StaffDetailPage from './routes/dashboard/staff/Staff';
-import StaffDetailFallback from './routes/dashboard/staff/StaffFallback';
 import RegisterPage from './routes/auth/register/RegisterPage';
 import LoginPage from './routes/auth/login/LoginPage';
+import StaffDetailStart from './routes/dashboard/staff/StaffDetailStart';
+import StaffDetail from './routes/dashboard/staff/StaffDetail';
 
 export const router = createBrowserRouter([
   {
@@ -39,8 +35,8 @@ export const router = createBrowserRouter([
             path: 'staff',
             element: <StaffLayout />,
             children: [
-              { index: true, element: <StaffDetailFallback /> },
-              { path: ':id', element: <StaffDetailPage /> },
+              { index: true, element: <StaffDetailStart /> },
+              { path: ':id', element: <StaffDetail /> },
             ],
           },
           { path: 'services', element: <div>Services</div> },
@@ -60,5 +56,9 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: '*',
+    element: <div>Not found</div>,
   },
 ]);
