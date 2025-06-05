@@ -1,4 +1,4 @@
-import { CircularProgress, Skeleton } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { useAllStaff } from '../../../hooks/staff.queries';
 import StaffDetailFallback from './StaffDetailFallback';
 

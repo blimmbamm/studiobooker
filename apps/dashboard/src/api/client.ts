@@ -1,7 +1,17 @@
 const BASE_URL = 'http://localhost:3000/';
 
-export class CustomError extends Error{  
-  constructor(message: string, public status: number){
+export enum QueryErrorType {
+  HTTP_NOT_FOUND,
+  HTTP_OTHER,
+  OTHER, // other than such with !response.ok, like network
+}
+
+export class QueryError extends Error {
+  constructor(
+    message: string,
+    public type: QueryErrorType,
+    public status: number
+  ) {
     super(message);
   }
 }
@@ -12,28 +22,44 @@ async function _fetch<T>(config: {
   body?: any;
   timeout?: number;
 }): Promise<T> {
-  const response = await fetch(`${BASE_URL}${config.path}`, {
-    method: config.method,
-    credentials: 'include',
-    ...(config.body
-      ? {
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(config.body),
-        }
-      : {}),
-  });
+  try {
+    const response = await fetch(`${BASE_URL}${config.path}`, {
+      method: config.method,
+      credentials: 'include',
+      ...(config.body
+        ? {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config.body),
+          }
+        : {}),
+    });
 
-  if(!response.ok) {
-    const errorData = await response.json();
-    const e = new CustomError(errorData.message, response.status);
-    throw e; // how to type this?
+    if (!response.ok) {
+      // In general, shape {message: string, statusCode: number} comes from Nest
+      const errorData = (await response.json()) as { message?: string };
+
+      const errorType =
+        response.status === 404
+          ? QueryErrorType.HTTP_NOT_FOUND
+          : QueryErrorType.HTTP_OTHER;
+
+      throw new QueryError(
+        errorData.message || 'Unknown error',
+        errorType,
+        response.status
+      );
+    }
+
+    const data = await response.json();
+
+    await new Promise((resolve) => setTimeout(resolve, config.timeout || 0));
+
+    return data;
+  } catch (error) {
+    if (error instanceof QueryError) throw error;
+
+    throw new QueryError((error as Error).message, QueryErrorType.OTHER, -1);
   }
-  
-  const data = await response.json();
-  
-  await new Promise((resolve) => setTimeout(resolve, config.timeout || 0));
-  
-  return data;
 }
 
 export const client = {
@@ -50,5 +76,3 @@ export const client = {
     return _fetch<T>({ path, method: 'DELETE', body });
   },
 };
-
-

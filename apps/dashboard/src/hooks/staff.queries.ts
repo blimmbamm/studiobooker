@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addStaff, editStaff, getAllStaff, getStaff } from '../api/staff.api';
-import { EditStaffDto } from '../types/staff';
-import { CustomError } from '../api/client';
+import { EditStaffDto, StaffStructured } from '../types/staff';
+import { QueryError, QueryErrorType } from '../api/client';
 
 export function useAllStaff() {
   const query = useQuery({
@@ -16,26 +16,28 @@ export function useAllStaff() {
 }
 
 export function useStaff(staffId?: number) {
-  const query = useQuery({
+  const query = useQuery<StaffStructured, QueryError>({
     queryKey: ['staff', staffId],
     queryFn: () => getStaff(staffId!),
     retry: (count, error) => {
-      const e = error as CustomError;
-      if (e.status === 404) {
-        return false;
+      if (error.type === QueryErrorType.OTHER) {
+        return count < 3;
       } else {
-        return count <= 3;
+        return error.status >= 500 && count < 3;
       }
     },
     enabled: !!staffId,
+    networkMode: 'always',
   });
-
-  console.log(query.error?.message);
 
   // Improvement: Exclude data
 
   return {
     ...query,
+    isNotFoundError: query.error?.type === QueryErrorType.HTTP_NOT_FOUND,
+    isOtherError:
+      query.error?.type === QueryErrorType.HTTP_OTHER ||
+      query.error?.type === QueryErrorType.OTHER, // both http errors and network/others
     staff: query.data,
   };
 }

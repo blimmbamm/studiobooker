@@ -11,12 +11,16 @@ export default function StaffDetail() {
   const { id } = useParams<{ id: string }>();
   const staffId = Boolean(Number(id)) ? Number(id) : undefined;
 
-  const { staff, isError } = useStaff(staffId);
+  const { staff, isNotFoundError, isOtherError } = useStaff(staffId);
 
-  if (!staffId || isError) {
+  if (!staffId || isNotFoundError) {
     return (
       <StaffDetailFallback message="The requested staff does not exist." />
     );
+  }
+
+  if (isOtherError) {
+    return <StaffDetailFallback message="Something went wrong..." />;
   }
 
   return (
