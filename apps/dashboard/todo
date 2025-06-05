@@ -15,3 +15,4 @@
 - src/app folder contents must be put somewhere else
 - use a snackbar to display errors; e.g. errors for changing/toggling working times currently aren't handled at all
 - rename staff details > details to something else, like "General" or "information"
+- display an error fallback if isError is true and if no cached data is available (like when launching the app). But when some cached, old data is there, this data should be displayed plus there should be a snackbar/toast notification that data could not be refreshed

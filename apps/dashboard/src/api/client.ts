@@ -1,20 +1,6 @@
+import { QueryError, QueryErrorType } from '@studiobooker/utils';
+
 const BASE_URL = 'http://localhost:3000/';
-
-export enum QueryErrorType {
-  HTTP_NOT_FOUND,
-  HTTP_OTHER,
-  OTHER, // other than such with !response.ok, like network
-}
-
-export class QueryError extends Error {
-  constructor(
-    message: string,
-    public type: QueryErrorType,
-    public status: number
-  ) {
-    super(message);
-  }
-}
 
 async function _fetch<T>(config: {
   path: string;
