@@ -7,7 +7,7 @@ import { EditStaffDto } from '../types/staff';
 import { client } from './client';
 
 export async function getAllStaff() {
-  const staff = await client.get<ApiStaff[]>('personnel');
+  const staff = await client.get<ApiStaff[]>('personnel', 300);
   return staff.map((s) => mapApiToStaff(s));
 }
 
