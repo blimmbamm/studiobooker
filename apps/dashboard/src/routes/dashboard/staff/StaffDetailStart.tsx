@@ -1,22 +1,28 @@
 import { CircularProgress } from '@mui/material';
+
+import { FallbackMessage } from '@studiobooker/utils';
 import { useAllStaff } from '../../../hooks/staff.queries';
-import StaffDetailFallback from './StaffDetailFallback';
 
 export default function StaffDetailStart() {
-  const allStaffQuery = useAllStaff();
+  const { isLoading, staff, isError } = useAllStaff();
 
-  const hasSomeStaff = Boolean(allStaffQuery.staff?.length);
+  const hasSomeStaff = Boolean(staff?.length);
+
+  if (isLoading) {
+    return <CircularProgress sx={{ margin: 'auto', marginTop: '20dvh' }} />;
+  }
+
+  if (isError) {
+    return <FallbackMessage message='Something went wrong...'/>
+  }
 
   return (
     <>
-      {allStaffQuery.isLoading && (
-        <CircularProgress sx={{ margin: 'auto', marginTop: '20dvh' }} />
-      )}
       {hasSomeStaff && (
-        <StaffDetailFallback message="Select staff to view detail..." />
+        <FallbackMessage message="Select staff to view detail..." />
       )}
       {!hasSomeStaff && (
-        <StaffDetailFallback message="You don't have staff yet. Start adding some!" />
+        <FallbackMessage message="You don't have staff yet. Start adding some!" />
       )}
     </>
   );

@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { useStaff } from '../../../hooks/staff.queries';
 import { Divider } from '@mui/material';
+import { useParams } from 'react-router-dom';
+
+import { FallbackMessage } from '@studiobooker/utils';
+import { useStaff } from '../../../hooks/staff.queries';
 import StaffDetails from './components/details/StaffDetails';
 import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
-import StaffDetailFallback from './StaffDetailFallback';
 
 export default function StaffDetail() {
   // This logic could go into a separate hook:
@@ -14,13 +15,11 @@ export default function StaffDetail() {
   const { staff, isNotFoundError, isOtherError } = useStaff(staffId);
 
   if (!staffId || isNotFoundError) {
-    return (
-      <StaffDetailFallback message="The requested staff does not exist." />
-    );
+    return <FallbackMessage message="The requested staff does not exist." />;
   }
 
   if (isOtherError) {
-    return <StaffDetailFallback message="Something went wrong..." />;
+    return <FallbackMessage message="Something went wrong..." />;
   }
 
   return (

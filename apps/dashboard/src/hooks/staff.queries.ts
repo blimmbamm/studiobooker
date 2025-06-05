@@ -27,7 +27,6 @@ export function useStaff(staffId?: number) {
       }
     },
     enabled: !!staffId,
-    networkMode: 'always',
   });
 
   // Improvement: Exclude data

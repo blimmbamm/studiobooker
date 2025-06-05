@@ -14,3 +14,4 @@
 - maybe it would be beneficial to have start and end time of working time already as Dayjs in the type --> use mapper to map appropriately 
 - src/app folder contents must be put somewhere else
 - use a snackbar to display errors; e.g. errors for changing/toggling working times currently aren't handled at all
+- rename staff details > details to something else, like "General" or "information"
