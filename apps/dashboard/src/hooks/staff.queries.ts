@@ -1,10 +1,6 @@
-import {
-  useMutation,
-  // useQuery as useTanstackQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { useQuery } from '@studiobooker/utils';
+import { useQuery, useMutation } from '@studiobooker/utils';
 import { addStaff, editStaff, getAllStaff, getStaff } from '../api/staff.api';
 import { EditStaffDto } from '../types/staff';
 
@@ -31,29 +27,6 @@ export function useStaff(staffId?: number) {
     ...query,
     staff,
   };
-
-  // const query = useQuery<StaffStructured, QueryError>({
-  //   queryKey: ['staff', staffId],
-  //   queryFn: () => getStaff(staffId!),
-  //   retry: (count, error) => {
-  //     if (error.type === QueryErrorType.OTHER) {
-  //       return count < 3;
-  //     } else {
-  //       return error.status >= 500 && count < 3;
-  //     }
-  //   },
-  //   enabled: !!staffId,
-  //   networkMode: 'always',
-  // });
-  // // Improvement: Exclude data
-  // return {
-  //   ...query,
-  //   isNotFoundError: query.error?.type === QueryErrorType.HTTP_NOT_FOUND,
-  //   isOtherError:
-  //     query.error?.type === QueryErrorType.HTTP_OTHER ||
-  //     query.error?.type === QueryErrorType.OTHER, // both http errors and network/others
-  //   staff: query.data,
-  // };
 }
 
 export function useAddStaff(

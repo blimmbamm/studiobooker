@@ -1,3 +1,4 @@
+General:
 - When loading the app, isAuthenticated is always false initially / the user gets redirected to /auth/login in the authguard, even if the auth check succeeds --> try something with location: from
 -  try setting auth route prefix to empty string, this should work since dashboard routes match first; however this may be problematic with a wildcard route
 - generic fetch thing: be sure that no runtime errors occur and maybe construct url path safely with respect to slashes etc
@@ -16,3 +17,10 @@
 - use a snackbar to display errors; e.g. errors for changing/toggling working times currently aren't handled at all
 - rename staff details > details to something else, like "General" or "information"
 - display an error fallback if isError is true and if no cached data is available (like when launching the app). But when some cached, old data is there, this data should be displayed plus there should be a snackbar/toast notification that data could not be refreshed
+- unify mutations: some have useDebouncedCallback outside, others inside
+
+
+
+Current branch:
+- error message in staffName is wrong
+- onError optimistic update for working times is missing

@@ -15,7 +15,7 @@ export default function StaffName(props: { staff: Staff }) {
       value={value}
       onChange={handleChange}
       error={hasError}
-      helperText={hasError && 'Must not be empty.'}
+      helperText={hasError && 'Must not be empty.'} // this is not correct, other errors can occur
       onBlur={checkErrors}
     />
   );
