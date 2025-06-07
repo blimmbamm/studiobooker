@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
-import AuthProvider from './app/AuthContext';
 import DashboardLayout from './routes/dashboard/DashboardLayout';
 import GuestRoute from './app/GuestRoute';
 import ProtectedRoute from './app/ProtectedRoute';
@@ -10,6 +9,7 @@ import RegisterPage from './routes/auth/register/RegisterPage';
 import LoginPage from './routes/auth/login/LoginPage';
 import StaffDetailStart from './routes/dashboard/staff/StaffDetailStart';
 import StaffDetail from './routes/dashboard/staff/StaffDetail';
+import AuthProvider from './contexts/AuthContext';
 
 export const router = createBrowserRouter([
   {

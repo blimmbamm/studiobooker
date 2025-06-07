@@ -1,7 +1,7 @@
-import { useAuth } from '../../../app/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { loginDummy } = useAuth();
 
-  return <button onClick={login}>Login</button>;
+  return <button onClick={loginDummy}>Login</button>;
 }

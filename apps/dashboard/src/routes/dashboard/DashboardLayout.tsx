@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { useAuth } from '../../app/AuthContext';
 import { AppBar, Box, Button, CssBaseline, Toolbar } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function DashboardRoot() {
   const { logout } = useAuth();
@@ -34,7 +34,7 @@ export default function DashboardRoot() {
           overflowY: 'scroll',
           // scrollbarGutter: 'stable', // alternative for modern browsers
           backgroundColor: grey[100],
-        }}        
+        }}
       >
         <Outlet />
       </Box>
