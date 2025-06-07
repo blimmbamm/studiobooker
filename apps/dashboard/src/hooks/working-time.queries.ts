@@ -45,6 +45,9 @@ export function useEditWorkingTime({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['staff', staffId] });
     },
+    onError: (_error, _variables, context) => {
+      queryClient.setQueryData(['staff', staffId], context?.prevStaff);
+    },
   });
 
   const [mutateDebounced, cancelMutateDebounced] = useDebouncedCallback(

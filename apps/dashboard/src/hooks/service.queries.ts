@@ -1,4 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { useQuery, useMutation } from '@studiobooker/utils';
 import {
   addStaffToService,
   getServicesByCategory,
@@ -65,7 +67,6 @@ export function useManageStaffServices() {
       queryClient.invalidateQueries({ queryKey: ['staff', staffId] });
     },
     onError: (_error, { staffId }, context) => {
-      // Todo: Add Toast with error message
       queryClient.setQueryData(['staff', staffId], context?.prevStaff);
     },
   });

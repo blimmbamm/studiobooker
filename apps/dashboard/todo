@@ -18,5 +18,4 @@ General:
 - rename staff details > details to something else, like "General" or "information"
 - display an error fallback if isError is true and if no cached data is available (like when launching the app). But when some cached, old data is there, this data should be displayed plus there should be a snackbar/toast notification that data could not be refreshed
 - unify mutations: some have useDebouncedCallback outside, others inside
-- onError optimistic update for working times is missing
 - improvement for useStaffProperty: validation error should only be displayed once the input is blurred (that's already the case) but mutation errors should be displayed once they occur (right now, both types of errors are only visible once input is blurred, and if input is blurred before the mutation yields an error, no error is displayed, what's not correct)
