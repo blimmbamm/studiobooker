@@ -28,12 +28,14 @@ export default function StaffEmail(props: { staff: Staff }) {
     return !value || validMailRegex.test(value);
   }
 
-  const { value, handleChange, hasError, checkErrors } = useStaffProperty({
-    staff: props.staff,
-    property: 'email',
-    updateValueIf: isValidPartialEmailOrEmpty,
-    submitValueIf: isValidFullEmailOrEmpty,
-  });
+  const { value, handleChange, showError, checkErrors, helperText } =
+    useStaffProperty({
+      staff: props.staff,
+      property: 'email',
+      updateValueIf: isValidPartialEmailOrEmpty,
+      submitValueIf: isValidFullEmailOrEmpty,
+      validationErrorHelperText: 'Invalid e-mail. This not saved.',
+    });
 
   return (
     <StaffProperty
@@ -41,8 +43,8 @@ export default function StaffEmail(props: { staff: Staff }) {
       value={value}
       onChange={handleChange}
       onBlur={checkErrors}
-      error={hasError}
-      helperText={hasError && 'Invalid e-mail. This is not saved.'}
+      error={showError}
+      helperText={helperText}
     />
   );
 }

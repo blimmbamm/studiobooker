@@ -7,20 +7,11 @@ export default function StaffPhone(props: { staff: Staff }) {
     return /^[0-9]*$/.test(value);
   }
 
-  const { value, handleChange, hasError, checkErrors } = useStaffProperty({
+  const { value, handleChange } = useStaffProperty({
     staff: props.staff,
     property: 'phone',
     updateValueIf: isNumberString,
   });
 
-  return (
-    <StaffProperty
-      name="Phone"
-      value={value}
-      onChange={handleChange}
-      onBlur={checkErrors}
-      error={hasError}
-      helperText={hasError && 'Invalid e-mail. This is not saved.'}
-    />
-  );
+  return <StaffProperty name="Phone" value={value} onChange={handleChange} />;
 }
