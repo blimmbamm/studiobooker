@@ -4,3 +4,4 @@ export * from './TimePicker';
 export * from './FallbackMessage';
 export * from './Alert';
 export * from './QueryClientProvider';
+export * from './AppBarLayout';
