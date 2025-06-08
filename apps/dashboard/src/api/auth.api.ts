@@ -11,7 +11,7 @@ export async function login(email: string, password: string) {
   return client.post<{ message: string }>('auth/login', {
     email,
     password,
-  });
+  }, 1500);
 }
 
 export async function logout() {

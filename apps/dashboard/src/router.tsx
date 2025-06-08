@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 import DashboardLayout from './routes/dashboard/DashboardLayout';
 import GuestRoute from './app/GuestRoute';
 import ProtectedRoute from './app/ProtectedRoute';
-import AuthRoot from './routes/auth/AuthLayout';
+import AuthLayout from './routes/auth/AuthLayout';
 import StaffLayout from './routes/dashboard/staff/StaffLayout';
 import RegisterPage from './routes/auth/register/RegisterPage';
 import LoginPage from './routes/auth/login/LoginPage';
@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
         path: 'auth',
         element: (
           <GuestRoute>
-            <AuthRoot />
+            <AuthLayout />
           </GuestRoute>
         ),
         children: [

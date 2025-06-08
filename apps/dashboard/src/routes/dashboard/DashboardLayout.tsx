@@ -1,10 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { AppBar, Box, Button, CssBaseline, Toolbar } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { useAuth } from '../../contexts/AuthContext';
+import { useLogout } from '../../hooks/auth/useLogout';
 
 export default function DashboardRoot() {
-  const { logout } = useAuth();
+  const { mutate: logout } = useLogout();
 
   return (
     <Box display={'flex'} flexDirection={'column'} height={'100dvh'}>
@@ -23,7 +23,7 @@ export default function DashboardRoot() {
           <Button component={NavLink} to={'settings'} color="inherit">
             Settings
           </Button>
-          <Button onClick={logout} color="inherit">
+          <Button onClick={() => logout()} color="inherit">
             Logout
           </Button>
         </Toolbar>
