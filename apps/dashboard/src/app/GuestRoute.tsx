@@ -4,9 +4,9 @@ import { PropsWithChildren } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function GuestRoute(props: PropsWithChildren) {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
-  if (loading) return <h1>Loading...</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
 
   if (isAuthenticated) {
     return <Navigate to={'/dashboard'} />;

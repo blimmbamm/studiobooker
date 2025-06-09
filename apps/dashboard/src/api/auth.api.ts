@@ -7,11 +7,23 @@ export async function checkAuth() {
   return mapApiToCompany(company);
 }
 
+export async function signup(email: string, password: string) {
+  return client.post<{ message: string }>(
+    'auth/register',
+    { email, password },
+    1000
+  );
+}
+
 export async function login(email: string, password: string) {
-  return client.post<{ message: string }>('auth/login', {
-    email,
-    password,
-  }, 1500);
+  return client.post<{ message: string }>(
+    'auth/login',
+    {
+      email,
+      password,
+    },
+    1500
+  );
 }
 
 export async function logout() {
