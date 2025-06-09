@@ -5,15 +5,25 @@ import {
   CardContent,
   CardHeader,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 
 type Props = {
   title: string;
   isSubmitting: boolean;
   onSubmit: () => void;
+  isError?: boolean;
+  errorMessage?: string;
 } & PropsWithChildren;
 
-export function AuthForm({ title, isSubmitting, children, onSubmit }: Props) {
+export function AuthForm({
+  title,
+  isSubmitting,
+  children,
+  onSubmit,
+  isError,
+  errorMessage,
+}: Props) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     onSubmit();
@@ -24,6 +34,11 @@ export function AuthForm({ title, isSubmitting, children, onSubmit }: Props) {
       <CardHeader title={title} />
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {children}
+        {isError && (
+          <Typography variant="caption" color="error">
+            {errorMessage}
+          </Typography>
+        )}
         <Button
           type="submit"
           variant="contained"

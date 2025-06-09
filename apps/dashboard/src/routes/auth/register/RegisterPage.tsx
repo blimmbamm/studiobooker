@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import { AuthForm } from '@studiobooker/utils';
 import { useSignup } from './useSignup';
@@ -27,6 +27,8 @@ export default function RegisterPage() {
       title="Signup"
       onSubmit={handleSignup}
       isSubmitting={signupIsPending}
+      isError={signupIsError}
+      errorMessage="Something went wrong."
     >
       <TextField
         label="E-mail"
@@ -56,11 +58,6 @@ export default function RegisterPage() {
         helperText={confirmPasswordIsError && "Passwords don't match."}
         onBlur={checkConfirmPassword}
       />
-      {signupIsError && (
-        <Typography variant="caption" color="error">
-          Something went wrong.
-        </Typography>
-      )}
     </AuthForm>
   );
 }
