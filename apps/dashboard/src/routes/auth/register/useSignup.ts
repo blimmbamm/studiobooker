@@ -31,7 +31,7 @@ export function useSignup() {
       password: string;
     }) => signup(email, password),
     onSuccess: () => {
-      navigate('auth/verify', { state: { email } });
+      navigate('/auth/verify', { state: { email } });
     },
     useDefaultErrorHandling: false,
   });

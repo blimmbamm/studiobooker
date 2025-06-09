@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@studiobooker/utils';
 import { checkAuth } from '../api/auth.api';
@@ -22,6 +22,7 @@ export default function AuthProvider(props: PropsWithChildren) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isLoading, isSuccess, isError } = useQuery({
     queryKey: ['auth-check'],
@@ -34,9 +35,13 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     if (isError) {
-      navigate('/auth/login');
+      const isInAuthRoute = location.pathname.startsWith('/auth');
+
+      if (!isInAuthRoute) {
+        navigate('/auth/login', { replace: true });
+      }
     }
-  }, [isSuccess, isError, navigate]);
+  }, [isSuccess, isError, navigate, location]);
 
   return (
     <AuthContext.Provider

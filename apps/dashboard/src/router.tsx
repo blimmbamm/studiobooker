@@ -10,6 +10,7 @@ import LoginPage from './routes/auth/login/LoginPage';
 import StaffDetailStart from './routes/dashboard/staff/StaffDetailStart';
 import StaffDetail from './routes/dashboard/staff/StaffDetail';
 import AuthProvider from './contexts/AuthContext';
+import VerifySignupPage from './routes/auth/verify/VerifySignupPage';
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to={'login'} /> },
           { path: 'login', element: <LoginPage /> },
           { path: 'register', element: <RegisterPage /> },
+          { path: 'verify', element: <VerifySignupPage /> },
         ],
       },
     ],
