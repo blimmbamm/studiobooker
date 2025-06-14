@@ -2,13 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useMutation } from '@studiobooker/utils';
 import { login } from '../../../api/auth.api';
-import { useNavigate } from 'react-router-dom';
 
 export function useLogin() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
 
   const loginMutation = useMutation({
@@ -16,7 +14,6 @@ export function useLogin() {
       login(email, password),
     onSuccess: () => {
       setIsAuthenticated(true);
-      navigate('/dashboard');
     },
     useDefaultErrorHandling: false,
   });

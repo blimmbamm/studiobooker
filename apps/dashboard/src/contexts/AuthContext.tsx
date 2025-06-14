@@ -41,7 +41,15 @@ export default function AuthProvider(props: PropsWithChildren) {
         navigate('/auth/login', { replace: true });
       }
     }
-  }, [isSuccess, isError, navigate, location]);
+  }, [isSuccess, isError, navigate]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth/login', { replace: true });
+    } else {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider
