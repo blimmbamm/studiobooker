@@ -11,6 +11,8 @@ import StaffDetailStart from './routes/dashboard/staff/StaffDetailStart';
 import StaffDetail from './routes/dashboard/staff/StaffDetail';
 import AuthProvider from './contexts/AuthContext';
 import VerifySignupPage from './routes/auth/verify/VerifySignupPage';
+import ServicesLayout from './routes/dashboard/services/ServicesLayout';
+import ServiceDetail from './routes/dashboard/services/ServiceDetail';
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +42,17 @@ export const router = createBrowserRouter([
               { path: ':id', element: <StaffDetail /> },
             ],
           },
-          { path: 'services', element: <div>Services</div> },
+          {
+            path: 'services',
+            element: <ServicesLayout />,
+            children: [
+              {
+                index: true,
+                element: <div>Services starting page</div>,
+              },
+              { path: ':id', element: <ServiceDetail /> },
+            ],
+          },
         ],
       },
       {

@@ -9,7 +9,12 @@ type Props = {
   actionComponent?: JSX.Element;
 } & BoxProps;
 
-export function SideNavSection({ title, children, actionComponent }: Props) {
+export function SideNavSection({
+  title,
+  children,
+  actionComponent,
+  ...boxProps
+}: Props) {
   return (
     <Box
       borderRight={1}
@@ -21,6 +26,7 @@ export function SideNavSection({ title, children, actionComponent }: Props) {
       top={0}
       bottom={0}
       sx={{ backgroundColor: 'white' }}
+      {...boxProps}
     >
       <Toolbar />
       <SectionTitle title={title} actionComponent={actionComponent} />

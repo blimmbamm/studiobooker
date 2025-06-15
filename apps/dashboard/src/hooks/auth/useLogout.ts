@@ -3,16 +3,11 @@ import { logout } from '../../api/auth.api';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function useLogout() {
-  const { setIsAuthenticated } = useAuth();
+  const { synchronizeAuth } = useAuth();
 
   return useMutation({
     mutationFn: (_args: void) => logout(),
-    onSuccess: () => {
-      setIsAuthenticated(false);
-    },
-    onError: () => {
-      setIsAuthenticated(false);
-    },
+    onSettled: synchronizeAuth,
     useDefaultErrorHandling: false,
   });
 }

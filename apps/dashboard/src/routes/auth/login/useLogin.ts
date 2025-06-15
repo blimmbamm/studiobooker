@@ -7,14 +7,12 @@ export function useLogin() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const { setIsAuthenticated } = useAuth();
+  const { synchronizeAuth } = useAuth();
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       login(email, password),
-    onSuccess: () => {
-      setIsAuthenticated(true);
-    },
+    onSuccess: synchronizeAuth,
     useDefaultErrorHandling: false,
   });
 

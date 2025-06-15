@@ -4,7 +4,7 @@ import { client } from './client';
 
 export async function getServicesByCategory() {
   const servicesByCategory = await client.get<ApiServiceCategory[]>(
-    'service-category'
+    'service-category', 2000
   );
   return servicesByCategory.map((sc) => mapApiToServiceCategory(sc));
 }

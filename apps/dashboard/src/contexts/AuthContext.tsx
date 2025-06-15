@@ -1,39 +1,35 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@studiobooker/utils';
 import { checkAuth } from '../api/auth.api';
+import { CircularProgress } from '@mui/material';
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
-  isLoading: boolean;
+  /**
+   * Synchronize the auth state by refetching auth check
+   */
+  synchronizeAuth: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export default function AuthProvider(props: PropsWithChildren) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoading, isSuccess, isError } = useQuery({
+  const {
+    isLoading,
+    isSuccess: isAuthenticated,
+    isError,
+    refetch: synchronizeAuth,
+  } = useQuery({
     queryKey: ['auth-check'],
     queryFn: checkAuth,
   });
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsAuthenticated(true);
-    }
-
     if (isError) {
       const isInAuthRoute = location.pathname.startsWith('/auth');
 
@@ -41,22 +37,21 @@ export default function AuthProvider(props: PropsWithChildren) {
         navigate('/auth/login', { replace: true });
       }
     }
-  }, [isSuccess, isError, navigate]);
+  }, [isAuthenticated, isError, navigate]);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/auth/login', { replace: true });
-    } else {
-      navigate('/dashboard', { replace: true });
-    }
-  }, [isAuthenticated]);
+  if (isLoading) {
+    return (
+      <CircularProgress
+        sx={{ display: 'block', margin: 'auto', marginTop: '20dvh' }}
+      />
+    );
+  }
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        setIsAuthenticated,
-        isLoading,
+        synchronizeAuth,
       }}
     >
       {props.children}
