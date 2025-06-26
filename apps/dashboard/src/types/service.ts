@@ -10,3 +10,10 @@ export type Service = {
 export type ServiceWithStaffQualification = Service & {
   staffIsQualifiedForService: boolean;
 };
+
+export type EditServiceDto = {
+  title?: string;
+  description?: string | null;
+  duration?: number | null;
+  price?: number | null;
+};

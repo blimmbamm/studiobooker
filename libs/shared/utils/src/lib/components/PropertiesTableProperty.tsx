@@ -2,7 +2,10 @@ import { TextField, TextFieldProps, Typography } from '@mui/material';
 
 type Props = { name: string } & TextFieldProps;
 
-export default function StaffProperty({ name, ...textFieldProps }: Props) {
+export function PropertiesTableProperty({
+  name,
+  ...textFieldProps
+}: Props) {
   return (
     <>
       <Typography>{name}</Typography>

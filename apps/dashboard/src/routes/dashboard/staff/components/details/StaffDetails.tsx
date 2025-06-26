@@ -1,38 +1,23 @@
-import { SxProps } from '@mui/material';
-
+import { PropertiesTableSection, PropertySkeleton } from '@studiobooker/utils';
 import { StaffStructured } from '../../../../../types/staff';
-import { Section } from '@studiobooker/utils';
 import StaffName from './StaffName';
 import StaffNotes from './StaffNotes';
 import StaffEmail from './StaffEmail';
 import StaffPhone from './StaffPhone';
-import StaffPropertySkeleton from './StaffPropertySkeleton';
 
 type Props = {
   staff: StaffStructured | undefined;
-  sx?: SxProps;
 };
 
-export default function StaffDetails({ staff, sx }: Props) {
+export default function StaffDetails({ staff }: Props) {
   return (
-    <Section
-      title="Details"
-      contentBoxProps={{
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
-        alignItems: 'center',
-        width: 'fit-content',
-        rowGap: 1,
-        columnGap: 3,
-      }}
-      sx={sx}
-    >
+    <PropertiesTableSection title="Details">
       {!staff && (
         <>
-          <StaffPropertySkeleton name="Name" />
-          <StaffPropertySkeleton name="E-mail" />
-          <StaffPropertySkeleton name="Phone" />
-          <StaffPropertySkeleton name="Notes" />
+          <PropertySkeleton name="Name" />
+          <PropertySkeleton name="E-mail" />
+          <PropertySkeleton name="Phone" />
+          <PropertySkeleton name="Notes" />
         </>
       )}
       {staff && (
@@ -43,6 +28,6 @@ export default function StaffDetails({ staff, sx }: Props) {
           <StaffNotes staff={staff} />
         </>
       )}
-    </Section>
+    </PropertiesTableSection>
   );
 }

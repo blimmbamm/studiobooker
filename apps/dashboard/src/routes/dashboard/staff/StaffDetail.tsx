@@ -1,16 +1,13 @@
 import { Divider } from '@mui/material';
-import { useParams } from 'react-router-dom';
 
-import { FallbackMessage } from '@studiobooker/utils';
+import { FallbackMessage, useNumericParam } from '@studiobooker/utils';
 import { useStaff } from '../../../hooks/staff.queries';
 import StaffDetails from './components/details/StaffDetails';
 import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
 
 export default function StaffDetail() {
-  // This logic could go into a separate hook:
-  const { id } = useParams<{ id: string }>();
-  const staffId = Boolean(Number(id)) ? Number(id) : undefined;
+  const staffId = useNumericParam('id');
 
   const { staff, isNotFoundError, isOtherError } = useStaff(staffId);
 

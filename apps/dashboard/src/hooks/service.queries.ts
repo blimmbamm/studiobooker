@@ -3,10 +3,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@studiobooker/utils';
 import {
   addStaffToService,
+  editService,
+  getService,
   getServicesByCategory,
   removeStaffFromService,
 } from '../api/service.api';
 import { StaffStructured } from '../types/staff';
+import { EditServiceDto } from '../types/service';
 
 export function useServicesByCategory() {
   const query = useQuery({
@@ -17,6 +20,19 @@ export function useServicesByCategory() {
   return {
     ...query,
     serviceCategories: query.data,
+  };
+}
+
+export function useService(id?: number) {
+  const { data: service, ...query } = useQuery({
+    queryKey: ['service', id],
+    queryFn: () => getService(id!),
+    enabled: !!id,
+  });
+
+  return {
+    ...query,
+    service,
   };
 }
 
@@ -68,6 +84,26 @@ export function useManageStaffServices() {
     },
     onError: (_error, { staffId }, context) => {
       queryClient.setQueryData(['staff', staffId], context?.prevStaff);
+    },
+  });
+}
+
+export function useEditService(args: {
+  serviceId: number;
+  onSuccess?: () => void;
+  onError?: () => void;
+}) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (variables: { input: EditServiceDto }) =>
+      editService(args.serviceId, variables.input),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['service'] });
+      args.onSuccess?.();
+    },
+    onError: () => {
+      args.onError?.();
     },
   });
 }

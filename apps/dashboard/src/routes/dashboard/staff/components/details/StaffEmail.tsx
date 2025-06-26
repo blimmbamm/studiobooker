@@ -1,6 +1,6 @@
+import { PropertiesTableProperty } from '@studiobooker/utils';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 import { Staff } from '../../../../../types/staff';
-import StaffProperty from './StaffProperty';
 
 export default function StaffEmail(props: { staff: Staff }) {
   /**
@@ -30,15 +30,16 @@ export default function StaffEmail(props: { staff: Staff }) {
 
   const { value, handleChange, showError, checkErrors, helperText } =
     useStaffProperty({
-      staff: props.staff,
+      entity: props.staff,
       property: 'email',
+      parseProperty: (value) => value,
       updateValueIf: isValidPartialEmailOrEmpty,
       submitValueIf: isValidFullEmailOrEmpty,
       validationErrorHelperText: 'Invalid e-mail. This not saved.',
     });
 
   return (
-    <StaffProperty
+    <PropertiesTableProperty
       name="E-mail"
       value={value}
       onChange={handleChange}

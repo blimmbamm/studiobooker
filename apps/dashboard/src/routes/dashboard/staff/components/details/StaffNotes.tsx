@@ -1,15 +1,16 @@
+import { PropertiesTableProperty } from '@studiobooker/utils';
 import { Staff } from '../../../../../types/staff';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
-import StaffProperty from './StaffProperty';
 
 export default function StaffNotes(props: { staff: Staff }) {
   const { value, handleChange } = useStaffProperty({
-    staff: props.staff,
+    entity: props.staff,
     property: 'notes',
+    parseProperty: (value) => value,
   });
 
   return (
-    <StaffProperty
+    <PropertiesTableProperty
       name="Notes"
       multiline
       value={value}

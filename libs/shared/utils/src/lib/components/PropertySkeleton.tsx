@@ -1,8 +1,6 @@
 import { Box, Skeleton, TextField, Typography } from '@mui/material';
 
-type Props = { name: string };
-
-export default function StaffPropertySkeleton({ name }: Props) {
+export function PropertySkeleton({ name }: { name: string }) {
   return (
     <>
       <Typography>{name}</Typography>
@@ -10,8 +8,6 @@ export default function StaffPropertySkeleton({ name }: Props) {
         <TextField
           size="small"
           sx={{
-            // height: 0,
-            // position: 'fixed',
             visibility: 'hidden',
           }}
         />
@@ -22,12 +18,6 @@ export default function StaffPropertySkeleton({ name }: Props) {
           sx={{ position: 'absolute', top: 0 }}
         />
       </Box>
-      {/* <TextField
-        variant="outlined"
-        size="small"
-        autoComplete="off"
-        {...textFieldProps}
-      /> */}
     </>
   );
 }

@@ -1,6 +1,6 @@
+import { PropertiesTableProperty } from '@studiobooker/utils';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 import { Staff } from '../../../../../types/staff';
-import StaffProperty from './StaffProperty';
 
 export default function StaffPhone(props: { staff: Staff }) {
   function isNumberString(value: string) {
@@ -8,10 +8,17 @@ export default function StaffPhone(props: { staff: Staff }) {
   }
 
   const { value, handleChange } = useStaffProperty({
-    staff: props.staff,
+    entity: props.staff,
     property: 'phone',
+    parseProperty: (value) => value,
     updateValueIf: isNumberString,
   });
 
-  return <StaffProperty name="Phone" value={value} onChange={handleChange} />;
+  return (
+    <PropertiesTableProperty
+      name="Phone"
+      value={value}
+      onChange={handleChange}
+    />
+  );
 }
