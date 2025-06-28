@@ -8,6 +8,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
   validationErrorHelperText = '',
   isError,
   onSubmit,
+  debounceTimeout = 500,
 }: {
   initialValue: string;
   updateValueIf?: (value: string) => boolean;
@@ -15,6 +16,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
   validationErrorHelperText?: string;
   isError: boolean;
   onSubmit: (inputs: string) => void;
+  debounceTimeout?: number
 }) {
   const [value, setValue] = useState(initialValue);
   const [isTyping, setIsTyping] = useState(false);
@@ -34,7 +36,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
   const [edit, cancelEdit] = useDebouncedCallback((input: string) => {
     setIsTyping(false);
     onSubmit(input);
-  }, 500);
+  }, debounceTimeout);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;

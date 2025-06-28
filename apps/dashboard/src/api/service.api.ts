@@ -1,25 +1,41 @@
-import { mapApiToServiceCategory } from '../types/api/service-category.mapper';
-import { ApiServiceCategory } from '../types/api/service-category';
+import { mapApiToServiceCategoryStructured } from '../types/api/service-category.mapper';
+import { ApiServiceCategoryStructured } from '../types/api/service-category';
 import { client } from './client';
-import { ApiService } from '../types/api/service';
-import { mapApiToService } from '../types/api/service.mapper';
+import { ApiService, ApiServiceStructured } from '../types/api/service';
+import {
+  mapApiToService,
+  mapApiToServiceStructured,
+} from '../types/api/service.mapper';
 import { EditServiceDto } from '../types/service';
 
 export async function getServicesByCategory() {
-  const servicesByCategory = await client.get<ApiServiceCategory[]>(
+  const servicesByCategory = await client.get<ApiServiceCategoryStructured[]>(
     'service-category',
     200
   );
-  return servicesByCategory.map((sc) => mapApiToServiceCategory(sc));
+  return servicesByCategory.map(mapApiToServiceCategoryStructured);
 }
 
 export async function getService(id: number) {
-  const service = await client.get<ApiService>(`service/${id}`, 200);
-  return mapApiToService(service);
+  const service = await client.get<ApiServiceStructured>(`service/${id}`, 200);
+  return mapApiToServiceStructured(service);
 }
 
 export async function editService(id: number, inputs: EditServiceDto) {
   const service = await client.patch<ApiService>(`service/${id}`, inputs);
+  return mapApiToService(service);
+}
+
+export async function editServiceServiceCategory(
+  id: number,
+  categoryId: number
+) {
+  const service = await client.patch<ApiService>(
+    `service/${id}/category/${categoryId}`,
+    {},
+    500
+  );
+
   return mapApiToService(service);
 }
 

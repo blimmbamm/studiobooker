@@ -1,21 +1,37 @@
 import { PropertiesTableSection, PropertySkeleton } from '@studiobooker/utils';
-import { Service } from "../../../../types/service";
+import { ServiceStructured } from '../../../../types/service';
+import ServiceTitle from './properties/ServiceTitle';
+import ServiceDescription from './properties/ServiceDescription';
+import ServiceDuration from './properties/ServiceDuration';
+import ServicePrice from './properties/ServicePrice';
+import ServiceCategory from './properties/ServiceCategory';
 
-export function ServiceProperties({service}: {service?: Service}){
-  return <PropertiesTableSection title='Details'>
-    {!service && (
-      <>
-        <PropertySkeleton name="Title" />
-        <PropertySkeleton name="Description" />
-        <PropertySkeleton name="Duration" />
-        <PropertySkeleton name="Price" />
-        <PropertySkeleton name="Category" />
-      </>
-    )}
-    {service && (
-      <>
-        <p>Whatever</p>
-      </>
-    )}
-  </PropertiesTableSection>
+export function ServiceProperties({
+  service,
+}: {
+  service?: ServiceStructured;
+}) {
+  console.log(service)
+  return (
+    <PropertiesTableSection title="Details">
+      {!service && (
+        <>
+          <PropertySkeleton name="Title" />
+          <PropertySkeleton name="Description" />
+          <PropertySkeleton name="Duration" />
+          <PropertySkeleton name="Price" />
+          <PropertySkeleton name="Category" />
+        </>
+      )}
+      {service && (
+        <>
+          <ServiceTitle service={service} />
+          <ServiceDescription service={service} />
+          <ServiceDuration service={service} />
+          <ServicePrice service={service} />
+          <ServiceCategory service={service} />
+        </>
+      )}
+    </PropertiesTableSection>
+  );
 }

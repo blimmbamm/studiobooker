@@ -1,3 +1,6 @@
+import { ApiServiceCategory } from './service-category';
+import { ApiStaff } from './staff';
+
 export type ApiService = {
   id: number;
   title: string;
@@ -8,4 +11,9 @@ export type ApiService = {
 
 export type ApiServiceWithStaffQualification = ApiService & {
   staffIsQualifiedForService: boolean;
+};
+
+export type ApiServiceStructured = ApiService & {
+  personnel: ApiStaff[]; // in backend, this is still called personnel, but use staff in client
+  serviceCategory: ApiServiceCategory;
 };

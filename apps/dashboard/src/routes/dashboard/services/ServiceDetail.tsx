@@ -5,17 +5,18 @@ import { ServiceProperties } from './components/ServiceProperties';
 export default function ServiceDetail() {
   const serviceId = useNumericParam('id');
 
-  const { service, isNotFoundError, isOtherError } = useService(serviceId);
+  const { service, isNotFoundError, isOtherError, isError } = useService(serviceId);
 
   if (!serviceId || isNotFoundError) {
     return <FallbackMessage message="The requested service does not exist." />;
   }
 
-  if(isOtherError) {
-     return <FallbackMessage message="Something went wrong..." />;
+  console.log(isOtherError)
+  console.log(isError)
+
+  if (isOtherError) {
+    return <FallbackMessage message="Something went wrong..." />;
   }
 
-  return <>
-    <ServiceProperties service={service}/>
-  </>
+  return <ServiceProperties service={service} />;
 }

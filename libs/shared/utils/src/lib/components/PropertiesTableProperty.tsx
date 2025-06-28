@@ -1,9 +1,11 @@
 import { TextField, TextFieldProps, Typography } from '@mui/material';
+import { PropsWithChildren } from 'react';
 
-type Props = { name: string } & TextFieldProps;
+type Props = { name: string } & TextFieldProps & PropsWithChildren;
 
 export function PropertiesTableProperty({
   name,
+  children,
   ...textFieldProps
 }: Props) {
   return (
@@ -14,7 +16,9 @@ export function PropertiesTableProperty({
         size="small"
         autoComplete="off"
         {...textFieldProps}
-      />
+      >
+        {children}
+      </TextField>
     </>
   );
 }

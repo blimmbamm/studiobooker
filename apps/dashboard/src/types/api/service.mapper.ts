@@ -1,8 +1,18 @@
-import { Service, ServiceWithStaffQualification } from '../service';
-import { ApiService, ApiServiceWithStaffQualification } from './service';
+import {
+  Service,
+  ServiceStructured,
+  ServiceWithStaffQualification,
+} from '../service';
+import {
+  ApiService,
+  ApiServiceStructured,
+  ApiServiceWithStaffQualification,
+} from './service';
+import { mapApiToServiceCategory } from './service-category.mapper';
+import { mapApiToStaff } from './staff.mapper';
 
 export function mapApiToService(service: ApiService): Service {
-  return { ...service, dingens: false };
+  return { ...service };
 }
 
 export function mapApiToServiceWithStaffQualification(
@@ -11,5 +21,15 @@ export function mapApiToServiceWithStaffQualification(
   return {
     ...mapApiToService(service),
     staffIsQualifiedForService: service.staffIsQualifiedForService,
+  };
+}
+
+export function mapApiToServiceStructured(
+  data: ApiServiceStructured
+): ServiceStructured {
+  return {
+    ...data,
+    staff: data.personnel.map((p) => mapApiToStaff(p)),
+    serviceCategory: mapApiToServiceCategory(data.serviceCategory),
   };
 }

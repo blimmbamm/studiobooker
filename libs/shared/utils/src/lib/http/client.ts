@@ -57,8 +57,8 @@ export class HttpClient {
     return this._fetch<T>({ path, method: 'POST', body, timeout });
   }
 
-  patch<T>(path: string, body: any): Promise<T> {
-    return this._fetch<T>({ path, method: 'PATCH', body });
+  patch<T>(path: string, body: any, timeout?: number): Promise<T> {
+    return this._fetch<T>({ path, method: 'PATCH', body, timeout });
   }
 
   delete<T>(path: string, body: any): Promise<T> {

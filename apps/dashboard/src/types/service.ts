@@ -1,12 +1,26 @@
+import { ServiceCategory } from './service-category';
+import { Staff } from './staff';
+
+/** Base Service type with only atomic fields */
 export type Service = {
   id: number;
   title: string;
   description: string | null;
   duration: number | null;
   price: number | null;
-  dingens: boolean;
 };
 
+/** Service type with (some) relations */
+export type ServiceStructured = Service & {
+  staff: Staff[];
+  serviceCategory: ServiceCategory;
+};
+
+/**
+ * Service type with information if staff implements the service.
+ *
+ * This is used in ServiceCategoryForStaff > StaffStructured type.
+ */
 export type ServiceWithStaffQualification = Service & {
   staffIsQualifiedForService: boolean;
 };
