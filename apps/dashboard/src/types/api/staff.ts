@@ -11,6 +11,10 @@ export type ApiStaff = {
   notes: string | null;
 };
 
+export type ApiStaffWithServiceQualification = ApiStaff & {
+  staffIsQualifiedForService: boolean;
+}
+
 export type ApiStaffStructured = ApiStaff & {
   workingTimes: ApiWorkingTime[];
   serviceCategories: ApiServiceCategoryForStaff[];

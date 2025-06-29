@@ -9,7 +9,7 @@ import {
   ApiServiceWithStaffQualification,
 } from './service';
 import { mapApiToServiceCategory } from './service-category.mapper';
-import { mapApiToStaff } from './staff.mapper';
+import { mapApiToStaffWithServiceQualification } from './staff.mapper';
 
 export function mapApiToService(service: ApiService): Service {
   return { ...service };
@@ -29,7 +29,7 @@ export function mapApiToServiceStructured(
 ): ServiceStructured {
   return {
     ...data,
-    staff: data.personnel.map((p) => mapApiToStaff(p)),
+    staff: data.personnel.map((p) => mapApiToStaffWithServiceQualification(p)),
     serviceCategory: mapApiToServiceCategory(data.serviceCategory),
   };
 }

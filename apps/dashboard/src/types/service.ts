@@ -1,5 +1,5 @@
 import { ServiceCategory } from './service-category';
-import { Staff } from './staff';
+import { StaffWithServiceQualification } from './staff';
 
 /** Base Service type with only atomic fields */
 export type Service = {
@@ -12,7 +12,7 @@ export type Service = {
 
 /** Service type with (some) relations */
 export type ServiceStructured = Service & {
-  staff: Staff[];
+  staff: StaffWithServiceQualification[];
   serviceCategory: ServiceCategory;
 };
 

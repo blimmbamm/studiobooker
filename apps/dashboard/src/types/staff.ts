@@ -9,6 +9,10 @@ export type Staff = {
   notes: string | null;
 };
 
+export type StaffWithServiceQualification = Staff & {
+  staffIsQualifiedForService: boolean;
+};
+
 export type StaffStructured = Staff & {
   workingTimes: WorkingTime[];
   serviceCategories: ServiceCategoryForStaff[];

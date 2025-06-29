@@ -1,11 +1,28 @@
-import { Staff, StaffStructured } from '../staff';
+import {
+  Staff,
+  StaffStructured,
+  StaffWithServiceQualification,
+} from '../staff';
 import { mapApiToServiceCategory } from './service-category.mapper';
 import { mapApiToService } from './service.mapper';
-import { ApiStaff, ApiStaffStructured } from './staff';
+import {
+  ApiStaff,
+  ApiStaffStructured,
+  ApiStaffWithServiceQualification,
+} from './staff';
 import { mapApiToWorkingTime } from './working-time.mapper';
 
 export function mapApiToStaff(data: ApiStaff): Staff {
   return data;
+}
+
+export function mapApiToStaffWithServiceQualification(
+  data: ApiStaffWithServiceQualification
+): StaffWithServiceQualification {
+  return {
+    ...mapApiToStaff(data),
+    staffIsQualifiedForService: data.staffIsQualifiedForService,
+  };
 }
 
 export function mapApiToStaffStructured(

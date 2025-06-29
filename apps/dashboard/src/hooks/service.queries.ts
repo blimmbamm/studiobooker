@@ -9,7 +9,7 @@ import {
   getServicesByCategory,
   removeStaffFromService,
 } from '../api/service.api';
-import { StaffStructured } from '../types/staff';
+import { StaffStructured, StaffWithServiceQualification } from '../types/staff';
 import { EditServiceDto, Service, ServiceStructured } from '../types/service';
 import { ServiceCategoryStructured } from '../types/service-category';
 
@@ -92,6 +92,56 @@ export function useManageStaffServices() {
     },
     onError: (_error, { staffId }, context) => {
       queryClient.setQueryData(['staff', staffId], context?.prevStaff);
+    },
+  });
+}
+
+export function useManageServiceStaff() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      staffId,
+      select,
+      serviceId,
+    }: {
+      staffId: number;
+      select: boolean;
+      serviceId: number;
+    }) =>
+      select
+        ? addStaffToService(serviceId, staffId)
+        : removeStaffFromService(serviceId, staffId),
+    onMutate: ({ staffId, select, serviceId }) => {
+      const queryKey = ServiceQueryKeys.SERVICE_DETAIL(serviceId);
+
+      queryClient.cancelQueries({ queryKey });
+
+      const prevService = queryClient.getQueryData<ServiceStructured>(queryKey);
+
+      queryClient.setQueryData<ServiceStructured>(queryKey, (data) => {
+        if (!data) return data;
+
+        const newData = structuredClone(data);
+
+        newData.staff = newData.staff.map<StaffWithServiceQualification>((s) =>
+          s.id === staffId ? { ...s, staffIsQualifiedForService: select } : s
+        );
+
+        return newData;
+      });
+      return { prevService };
+    },
+    onSuccess: (_, { serviceId }) => {
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICE_DETAIL(serviceId),
+      });
+    },
+    onError: (_error, { serviceId }, context) => {
+      queryClient.setQueryData(
+        ServiceQueryKeys.SERVICE_DETAIL(serviceId),
+        context?.prevService
+      );
     },
   });
 }
