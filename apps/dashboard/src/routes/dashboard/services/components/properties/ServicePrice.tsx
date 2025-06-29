@@ -1,4 +1,4 @@
-import InputAdornment from '@mui/material/InputAdornment';
+import {InputAdornment} from '@mui/material';
 
 import { PropertiesTableProperty } from '@studiobooker/utils';
 import { Service } from '../../../../../types/service';

@@ -1,3 +1,5 @@
+import {InputAdornment} from '@mui/material';
+
 import { PropertiesTableProperty } from '@studiobooker/utils';
 import { Service } from '../../../../../types/service';
 import { useServiceProperty } from '../../hooks/useServiceProperty';
@@ -16,9 +18,10 @@ export default function ServiceDuration({ service }: { service: Service }) {
 
   return (
     <PropertiesTableProperty
-      name="Duration (min.)"
+      name="Duration"
       value={value}
       onChange={handleChange}
+      slotProps={{input: {endAdornment: <InputAdornment position='end'>min.</InputAdornment>}}}
     />
   );
 }

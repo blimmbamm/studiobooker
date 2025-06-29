@@ -17,7 +17,7 @@ export function ServiceProperties({
         <>
           <PropertySkeleton name="Title" />
           <PropertySkeleton name="Description" />
-          <PropertySkeleton name="Duration" />
+          <PropertySkeleton name="Duration" adornment="min." />
           <PropertySkeleton name="Price" />
           <PropertySkeleton name="Category" />
         </>

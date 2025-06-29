@@ -13,6 +13,7 @@ import AuthProvider from './contexts/AuthContext';
 import VerifySignupPage from './routes/auth/verify/VerifySignupPage';
 import ServicesLayout from './routes/dashboard/services/ServicesLayout';
 import ServiceDetail from './routes/dashboard/services/ServiceDetail';
+import ServiceDetailStart from './routes/dashboard/services/ServiceDetailStart';
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <div>Services starting page</div>,
+                element: <ServiceDetailStart />,
               },
               { path: ':id', element: <ServiceDetail /> },
             ],

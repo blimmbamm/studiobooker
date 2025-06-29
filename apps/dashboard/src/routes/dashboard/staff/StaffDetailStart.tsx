@@ -22,7 +22,7 @@ export default function StaffDetailStart() {
         <FallbackMessage message="Select staff to view detail..." />
       )}
       {!hasSomeStaff && (
-        <FallbackMessage message="You don't have staff yet. Start adding some!" />
+        <FallbackMessage message="You don't have any staff yet. Start adding some!" />
       )}
     </>
   );

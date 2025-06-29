@@ -1,6 +1,18 @@
-import { Box, Skeleton, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Skeleton,
+  TextField,
+  Typography,
+  InputAdornment,
+} from '@mui/material';
 
-export function PropertySkeleton({ name }: { name: string }) {
+export function PropertySkeleton({
+  name,
+  adornment = '',
+}: {
+  name: string;
+  adornment?: string;
+}) {
   return (
     <>
       <Typography>{name}</Typography>
@@ -10,6 +22,19 @@ export function PropertySkeleton({ name }: { name: string }) {
           sx={{
             visibility: 'hidden',
           }}
+          slotProps={
+            adornment
+              ? {
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {adornment}
+                      </InputAdornment>
+                    ),
+                  },
+                }
+              : {}
+          }
         />
         <Skeleton
           variant="rounded"
