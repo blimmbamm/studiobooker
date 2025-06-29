@@ -16,7 +16,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
   validationErrorHelperText?: string;
   isError: boolean;
   onSubmit: (inputs: string) => void;
-  debounceTimeout?: number
+  debounceTimeout?: number;
 }) {
   const [value, setValue] = useState(initialValue);
   const [isTyping, setIsTyping] = useState(false);
@@ -73,13 +73,12 @@ export function useInputWithAutomaticAndDebouncedSubmission({
   }
 
   /**
-   * If staff data updates due to refetching, update the state in here as well,
-   * but only if user is not typing currently (i.e. if input is 'idle')
+   * If user is not typing, reset state to initialValue if initialValue changes,
+   * e.g. due to refetching or switched entity
    */
   useEffect(() => {
-    if (!isTyping && initialValue) {
+    if (!isTyping ) {
       setValue(initialValue);
-      console.log('setting value from query');
     }
     // add disable exhaustive deps hint for eslint here
   }, [initialValue]);

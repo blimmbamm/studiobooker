@@ -11,7 +11,6 @@ export function ServiceProperties({
 }: {
   service?: ServiceStructured;
 }) {
-  console.log(service)
   return (
     <PropertiesTableSection title="Details">
       {!service && (

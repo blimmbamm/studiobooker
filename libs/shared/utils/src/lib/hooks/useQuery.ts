@@ -27,9 +27,8 @@ export function useQuery<TData, TKey extends QueryKey = QueryKey>(
     ...query,
     isNotFoundError:
       query.isError && query.error?.type === QueryErrorType.HTTP_NOT_FOUND,
-    isOtherError:
-      query.isError &&
+    isOtherError: query.isError /*&&
       (query.error?.type === QueryErrorType.HTTP_OTHER ||
-        query.error?.type === QueryErrorType.OTHER),
+        query.error?.type === QueryErrorType.OTHER), */
   };
 }

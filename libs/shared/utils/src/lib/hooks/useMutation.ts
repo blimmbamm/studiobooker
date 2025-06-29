@@ -32,23 +32,3 @@ export function useMutation<TData, TVariables, TContext = unknown>(
     },
   });
 }
-
-// type UseMutationParams = Parameters<typeof useTanstackMutation> & {
-//   useDefaultErrorHandling: boolean;
-// };
-// type UseMutationReturn = ReturnType<typeof useTanstackMutation>;
-
-// export function useMutation2(...args: UseMutationParams): UseMutationReturn {
-//   const { useDefaultErrorHandling, ...other } = args;
-//   const [options] = other;
-
-//   const mutation = useTanstackMutation({
-//     ...options,
-//     onError: (error, variables, context) => {
-//       console.log('default alert logic');
-//       options.onError?.(error, variables, context);
-//     },
-//   });
-
-//   return mutation;
-// }
