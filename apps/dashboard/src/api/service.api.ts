@@ -1,5 +1,8 @@
 import { mapApiToServiceCategoryStructured } from '../types/api/service-category.mapper';
-import { ApiServiceCategoryStructured } from '../types/api/service-category';
+import {
+  ApiServiceCategory,
+  ApiServiceCategoryStructured,
+} from '../types/api/service-category';
 import { client } from './client';
 import { ApiService, ApiServiceStructured } from '../types/api/service';
 import {
@@ -45,4 +48,14 @@ export function addStaffToService(serviceId: number, staffId: number) {
 
 export function removeStaffFromService(serviceId: number, staffId: number) {
   return client.delete<void>(`service/${serviceId}/personnel/${staffId}`, {});
+}
+
+export function addCategory(name: string) {
+  return client.post<ApiServiceCategory>('service-category', { name });
+}
+
+export function addService(title: string, categoryId: number) {
+  return client.post<ApiService>(`service-category/${categoryId}/service`, {
+    title,
+  });
 }

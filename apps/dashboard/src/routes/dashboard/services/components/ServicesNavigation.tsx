@@ -7,6 +7,8 @@ import { useServicesByCategory } from '../../../../hooks/service.queries';
 import { useEffect, useState } from 'react';
 import { ServiceCategoryStructured } from '../../../../types/service-category';
 import { useNavigate } from 'react-router-dom';
+import AddCategory from './navigation/AddCategory';
+import AddService from './navigation/AddService';
 
 export default function ServicesNavigation() {
   const { serviceCategories, isLoading, isError } = useServicesByCategory();
@@ -30,23 +32,34 @@ export default function ServicesNavigation() {
     }
   }
 
-  /**
-   * If there is a service id in the url, set selected category
-   * to the category that contains the service
-   */
   useEffect(() => {
     if (serviceId) {
+      /**
+       * If there is a service id in the url, set selected category
+       * to the category that contains the service. This is needed
+       * to auto-select the proper category if page is loaded with
+       * service detail, that is /dashboard/services/:id
+       */
       setSelectedCategory(
         serviceCategories?.find((sc) =>
           sc.services.map((s) => s.id).includes(serviceId)
         )
+      );
+    } else {
+      /**
+       * If user is on just /dashboard/services, update selected category
+       * if underlying data changes, for example, if a service is added
+       * into the category.
+       */
+      setSelectedCategory((prevCategory) =>
+        serviceCategories?.find((sc) => sc.id === prevCategory?.id)
       );
     }
   }, [serviceCategories, serviceId]);
 
   return (
     <>
-      <SideNavSection title="Category">
+      <SideNavSection title="Category" actionComponent={<AddCategory />}>
         <NavigationList
           isLoading={isLoading}
           isError={isError}
@@ -58,7 +71,11 @@ export default function ServicesNavigation() {
           fallbackMessage="No categories yet."
         />
       </SideNavSection>
-      <SideNavSection title="Service" marginLeft={'250px'}>
+      <SideNavSection
+        title="Service"
+        marginLeft={'250px'}
+        actionComponent={<AddService category={selectedCategory} />}
+      >
         <NavigationList
           isLoading={isLoading}
           isError={isError}

@@ -2,6 +2,8 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useQuery, useMutation } from '@studiobooker/utils';
 import {
+  addCategory,
+  addService,
   addStaffToService,
   editService,
   editServiceServiceCategory,
@@ -42,6 +44,36 @@ export function useService(id?: number) {
     ...query,
     service,
   };
+}
+
+export function useAddCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ name }: { name: string }) => addCategory(name),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+      }),
+  });
+}
+
+export function useAddService() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      title,
+      categoryId,
+    }: {
+      title: string;
+      categoryId: number;
+    }) => addService(title, categoryId),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+      }),
+  });
 }
 
 export function useManageStaffServices() {
