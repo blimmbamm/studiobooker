@@ -5,6 +5,7 @@ import { useStaff } from '../../../hooks/staff.queries';
 import StaffDetails from './components/details/StaffDetails';
 import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
+import StaffSettings from './components/settings/StaffSettings';
 
 export default function StaffDetail() {
   const staffId = useNumericParam('id');
@@ -25,7 +26,9 @@ export default function StaffDetail() {
       <Divider />
       <StaffWorkingTimes staff={staff} />
       <Divider />
-      <StaffServices sx={{ marginBottom: 5 }} staff={staff} />
+      <StaffServices staff={staff} />
+      <Divider />
+      <StaffSettings staff={staff} sx={{ marginBottom: 5 }} />
     </>
   );
 }

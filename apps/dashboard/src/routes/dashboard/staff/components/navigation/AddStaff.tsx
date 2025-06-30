@@ -1,4 +1,4 @@
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import AddIcon from '@mui/icons-material/Add';
 
 import { SingleInputDialog } from '@studiobooker/utils';
 import { useAddStaff } from '../../../../../hooks/staff.queries';
@@ -8,7 +8,7 @@ export default function AddStaff() {
 
   return (
     <SingleInputDialog
-      buttonIcon={<PersonAddIcon fontSize="medium" />}
+      buttonIcon={<AddIcon fontSize="medium" />}
       onSubmit={(name) => mutate({ name })}
       helperText={error?.message}
       isError={isError}

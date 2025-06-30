@@ -26,3 +26,8 @@ export async function editStaff(id: number, inputs: EditStaffDto) {
   const staff = await client.patch<ApiStaff>(`personnel/${id}`, inputs);
   return mapApiToStaff(staff);
 }
+
+export async function removeStaff(id: number) {
+  const staff = await client.delete<ApiStaff>(`personnel/${id}`, {});
+  return mapApiToStaff(staff);
+}

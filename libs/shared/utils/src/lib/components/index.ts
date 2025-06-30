@@ -9,6 +9,8 @@ export * from './CenteredCard';
 export * from './AuthForm';
 export * from './NavigationList';
 export * from './PropertiesTableSection';
+export * from './TableSection';
 export * from './PropertySkeleton';
 export * from './PropertiesTableProperty';
 export * from './SingleInputDialog';
+export * from './SettingsItem';
