@@ -1,49 +1,23 @@
-import { Box, Button, Typography } from '@mui/material';
-import { ConfirmDialog } from './ConfirmDialog';
-import { useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import { PropsWithChildren } from 'react';
 
 type Props = {
   title: string;
   description: string;
-  buttonLabel: string;
-  onAction: () => void;
-  confirmActionDialogTitle: string;
-  confirmActionDialogMessage: string;
-};
+} & PropsWithChildren;
 
-export function SettingsItem({
-  title,
-  description,
-  buttonLabel,
-  onAction,
-  confirmActionDialogTitle,
-  confirmActionDialogMessage,
-}: Props) {
-  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-
+export function SettingsItem({ title, description, children }: Props) {
   return (
     <>
       <Box>
         <Typography fontWeight={'bold'} variant="h6">
           {title}
         </Typography>
-        <Typography>{description}</Typography>
+        <Typography variant="body2" whiteSpace="pre-line">
+          {description}
+        </Typography>
       </Box>
-      <Button
-        variant="outlined"
-        onClick={() => setConfirmDialogOpen(true)}
-        color="error"
-        sx={{ backgroundColor: (theme) => theme.palette.error.light }}
-      >
-        {buttonLabel}
-      </Button>
-      <ConfirmDialog
-        open={confirmDialogOpen}
-        onClose={() => setConfirmDialogOpen(false)}
-        title={confirmActionDialogTitle}
-        message={confirmActionDialogMessage}
-        onConfirm={onAction}
-      />
+      {children}
     </>
   );
 }

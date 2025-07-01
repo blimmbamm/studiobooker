@@ -1,4 +1,7 @@
-import { PropertiesTableSection, PropertySkeleton } from '@studiobooker/utils';
+import {
+  PropertySkeleton,
+  PropertiesTableSection,
+} from '@studiobooker/utils';
 import { ServiceStructured } from '../../../../types/service';
 import ServiceTitle from './properties/ServiceTitle';
 import ServiceDescription from './properties/ServiceDescription';

@@ -14,3 +14,5 @@ export * from './PropertySkeleton';
 export * from './PropertiesTableProperty';
 export * from './SingleInputDialog';
 export * from './SettingsItem';
+export * from './ConfirmDialog';
+export * from './SettingSkeleton';

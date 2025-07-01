@@ -9,6 +9,7 @@ export type ApiStaff = {
   email: string | null;
   phone: string | null;
   notes: string | null;
+  activated: boolean;
 };
 
 export type ApiStaffWithServiceQualification = ApiStaff & {

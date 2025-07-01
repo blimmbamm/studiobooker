@@ -23,7 +23,7 @@ export async function addStaff(name: string) {
 }
 
 export async function editStaff(id: number, inputs: EditStaffDto) {
-  const staff = await client.patch<ApiStaff>(`personnel/${id}`, inputs);
+  const staff = await client.patch<ApiStaff>(`personnel/${id}`, inputs, 300);
   return mapApiToStaff(staff);
 }
 

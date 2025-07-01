@@ -7,6 +7,7 @@ export type Staff = {
   email: string | null;
   phone: string | null;
   notes: string | null;
+  activated: boolean;
 };
 
 export type StaffWithServiceQualification = Staff & {
@@ -23,4 +24,5 @@ export type EditStaffDto = {
   email?: string | null;
   phone?: string | null;
   notes?: string | null;
+  activated?: boolean;
 };

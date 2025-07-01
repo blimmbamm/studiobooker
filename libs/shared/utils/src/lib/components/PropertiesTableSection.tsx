@@ -1,22 +1,16 @@
 import { PropsWithChildren } from 'react';
-import { Section } from './Section';
+import { TableSection } from './TableSection';
 
 type Props = { title: string } & PropsWithChildren;
 
 export function PropertiesTableSection({ title, children }: Props) {
   return (
-    <Section
+    <TableSection
       title={title}
-      contentBoxProps={{
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
-        alignItems: 'center',
-        width: 'fit-content',
-        rowGap: 1,
-        columnGap: 3,
-      }}
+      columns={2}
+      tableSx={{ width: 'fit-content', rowGap: 1 }}
     >
       {children}
-    </Section>
+    </TableSection>
   );
 }

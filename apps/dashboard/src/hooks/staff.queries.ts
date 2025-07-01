@@ -8,7 +8,7 @@ import {
   getStaff,
   removeStaff,
 } from '../api/staff.api';
-import { EditStaffDto } from '../types/staff';
+import { EditStaffDto, StaffStructured } from '../types/staff';
 
 export const StaffQueryKeys = {
   STAFF_ANY: ['staff'],
@@ -61,23 +61,52 @@ export function useAddStaff(
   });
 }
 
-export function useEditStaff(args: {
+export function useEditStaff({
+  staffId,
+  onError,
+  onSuccess,
+  withOptimisticUpdating = false,
+}: {
   staffId: number;
-  onSuccess?: () => void;
   onError?: () => void;
+  onSuccess?: () => void;
+  withOptimisticUpdating?: boolean;
 }) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (variables: { input: EditStaffDto }) =>
-      editStaff(args.staffId, variables.input),
-    onSuccess: () => {
-      // this will invalidate both staff and staff details
-      queryClient.invalidateQueries({ queryKey: StaffQueryKeys.STAFF_ANY });
-      args.onSuccess?.();
+      editStaff(staffId, variables.input),
+    onMutate: ({ input }) => {
+      if (withOptimisticUpdating) {
+        const queryKey = StaffQueryKeys.STAFF_DETAIL(staffId);
+        queryClient.cancelQueries({ queryKey });
+
+        const prevStaff = queryClient.getQueryData<StaffStructured>(queryKey);
+
+        queryClient.setQueryData<StaffStructured>(queryKey, (data) => {
+          if (!data) return data;
+
+          const newData = structuredClone(data);
+
+          return { ...newData, ...input };
+        });
+
+        return { prevStaff, queryKey };
+      } else {
+        return;
+      }
     },
-    onError: () => {
-      args.onError?.();
+    onSuccess: () => {
+      // this will invalidate both staff and staff details... actually invalidating the edited detail would be enough
+      queryClient.invalidateQueries({ queryKey: StaffQueryKeys.STAFF_ANY });
+      onSuccess?.();
+    },
+    onError: (_error, _variables, context) => {
+      if (context) {
+        queryClient.setQueryData(context.queryKey, context.prevStaff);
+      }
+      onError?.();
     },
   });
 }

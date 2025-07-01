@@ -1,6 +1,6 @@
 import { Box, SxProps, Typography } from '@mui/material';
 
-import { Section } from '@studiobooker/utils';
+import { TableSection } from '@studiobooker/utils';
 import StaffWorkingTime from './StaffWorkingTime';
 import { StaffStructured } from '../../../../../types/staff';
 import StaffWorkingTimeSkeleton from './StaffWorkingTimeSkeleton';
@@ -21,15 +21,10 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
   ];
 
   return (
-    <Section
+    <TableSection
       title="Working times"
-      contentBoxProps={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, auto)',
-        width: 'fit-content',
-        rowGap: 1,
-        columnGap: 3,
-      }}
+      columns={3}
+      tableSx={{ width: 'fit-content', rowGap: 1 }}
       sx={sx}
     >
       <Box />
@@ -46,6 +41,6 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
         staff.workingTimes.map((wt) => (
           <StaffWorkingTime key={wt.id} workingTime={wt} staffId={staff.id} />
         ))}
-    </Section>
+    </TableSection>
   );
 }

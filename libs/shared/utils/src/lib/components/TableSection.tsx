@@ -6,9 +6,10 @@ type Props = {
   title: string;
   columns: number;
   sx?: SxProps;
+  tableSx?: SxProps;
 } & PropsWithChildren;
 
-export function TableSection({ title, columns, sx, children }: Props) {
+export function TableSection({ title, columns, sx, tableSx, children }: Props) {
   return (
     <Section
       title={title}
@@ -16,9 +17,9 @@ export function TableSection({ title, columns, sx, children }: Props) {
         display: 'grid',
         gridTemplateColumns: `repeat(${columns}, auto)`,
         alignItems: 'center',
-        width: 'fit-content',
-        rowGap: 1,
+        rowGap: 2,
         columnGap: 3,
+        sx: tableSx,
       }}
       sx={sx}
     >
