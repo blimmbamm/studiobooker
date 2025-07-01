@@ -16,3 +16,4 @@ export * from './SingleInputDialog';
 export * from './SettingsItem';
 export * from './ConfirmDialog';
 export * from './SettingSkeleton';
+export * from './RemoveButton';

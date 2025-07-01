@@ -9,6 +9,7 @@ import {
   editServiceServiceCategory,
   getService,
   getServicesByCategory,
+  removeService,
   removeStaffFromService,
 } from '../api/service.api';
 import { StaffStructured, StaffWithServiceQualification } from '../types/staff';
@@ -178,22 +179,52 @@ export function useManageServiceStaff() {
   });
 }
 
-export function useEditService(args: {
+export function useEditService({
+  serviceId,
+  onError,
+  onSuccess,
+  withOptimisticUpdating = false,
+}: {
   serviceId: number;
-  onSuccess?: () => void;
   onError?: () => void;
+  onSuccess?: () => void;
+  withOptimisticUpdating?: boolean;
 }) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (variables: { input: EditServiceDto }) =>
-      editService(args.serviceId, variables.input),
+      editService(serviceId, variables.input),
+    onMutate: ({ input }) => {
+      if (withOptimisticUpdating) {
+        const queryKey = ServiceQueryKeys.SERVICE_DETAIL(serviceId);
+
+        queryClient.cancelQueries({ queryKey });
+
+        const prevService =
+          queryClient.getQueryData<ServiceStructured>(queryKey);
+
+        queryClient.setQueryData<ServiceStructured>(queryKey, (data) => {
+          if (!data) return data;
+
+          const newData = structuredClone(data);
+          return { ...newData, ...input };
+        });
+
+        return { prevService, queryKey };
+      } else {
+        return;
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['service'] });
-      args.onSuccess?.();
+      onSuccess?.();
     },
-    onError: () => {
-      args.onError?.();
+    onError: (_error, _variables, context) => {
+      if (context) {
+        queryClient.setQueryData(context.queryKey, context.prevService);
+      }
+      onError?.();
     },
   });
 }
@@ -310,6 +341,20 @@ export function useEditServiceServiceCategory(args?: {
         queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
       });
       args?.onSuccess?.();
+    },
+  });
+}
+
+export function useRemoveService({ onSuccess }: { onSuccess?: () => void }) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id }: { id: number }) => removeService(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+      });
+      onSuccess?.();
     },
   });
 }

@@ -80,6 +80,7 @@ export function useEditStaff({
     onMutate: ({ input }) => {
       if (withOptimisticUpdating) {
         const queryKey = StaffQueryKeys.STAFF_DETAIL(staffId);
+
         queryClient.cancelQueries({ queryKey });
 
         const prevStaff = queryClient.getQueryData<StaffStructured>(queryKey);

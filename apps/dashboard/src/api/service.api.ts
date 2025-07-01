@@ -25,7 +25,7 @@ export async function getService(id: number) {
 }
 
 export async function editService(id: number, inputs: EditServiceDto) {
-  const service = await client.patch<ApiService>(`service/${id}`, inputs);
+  const service = await client.patch<ApiService>(`service/${id}`, inputs, 2000);
   return mapApiToService(service);
 }
 
@@ -58,4 +58,9 @@ export function addService(title: string, categoryId: number) {
   return client.post<ApiService>(`service-category/${categoryId}/service`, {
     title,
   });
+}
+
+export async function removeService(id: number) {
+  const service = await client.delete<ApiService>(`service/${id}`, {});
+  return mapApiToService(service);
 }

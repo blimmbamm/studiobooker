@@ -7,6 +7,7 @@ export type ApiService = {
   description: string | null;
   duration: number | null;
   price: number | null;
+  activated: boolean;
 };
 
 export type ApiServiceWithStaffQualification = ApiService & {

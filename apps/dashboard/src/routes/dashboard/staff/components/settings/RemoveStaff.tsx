@@ -1,9 +1,7 @@
-import { SettingsItem, ConfirmDialog } from '@studiobooker/utils';
+import { SettingsItem, RemoveButton } from '@studiobooker/utils';
 import { useRemoveStaff } from '../../../../../hooks/staff.queries';
 import { useNavigate } from 'react-router-dom';
 import { Staff } from '../../../../../types/staff';
-import { Button } from '@mui/material';
-import { useState } from 'react';
 
 type Props = {
   staff: Staff;
@@ -14,28 +12,16 @@ export default function RemoveStaff({ staff }: Props) {
 
   const { mutate } = useRemoveStaff({ onSuccess: () => navigate('..') });
 
-  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-
   return (
     <SettingsItem
       title="Remove staff"
-      description="Staff is permanently removed."
+      description="Staff is removed permanently."
     >
-      <Button
-        variant="outlined"
-        onClick={() => setConfirmDialogOpen(true)}
-        color="error"
-        sx={{ backgroundColor: (theme) => theme.palette.error.light }}
-      >
-        Remove
-      </Button>
-      <ConfirmDialog
-        open={confirmDialogOpen}
-        onClose={() => setConfirmDialogOpen(false)}
-        title="Remove staff?"
-        message={`This will remove this staff member permanently. 
-          This action cannot be undone. Are you sure?`}
+      <RemoveButton
         onConfirm={() => mutate({ id: staff.id })}
+        dialogTitle="Remove staff?"
+        dialogMessage={`This will remove the staff member permanently. 
+          This action cannot be undone. Are you sure?`}
       />
     </SettingsItem>
   );

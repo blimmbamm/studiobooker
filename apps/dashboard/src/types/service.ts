@@ -8,6 +8,7 @@ export type Service = {
   description: string | null;
   duration: number | null;
   price: number | null;
+  activated: boolean;
 };
 
 /** Service type with (some) relations */
@@ -30,4 +31,5 @@ export type EditServiceDto = {
   description?: string | null;
   duration?: number | null;
   price?: number | null;
+  activated?: boolean;
 };

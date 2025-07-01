@@ -5,7 +5,7 @@ import RemoveStaff from './RemoveStaff';
 import ManageStaffActivation from './ManageStaffActivation';
 import { StaffStructured } from '../../../../../types/staff';
 
-type Props = { staff?: StaffStructured; sx: SxProps };
+type Props = { staff?: StaffStructured; sx?: SxProps };
 
 export default function StaffSettings({ staff, sx }: Props) {
   return (
