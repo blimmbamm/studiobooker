@@ -1,3 +1,4 @@
+import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { SingleInputDialog } from '@studiobooker/utils';
@@ -9,7 +10,8 @@ export default function AddCategory() {
 
   return (
     <SingleInputDialog
-      buttonIcon={<AddIcon fontSize="medium" />}
+      triggerComponent={IconButton}
+      triggerProps={{}}
       onSubmit={(name) => mutate({ name })}
       helperText={error?.message}
       isError={isError}
@@ -17,6 +19,8 @@ export default function AddCategory() {
       isSuccess={isSuccess}
       placeholder="Category name"
       reset={reset}
-    />
+    >
+      <AddIcon fontSize="medium" />
+    </SingleInputDialog>
   );
 }

@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { SingleInputDialog } from '@studiobooker/utils';
 import { useAddService } from '../../../../../hooks/service.queries';
 import { ServiceCategoryStructured } from '../../../../../types/service-category';
+import { IconButton } from '@mui/material';
 
 type Props = {
   category?: ServiceCategoryStructured;
@@ -20,12 +21,8 @@ export default function AddService({ category }: Props) {
 
   return (
     <SingleInputDialog
-      buttonIcon={
-        <AddIcon
-          sx={{ visibility: category ? 'visible' : 'hidden' }}
-          fontSize="medium"
-        />
-      }
+      triggerComponent={IconButton}
+      triggerProps={{ sx: { visibility: category ? 'visible' : 'hidden' } }}
       onSubmit={handleSubmit}
       helperText={error?.message}
       isError={isError}
@@ -33,6 +30,8 @@ export default function AddService({ category }: Props) {
       isSuccess={isSuccess}
       reset={reset}
       placeholder="Service title"
-    />
+    >
+      <AddIcon fontSize="medium" />
+    </SingleInputDialog>
   );
 }

@@ -9,6 +9,7 @@ import { ServiceCategoryStructured } from '../../../../types/service-category';
 import { useNavigate } from 'react-router-dom';
 import AddCategory from './navigation/AddCategory';
 import AddService from './navigation/AddService';
+import CategoryOptionsMenu from './navigation/CategoryOptionsMenu';
 
 export default function ServicesNavigation() {
   const { serviceCategories, isLoading, isError } = useServicesByCategory();
@@ -69,6 +70,13 @@ export default function ServicesNavigation() {
           isActive={(category) => category === selectedCategory}
           onClick={handleSwitchCategory}
           fallbackMessage="No categories yet."
+          secondaryActionRender={(category, anchorEl, handleClose) => (
+            <CategoryOptionsMenu
+              category={category}
+              anchorEl={anchorEl}
+              handleClose={handleClose}
+            />
+          )}
         />
       </SideNavSection>
       <SideNavSection

@@ -6,15 +6,20 @@ import {
   addService,
   addStaffToService,
   editService,
+  editServiceCategory,
   editServiceServiceCategory,
   getService,
   getServicesByCategory,
+  removeCategory,
   removeService,
   removeStaffFromService,
 } from '../api/service.api';
 import { StaffStructured, StaffWithServiceQualification } from '../types/staff';
 import { EditServiceDto, Service, ServiceStructured } from '../types/service';
-import { ServiceCategoryStructured } from '../types/service-category';
+import {
+  EditServiceCategoryDto,
+  ServiceCategoryStructured,
+} from '../types/service-category';
 
 export const ServiceQueryKeys = {
   SERVICE_ALL: ['service'],
@@ -345,11 +350,82 @@ export function useEditServiceServiceCategory(args?: {
   });
 }
 
+export function useEditServiceCategory({
+  withOptimisticUpdating,
+}: {
+  withOptimisticUpdating: boolean;
+}) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      id,
+      inputs,
+    }: {
+      id: number;
+      inputs: EditServiceCategoryDto;
+    }) => editServiceCategory(id, inputs),
+    onMutate: ({ id, inputs }) => {
+      if (withOptimisticUpdating) {
+        const queryKey = ServiceQueryKeys.SERVICES_BY_CATEGORY;
+
+        queryClient.cancelQueries({ queryKey });
+
+        const prevServicesByCategory =
+          queryClient.getQueryData<ServiceCategoryStructured[]>(queryKey);
+
+        queryClient.setQueryData<ServiceCategoryStructured[]>(
+          queryKey,
+          (data) => {
+            if (!data) return data;
+
+            const newData = structuredClone(data);
+
+            return newData.map((sc) =>
+              sc.id === id ? { ...sc, ...inputs } : sc
+            );
+          }
+        );
+
+        return { prevServicesByCategory, queryKey };
+      } else {
+        return;
+      }
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+      }),
+    onError: (_error, _variables, context) => {
+      if (context) {
+        queryClient.setQueryData(
+          context.queryKey,
+          context.prevServicesByCategory
+        );
+      }
+    },
+  });
+}
+
 export function useRemoveService({ onSuccess }: { onSuccess?: () => void }) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({ id }: { id: number }) => removeService(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+      });
+      onSuccess?.();
+    },
+  });
+}
+
+export function useRemoveCategory({ onSuccess }: { onSuccess?: () => void }) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id }: { id: number }) => removeCategory(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,

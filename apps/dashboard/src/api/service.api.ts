@@ -1,4 +1,7 @@
-import { mapApiToServiceCategoryStructured } from '../types/api/service-category.mapper';
+import {
+  mapApiToServiceCategory,
+  mapApiToServiceCategoryStructured,
+} from '../types/api/service-category.mapper';
 import {
   ApiServiceCategory,
   ApiServiceCategoryStructured,
@@ -10,6 +13,7 @@ import {
   mapApiToServiceStructured,
 } from '../types/api/service.mapper';
 import { EditServiceDto } from '../types/service';
+import { EditServiceCategoryDto } from '../types/service-category';
 
 export async function getServicesByCategory() {
   const servicesByCategory = await client.get<ApiServiceCategoryStructured[]>(
@@ -27,6 +31,19 @@ export async function getService(id: number) {
 export async function editService(id: number, inputs: EditServiceDto) {
   const service = await client.patch<ApiService>(`service/${id}`, inputs, 2000);
   return mapApiToService(service);
+}
+
+export async function editServiceCategory(
+  id: number,
+  inputs: EditServiceCategoryDto
+) {
+  const category = await client.patch<ApiServiceCategory>(
+    `service-category/${id}`,
+    inputs,
+    300
+  );
+
+  return mapApiToServiceCategory(category);
 }
 
 export async function editServiceServiceCategory(
@@ -63,4 +80,12 @@ export function addService(title: string, categoryId: number) {
 export async function removeService(id: number) {
   const service = await client.delete<ApiService>(`service/${id}`, {});
   return mapApiToService(service);
+}
+
+export async function removeCategory(id: number) {
+  const category = await client.delete<ApiServiceCategory>(
+    `service-category/${id}`,
+    {}
+  );
+  return mapApiToServiceCategory(category);
 }

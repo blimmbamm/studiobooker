@@ -1,39 +1,71 @@
+import { FunctionComponent, ReactNode, useState } from 'react';
 import {
-  Button,
   Dialog,
-  DialogActions,
   DialogContent,
-  DialogContentText,
+  DialogActions,
   DialogTitle,
+  DialogContentText,
+  Button,
 } from '@mui/material';
 
-type Props = {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  message: string;
+export type ConfirmDialogProps<P> = {
+  triggerComponent: FunctionComponent<P>;
+  triggerProps: P;
+  onClickTrigger?: () => void;
+  children?: ReactNode;
   onConfirm: () => void;
+  dialogTitle: string;
+  dialogMessage: string;
+  onClose?: () => void;
 };
 
-export function ConfirmDialog({
-  open,
-  onClose,
-  title,
-  message,
+export function ConfirmDialog<P>({
+  triggerComponent: TriggerComponent,
+  triggerProps,
+  onClickTrigger,
+  children,
   onConfirm,
-}: Props) {
+  dialogTitle,
+  dialogMessage,
+  onClose,
+}: ConfirmDialogProps<P>) {
+  const [open, setOpen] = useState(false);
+
+  function handleClose() {
+    onClose?.();
+    setOpen(false);
+  }
+
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button autoFocus variant="contained" onClick={onConfirm}>
-          Ok
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <>
+      <TriggerComponent
+        {...triggerProps}
+        onClick={() => {
+          setOpen(true);
+          onClickTrigger?.();
+        }}        
+      >
+        {children}
+      </TriggerComponent>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{dialogTitle}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{dialogMessage}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            autoFocus
+            variant="contained"
+            onClick={() => {
+              onConfirm();
+              handleClose();
+            }}
+          >
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }

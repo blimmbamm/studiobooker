@@ -1,16 +1,21 @@
 import {
   Button,
-  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
-  IconButton,
   TextField,
 } from '@mui/material';
-import { FormEvent, JSX, useEffect, useRef, useState } from 'react';
+import {
+  FormEvent,
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-type Props = {
-  buttonIcon: JSX.Element;
+type Props<P> = {
+  defaultValue?: string;
   onSubmit: (value: string) => void;
   helperText?: string;
   isError?: boolean;
@@ -18,10 +23,15 @@ type Props = {
   reset?: () => void;
   isSuccess?: boolean;
   placeholder?: string;
+  triggerComponent: FunctionComponent<P>;
+  triggerProps: P;
+  children?: ReactNode;
+  onClick?: () => void;
+  onClose?: () => void;
 };
 
-export function SingleInputDialog({
-  buttonIcon,
+export function SingleInputDialog<P>({
+  defaultValue = '',
   onSubmit,
   helperText,
   isError,
@@ -29,7 +39,12 @@ export function SingleInputDialog({
   reset,
   isSuccess = false,
   placeholder = '',
-}: Props) {
+  triggerComponent: TriggerComponent,
+  triggerProps,
+  children,
+  onClick,
+  onClose,
+}: Props<P>) {
   const [open, setOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,6 +52,7 @@ export function SingleInputDialog({
   function handleClose() {
     reset?.();
     setOpen(false);
+    onClose?.();
   }
 
   function handleChange() {
@@ -58,14 +74,16 @@ export function SingleInputDialog({
 
   return (
     <>
-      <IconButton
+      <TriggerComponent
+        {...triggerProps}
         onClick={() => {
           setOpen(true);
           reset?.();
+          onClick?.();
         }}
       >
-        {buttonIcon}
-      </IconButton>
+        {children}
+      </TriggerComponent>
       <Dialog
         open={open}
         component="form"
@@ -75,6 +93,7 @@ export function SingleInputDialog({
         <DialogContent>
           <TextField
             inputRef={inputRef}
+            defaultValue={defaultValue}
             placeholder={placeholder}
             variant="outlined"
             helperText={helperText}
@@ -84,9 +103,8 @@ export function SingleInputDialog({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending && <CircularProgress color="inherit" size={'1.5rem'} />}
-            {!isPending && 'Add'}
+          <Button type="submit" variant="contained" loading={isPending}>
+            Ok
           </Button>
         </DialogActions>
       </Dialog>

@@ -15,3 +15,7 @@ export type ServiceCategoryStructured = ServiceCategory & {
 export type ServiceCategoryForStaff = ServiceCategory & {
   services: ServiceWithStaffQualification[];
 };
+
+export type EditServiceCategoryDto = {
+  name?: string;
+};
