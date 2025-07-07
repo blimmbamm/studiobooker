@@ -1,10 +1,7 @@
-import { ApiCompany } from '../types/api/company';
-import { mapApiToCompany } from '../types/api/company.mapper';
 import { client } from './client';
 
 export async function checkAuth() {
-  const company = await client.get<ApiCompany>('auth/company', 500);
-  return mapApiToCompany(company);
+  return client.get<{ message: string }>('auth/check', 500);
 }
 
 export async function signup(email: string, password: string) {

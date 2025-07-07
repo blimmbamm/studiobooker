@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+
 import StaffList from './components/navigation/StaffList';
 
 export default function StaffLayout() {

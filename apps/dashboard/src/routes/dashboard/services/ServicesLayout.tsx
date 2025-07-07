@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
+
 import ServicesNavigation from './components/ServicesNavigation';
 
 export default function ServicesLayout() {

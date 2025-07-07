@@ -14,6 +14,8 @@ import VerifySignupPage from './routes/auth/verify/VerifySignupPage';
 import ServicesLayout from './routes/dashboard/services/ServicesLayout';
 import ServiceDetail from './routes/dashboard/services/ServiceDetail';
 import ServiceDetailStart from './routes/dashboard/services/ServiceDetailStart';
+import SettingsLayout from './routes/dashboard/settings/SettingsLayout';
+import Settings from './routes/dashboard/settings/Settings';
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +54,20 @@ export const router = createBrowserRouter([
                 element: <ServiceDetailStart />,
               },
               { path: ':id', element: <ServiceDetail /> },
+            ],
+          },
+          {
+            path: 'settings',
+            element: <SettingsLayout />,
+            children: [
+              {
+                index: true,
+                element: <Settings />,
+              },
+              {
+                path: 'reset-password',
+                element: <div>Reset password</div>,
+              },
             ],
           },
         ],
