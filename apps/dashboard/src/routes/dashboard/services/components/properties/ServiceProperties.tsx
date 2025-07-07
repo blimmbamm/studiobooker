@@ -1,13 +1,10 @@
-import {
-  PropertySkeleton,
-  PropertiesTableSection,
-} from '@studiobooker/utils';
-import { ServiceStructured } from '../../../../types/service';
-import ServiceTitle from './properties/ServiceTitle';
-import ServiceDescription from './properties/ServiceDescription';
-import ServiceDuration from './properties/ServiceDuration';
-import ServicePrice from './properties/ServicePrice';
-import ServiceCategory from './properties/ServiceCategory';
+import { PropertySkeleton, PropertiesTableSection } from '@studiobooker/utils';
+import { ServiceStructured } from '../../../../../types/service';
+import ServiceTitle from './ServiceTitle';
+import ServiceDescription from './ServiceDescription';
+import ServiceDuration from './ServiceDuration';
+import ServicePrice from './ServicePrice';
+import ServiceCategory from './ServiceCategory';
 
 export function ServiceProperties({
   service,

@@ -2,10 +2,10 @@ import { Divider } from '@mui/material';
 
 import { FallbackMessage, useNumericParam } from '@studiobooker/utils';
 import { useStaff } from '../../../hooks/staff.queries';
-import StaffDetails from './components/details/StaffDetails';
 import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
 import StaffSettings from './components/settings/StaffSettings';
+import StaffProperties from './components/properties/StaffProperties';
 
 export default function StaffDetail() {
   const staffId = useNumericParam('id');
@@ -22,7 +22,7 @@ export default function StaffDetail() {
 
   return (
     <>
-      <StaffDetails staff={staff} />
+      <StaffProperties staff={staff} />
       <Divider />
       <StaffWorkingTimes staff={staff} />
       <Divider />

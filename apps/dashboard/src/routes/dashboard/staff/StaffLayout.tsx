@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import StaffNavigation from './components/navigation/StaffNavigation';
 
-import StaffList from './components/navigation/StaffList';
 
 export default function StaffLayout() {
   return (
@@ -11,7 +11,7 @@ export default function StaffLayout() {
       sx={{ backgroundColor: 'white' }}
       minHeight={'100%'}
     >
-      <StaffList />
+      <StaffNavigation />
       <Box
         marginLeft={'250px'}
         display={'flex'}

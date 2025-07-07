@@ -9,7 +9,7 @@ type Props = {
   staff: StaffStructured | undefined;
 };
 
-export default function StaffDetails({ staff }: Props) {
+export default function StaffProperties({ staff }: Props) {
   return (
     <PropertiesTableSection title="Details">
       {!staff && (

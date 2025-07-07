@@ -2,9 +2,9 @@ import { Divider } from '@mui/material';
 
 import { FallbackMessage, useNumericParam } from '@studiobooker/utils';
 import { useService } from '../../../hooks/service.queries';
-import { ServiceProperties } from './components/ServiceProperties';
 import ServiceStaff from './components/staff/ServiceStaff';
 import ServiceSettings from './components/settings/ServiceSettings';
+import { ServiceProperties } from './components/properties/ServiceProperties';
 
 export default function ServiceDetail() {
   const serviceId = useNumericParam('id');

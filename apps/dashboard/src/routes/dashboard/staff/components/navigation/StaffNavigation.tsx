@@ -6,7 +6,7 @@ import {
 import { useAllStaff } from '../../../../../hooks/staff.queries';
 import AddStaff from './AddStaff';
 
-export default function StaffList() {
+export default function StaffNavigation() {
   const { isLoading, staff, isError } = useAllStaff();
 
   const staffId = useNumericParam('id');

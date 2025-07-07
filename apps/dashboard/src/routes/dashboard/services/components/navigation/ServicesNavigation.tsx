@@ -3,13 +3,13 @@ import {
   useNumericParam,
   NavigationList,
 } from '@studiobooker/utils';
-import { useServicesByCategory } from '../../../../hooks/service.queries';
 import { useEffect, useState } from 'react';
-import { ServiceCategoryStructured } from '../../../../types/service-category';
 import { useNavigate } from 'react-router-dom';
-import AddCategory from './navigation/AddCategory';
-import AddService from './navigation/AddService';
-import CategoryOptionsMenu from './navigation/CategoryOptionsMenu';
+import { useServicesByCategory } from '../../../../../hooks/service.queries';
+import { ServiceCategoryStructured } from '../../../../../types/service-category';
+import AddCategory from './AddCategory';
+import CategoryOptionsMenu from './CategoryOptionsMenu';
+import AddService from './AddService';
 
 export default function ServicesNavigation() {
   const { serviceCategories, isLoading, isError } = useServicesByCategory();
