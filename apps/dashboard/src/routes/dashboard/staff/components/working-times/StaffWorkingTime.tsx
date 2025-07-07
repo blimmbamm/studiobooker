@@ -31,8 +31,16 @@ export default function StaffWorkingTime(props: {
         </IconButton>
         <Typography paddingLeft={1}>{workingTime.weekday}</Typography>
       </Box>
-      <TimePicker value={time.start} onChange={handleChangeStart} />
-      <TimePicker value={time.end} onChange={handleChangeEnd} />
+      <TimePicker
+        value={time.start}
+        onChange={handleChangeStart}
+        disabled={!workingTime.activated}
+      />
+      <TimePicker
+        value={time.end}
+        onChange={handleChangeEnd}
+        disabled={!workingTime.activated}
+      />
     </>
   );
 }
