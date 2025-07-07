@@ -2,7 +2,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 
-import StaffWorkingTimeInput from './StaffWorkingTimeInput';
+import { TimePicker } from '@studiobooker/utils';
 import { WorkingTime } from '../../../../../types/working-time';
 import { useStaffWorkingTime } from '../../hooks/useStaffWorkingTime';
 
@@ -31,16 +31,8 @@ export default function StaffWorkingTime(props: {
         </IconButton>
         <Typography paddingLeft={1}>{workingTime.weekday}</Typography>
       </Box>
-      <StaffWorkingTimeInput
-        value={time.start}
-        activated={workingTime.activated}
-        onChange={handleChangeStart}
-      />
-      <StaffWorkingTimeInput
-        value={time.end}
-        activated={workingTime.activated}
-        onChange={handleChangeEnd}
-      />
+      <TimePicker value={time.start} onChange={handleChangeStart} />
+      <TimePicker value={time.end} onChange={handleChangeEnd} />
     </>
   );
 }

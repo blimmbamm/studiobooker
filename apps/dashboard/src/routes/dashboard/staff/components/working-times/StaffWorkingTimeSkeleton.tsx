@@ -1,7 +1,6 @@
 import { Box, Skeleton, Typography } from '@mui/material';
-import dayjs from 'dayjs';
 
-import { TimePicker } from '@studiobooker/utils';
+import { TimePickerSkeleton } from '@studiobooker/utils';
 
 type Props = { weekday: string };
 
@@ -15,15 +14,7 @@ export default function StaffWorkingTimeSkeleton({ weekday }: Props) {
         <Typography paddingLeft={1}>{weekday}</Typography>
       </Box>
       {[1, 2].map((index) => (
-        <Box key={index} sx={{ position: 'relative' }}>
-          <TimePicker defaultValue={dayjs('00:00', 'HH:mm')} hidden />
-          <Skeleton
-            variant="rounded"
-            height={40}
-            width={'100%'}
-            sx={{ position: 'absolute', top: 0 }}
-          />
-        </Box>
+        <TimePickerSkeleton key={index} />
       ))}
     </>
   );

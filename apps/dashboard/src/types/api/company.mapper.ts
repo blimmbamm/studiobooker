@@ -1,7 +1,7 @@
 import { Company, CompanyStructured } from '../company';
 import { ApiCompany, ApiCompanyStructured } from './company';
 import { mapApiToCompanyInfo } from './company-info.mapper';
-import { mapApiToWorkingTimeSetting } from './working-time-setting.mapper';
+import { mapApiToWorkingTime } from './working-time.mapper';
 
 export function mapApiToCompany(data: ApiCompany): Company {
   return data;
@@ -13,8 +13,6 @@ export function mapApiToCompanyStructured(
   return {
     ...data,
     companyInfo: mapApiToCompanyInfo(data.companyInfo),
-    workingTimeSettings: data.workingTimeSettings.map(
-      mapApiToWorkingTimeSetting
-    ),
+    workingTimeSettings: data.workingTimeSettings.map(mapApiToWorkingTime),
   };
 }

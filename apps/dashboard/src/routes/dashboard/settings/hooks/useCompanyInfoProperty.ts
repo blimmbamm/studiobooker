@@ -8,4 +8,7 @@ import {
 export const useCompanyInfoProperty = createUseProperty<
   EditCompanyInfoDto,
   CompanyInfo
->({ editMutation: (companyInfo) => useEditCompanyInfo(companyInfo.id) });
+>({
+  editMutation: ({ id }) =>
+    useEditCompanyInfo({ id, withOptimisticUpdating: true }),
+});

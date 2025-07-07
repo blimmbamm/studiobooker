@@ -6,10 +6,22 @@ import { client } from './client';
 export async function editWorkingTime(id: number, inputs: EditWorkingTimeDto) {
   const workingTime = await client.patch<ApiWorkingTime>(
     `working-time/${id}`,
-    inputs
+    inputs,
+    300
   );
 
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  return mapApiToWorkingTime(workingTime);
+}
+
+export async function editWorkingTimeSetting(
+  id: number,
+  inputs: EditWorkingTimeDto
+) {
+  const workingTime = await client.patch<ApiWorkingTime>(
+    `working-time-company-settings/${id}`,
+    inputs,
+    300
+  );
 
   return mapApiToWorkingTime(workingTime);
 }

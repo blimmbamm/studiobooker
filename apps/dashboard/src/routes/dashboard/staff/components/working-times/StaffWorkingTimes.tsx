@@ -4,6 +4,7 @@ import { TableSection } from '@studiobooker/utils';
 import StaffWorkingTime from './StaffWorkingTime';
 import { StaffStructured } from '../../../../../types/staff';
 import StaffWorkingTimeSkeleton from './StaffWorkingTimeSkeleton';
+import { WEEKDAYS } from '../../../../../constants/weekdays';
 
 type Props = {
   staff?: StaffStructured;
@@ -11,15 +12,6 @@ type Props = {
 };
 
 export default function StaffWorkingHours({ staff, sx }: Props) {
-  const DEFAULT_WORKING_TIMES = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-
   return (
     <TableSection
       title="Working times"
@@ -30,11 +22,8 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
       <Box />
       <Typography textAlign="center">From</Typography>
       <Typography textAlign="center">To</Typography>
-      {/* Default working times will come from company settings later, 
-        which will be loaded on app start and will be available when this renders.
-        Hence, the skeleton could be moved to very own component */}
       {!staff &&
-        DEFAULT_WORKING_TIMES.map((wt) => (
+        WEEKDAYS.map((wt) => (
           <StaffWorkingTimeSkeleton key={wt} weekday={wt} />
         ))}
       {staff &&

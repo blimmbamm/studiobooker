@@ -1,5 +1,5 @@
 import { CompanyInfo } from './company-info';
-import { WorkingTimeSetting } from './working-time-setting';
+import { WorkingTime } from './working-time';
 
 export type Company = {
   id: number;
@@ -8,5 +8,5 @@ export type Company = {
 
 export type CompanyStructured = Company & {
   companyInfo: CompanyInfo;
-  workingTimeSettings: WorkingTimeSetting[];
+  workingTimeSettings: WorkingTime[];
 };

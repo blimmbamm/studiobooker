@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { EditWorkingTimeDto } from '../types/working-time';
-import { editWorkingTime } from '../api/working-time';
+import { EditWorkingTimeDto, WorkingTime } from '../types/working-time';
+import { editWorkingTime, editWorkingTimeSetting } from '../api/working-time';
 import { useDebouncedCallback } from '@studiobooker/utils';
 
 import { StaffStructured } from '../types/staff';
+import { CompanyQueryKeys } from './company.queries';
+import { CompanyStructured } from '../types/company';
 
 export function useEditWorkingTime({
   workingTimeId,
   staffId,
-  onEditing,
 }: {
   workingTimeId: number;
   staffId: number;
-  onEditing: () => void;
 }) {
   const queryClient = useQueryClient();
 
@@ -51,8 +51,66 @@ export function useEditWorkingTime({
   });
 
   const [mutateDebounced, cancelMutateDebounced] = useDebouncedCallback(
-    (variables: { inputs: EditWorkingTimeDto }) => {
-      onEditing();
+    (variables: { inputs: EditWorkingTimeDto; onEdit?: () => void }) => {
+      variables.onEdit?.();
+      mutation.mutate(variables);
+    },
+    500
+  );
+
+  return {
+    ...mutation,
+    mutateDebounced,
+    cancelMutateDebounced,
+  };
+}
+
+export function useEditWorkingTimeSetting({ id }: { id: number }) {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: ({ inputs }: { inputs: EditWorkingTimeDto }) =>
+      editWorkingTimeSetting(id, inputs),
+    onMutate: ({ inputs }) => {
+      // optimistically update company query
+      // Actually, this is not really needed IF only start and end of working time settings are edited via TimePicker
+      // These changes are visible right away in any case, so no need for optimistic updating...
+      const queryKey = CompanyQueryKeys.COMPANY_STRUCTURED;
+
+      queryClient.cancelQueries({ queryKey });
+
+      const prevCompany = queryClient.getQueryData<CompanyStructured>(queryKey);
+
+      queryClient.setQueryData<CompanyStructured>(queryKey, (data) => {
+        if (!data) return data;
+
+        const newData = structuredClone(data);
+        newData.workingTimeSettings =
+          newData.workingTimeSettings.map<WorkingTime>((wt) =>
+            wt.id === id ? { ...wt, ...inputs } : wt
+          );
+
+        return newData;
+      });
+
+      return { prevCompany, queryKey };
+    },
+    onSuccess: (_d, _v, { queryKey }) => {
+      queryClient.invalidateQueries({ queryKey });
+    },
+    onError: (_error, _variables, context) => {
+      if (context) {
+        queryClient.setQueryData<CompanyStructured>(
+          context.queryKey,
+          context.prevCompany
+        );
+      }
+    },
+  });
+
+  const [mutateDebounced, cancelMutateDebounced] = useDebouncedCallback(
+    (variables: { inputs: EditWorkingTimeDto; onEdit?: () => void }) => {
+      variables.onEdit?.();
       mutation.mutate(variables);
     },
     500
