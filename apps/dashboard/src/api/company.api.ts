@@ -11,11 +11,9 @@ export async function getCompany() {
 }
 
 export async function editCompanyInfo(id: number, inputs: EditCompanyInfoDto) {
-  console.log('test')
   const companyInfo = await client.patch<ApiCompanyInfo>(
     `company-info/${id}`,
     inputs
   );
-  console.log(companyInfo)
   return mapApiToCompanyInfo(companyInfo);
 }

@@ -139,7 +139,7 @@ export function NavigationList<T extends { id: number }>({
   );
 }
 
-function NavigationListSkeleton() {
+export function NavigationListSkeleton() {
   return [100, 50, 70].map((value) => (
     <ListItemButton key={value} disabled>
       <ListItem>

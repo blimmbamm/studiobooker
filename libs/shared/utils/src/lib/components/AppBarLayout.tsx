@@ -10,7 +10,7 @@ export function AppBarLayout({ children, mainContainerSx }: Props) {
   return (
     <Box display={'flex'} flexDirection={'column'} height={'100dvh'}>
       <CssBaseline />
-      <AppBar sx={{ zIndex: 1 }} position="static">
+      <AppBar sx={{ zIndex: 2 }} position="static">
         <Toolbar>{children}</Toolbar>
       </AppBar>
       <Box

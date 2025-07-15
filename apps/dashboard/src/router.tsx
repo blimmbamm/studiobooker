@@ -16,6 +16,7 @@ import ServiceDetail from './routes/dashboard/services/ServiceDetail';
 import ServiceDetailStart from './routes/dashboard/services/ServiceDetailStart';
 import SettingsLayout from './routes/dashboard/settings/SettingsLayout';
 import Settings from './routes/dashboard/settings/Settings';
+import CalendarLayout from './routes/dashboard/calendar/CalendarLayout';
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <Navigate to={'staff'} /> },
-          { path: 'calendar', element: <div>Calendar</div> },
+          { path: 'calendar', element: <CalendarLayout /> },
           {
             path: 'staff',
             element: <StaffLayout />,

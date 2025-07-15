@@ -14,6 +14,9 @@ export const theme = createTheme({
             borderRadius: 4, // or use theme.shape.borderRadius
           },
         },
+        { props: { color: 'inherit' }, style: { borderRadius: 4 } },
+        // { props: { name: 'whatever' }, style: { borderRadius: 0 } },
+        // { props: { name: 'whatelse' }, style: { borderColor: 'green'} },
       ],
     },
     // MuiPaper: {
