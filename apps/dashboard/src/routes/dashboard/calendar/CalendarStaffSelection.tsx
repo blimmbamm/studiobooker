@@ -6,8 +6,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
-import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 import {
   FallbackMessage,
@@ -17,14 +17,29 @@ import {
 import { useCalendarStaffSelection } from './hooks/useCalendarStaffSelection';
 import { useAllStaff } from '../../../hooks/staff.queries';
 import { grey } from '@mui/material/colors';
+import { useStaffColors } from './contexts/StaffColorContext';
 
 type Props = { boxProps?: BoxProps };
 
 export default function CalendarStaffSelection({ boxProps }: Props) {
-  // Put logic here that adds and removes staff from staff search param
   const { toggleStaff, staffIds } = useCalendarStaffSelection();
 
   const { staff, isLoading, isError } = useAllStaff();
+
+  // function* colorIterator(colors: string[]) {
+  //   let index = 0;
+  //   while (true) {
+  //     console.log(index)
+  //     yield colors[index % colors.length];
+  //     index++;
+  //   }
+  // }
+
+  // // Usage
+  // const colors = ['red', 'blue', 'green'];
+  // const iterator = colorIterator(colors);
+  // '#33FF57'
+  const staffColorMap = useStaffColors()
 
   function content() {
     if (isLoading) return <NavigationListSkeleton />;
@@ -45,7 +60,9 @@ export default function CalendarStaffSelection({ boxProps }: Props) {
           >
             <ListItemIcon sx={{ minWidth: 0, paddingRight: 1.5 }}>
               {staffIds?.includes(s.id) ? (
-                <CheckBoxOutlinedIcon />
+                // <CheckBoxOutlinedIcon />
+                // <CheckBoxIcon sx={{ color: iterator.next().value! }} />
+                <CheckBoxIcon sx={{ color: staffColorMap[s.id] }} />
               ) : (
                 <CheckBoxOutlineBlankOutlinedIcon />
               )}

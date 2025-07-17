@@ -1,3 +1,4 @@
+import { Appointment } from './appointment';
 import { ServiceCategoryForStaff } from './service-category';
 import { WorkingTime } from './working-time';
 
@@ -17,6 +18,10 @@ export type StaffWithServiceQualification = Staff & {
 export type StaffStructured = Staff & {
   workingTimes: WorkingTime[];
   serviceCategories: ServiceCategoryForStaff[];
+};
+
+export type StaffWithAppointments = Staff & {
+  appointments: Appointment[];
 };
 
 export type EditStaffDto = {

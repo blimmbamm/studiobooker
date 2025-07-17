@@ -1,13 +1,16 @@
 import {
   Staff,
   StaffStructured,
+  StaffWithAppointments,
   StaffWithServiceQualification,
 } from '../staff';
+import { mapApiToAppointment } from './appointment.mapper';
 import { mapApiToServiceCategory } from './service-category.mapper';
 import { mapApiToService } from './service.mapper';
 import {
   ApiStaff,
   ApiStaffStructured,
+  ApiStaffWithAppointments,
   ApiStaffWithServiceQualification,
 } from './staff';
 import { mapApiToWorkingTime } from './working-time.mapper';
@@ -35,5 +38,14 @@ export function mapApiToStaffStructured(
       ...mapApiToServiceCategory(sc),
       services: sc.services.map((s) => ({ ...s, ...mapApiToService(s) })),
     })),
+  };
+}
+
+export function mapApiToStaffWithAppointments(
+  data: ApiStaffWithAppointments
+): StaffWithAppointments {
+  return {
+    ...mapApiToStaff(data),
+    appointments: data.appointments.map(mapApiToAppointment),
   };
 }

@@ -1,7 +1,7 @@
 import { BoxProps, Box, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { CalendarDay } from '../Calendar';
 import GridLines from './GridLines';
+import { CalendarDay } from '../../../../types/calendar-day';
 
 type Props = { days: CalendarDay[] } & BoxProps;
 
@@ -23,7 +23,7 @@ export default function CalendarColumnHeader({ days, ...boxProps }: Props) {
       <GridLines nCols={days.length} gridImageHeight="calc(2rem - 1px)" />
       {days.map((day) => (
         <Typography
-          key={day.date.toString()}
+          key={day.dateStr}
           fontSize="0.8rem"
           noWrap
           textAlign="center"

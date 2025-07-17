@@ -1,29 +1,13 @@
-import { Box, Typography } from '@mui/material';
-import { CalendarDay } from './Calendar';
+import { Box } from '@mui/material';
+import { CalendarDay } from '../../../types/calendar-day';
+import { useStaffColors } from './contexts/StaffColorContext';
 
 type Props = {
   day: CalendarDay;
-  // width: number;
-  // nStaff: number;
-  // firstDay: boolean;
-  // lastDay: boolean;
 };
 
-export default function DayView({
-  day,
-}: // width,
-// nStaff,
-// firstDay,
-// lastDay,
-Props) {
-  // const firstAppointmentRef = useRef<HTMLElement>(null);
-
-  // useEffect(() => {
-  //   firstAppointmentRef.current?.scrollIntoView({
-  //     behavior: 'instant',
-  //     block: 'start',
-  //   });
-  // });
+export default function DayView({ day }: Props) {
+  const staffColorMap = useStaffColors();
 
   return (
     <Box
@@ -33,7 +17,7 @@ Props) {
       display="flex"
       gap={0.5}
     >
-      {day.staff.map((s) => (
+      {day.staffWithAppointments.map((s) => (
         <Box key={s.id} flex={1} position="relative">
           {s.appointments.map((a) => (
             <Box
@@ -41,13 +25,13 @@ Props) {
               position="absolute"
               top={a.startNum}
               width={'100%'}
-              height={a.endNum - a.startNum - 1}
+              height={a.duration - 1}
               paddingBlock={'1.5px'}
             >
               <Box
                 width={'100%'}
                 height={'100%'}
-                bgcolor={'magenta'}
+                bgcolor={staffColorMap[s.id]}
                 borderRadius={1.5}
               />
             </Box>

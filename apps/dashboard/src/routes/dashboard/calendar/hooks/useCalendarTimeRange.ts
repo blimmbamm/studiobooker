@@ -66,8 +66,8 @@ export function useCalendarTimeRange() {
 
   const timeRange = rangeIsValid(from, to)
     ? {
-        from,
-        to,
+        from: from.format('YYYYMMDD'),
+        to: to.format('YYYYMMDD'),
       }
     : undefined;
 

@@ -1,6 +1,5 @@
-import {
-  ApiServiceCategoryForStaff,
-} from './service-category';
+import { ApiAppointment } from './appointment';
+import { ApiServiceCategoryForStaff } from './service-category';
 import { ApiWorkingTime } from './working-time';
 
 export type ApiStaff = {
@@ -14,9 +13,13 @@ export type ApiStaff = {
 
 export type ApiStaffWithServiceQualification = ApiStaff & {
   staffIsQualifiedForService: boolean;
-}
+};
 
 export type ApiStaffStructured = ApiStaff & {
   workingTimes: ApiWorkingTime[];
   serviceCategories: ApiServiceCategoryForStaff[];
+};
+
+export type ApiStaffWithAppointments = ApiStaff & {
+  appointments: ApiAppointment[];
 };

@@ -14,7 +14,7 @@ export function useCalendarStaffSelection() {
   const parsedStaffIds = staffParams ? staffParams.split(',').map(Number) : [];
 
   const staffIds = staffIsValid(parsedStaffIds, staff)
-    ? parsedStaffIds
+    ? parsedStaffIds.sort()
     : undefined;
 
   // Alternative: Pass list of ids right away and then check/update in background
