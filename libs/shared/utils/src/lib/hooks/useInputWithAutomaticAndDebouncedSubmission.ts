@@ -48,7 +48,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
     if (updateValueIf(value)) {
       setValue(value);
     } else {
-      return;
+      return false;
     }
 
     // Trigger debounced submission if allowed AND
@@ -58,6 +58,8 @@ export function useInputWithAutomaticAndDebouncedSubmission({
     } else {
       cancelEdit();
     }
+
+    return true;
   }
 
   /**
@@ -77,7 +79,7 @@ export function useInputWithAutomaticAndDebouncedSubmission({
    * e.g. due to refetching or switched entity
    */
   useEffect(() => {
-    if (!isTyping ) {
+    if (!isTyping) {
       setValue(initialValue);
     }
     // add disable exhaustive deps hint for eslint here

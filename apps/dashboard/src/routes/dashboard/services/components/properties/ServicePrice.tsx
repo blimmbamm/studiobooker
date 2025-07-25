@@ -1,31 +1,44 @@
-import {InputAdornment} from '@mui/material';
+import { InputAdornment } from '@mui/material';
 
-import { PropertiesTableProperty } from '@studiobooker/utils';
+import { isPositiveNumberStringOrEmpty, PropertiesTableProperty } from '@studiobooker/utils';
 import { Service } from '../../../../../types/service';
 import { useServiceProperty } from '../../hooks/useServiceProperty';
+import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
+import { ChangeEvent } from 'react';
 
 export default function ServicePrice({ service }: { service: Service }) {
-  function isNumberString(value: string) {
-    return /^[0-9]*$/.test(value);
-  }
+
 
   const { value, handleChange } = useServiceProperty({
     entity: service,
     property: 'price',
     parseProperty: (value) => +value,
-    updateValueIf: isNumberString,
+    updateValueIf: isPositiveNumberStringOrEmpty,
   });
+
+  const { hasError, errorMessage, resetError } =
+    useServiceActivationValidation();
+
+  function handleChangePrice(event: ChangeEvent<HTMLInputElement>) {
+    const didChange = handleChange(event);
+
+    if (didChange) {
+      resetError('price');
+    }
+  }
 
   return (
     <PropertiesTableProperty
       name="Price"
       value={value}
-      onChange={handleChange}
+      onChange={handleChangePrice}
       slotProps={{
         input: {
           endAdornment: <InputAdornment position="end">€</InputAdornment>,
         },
       }}
+      error={hasError('price')}
+      helperText={errorMessage('price')}
     />
   );
 }
