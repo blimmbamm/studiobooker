@@ -12,14 +12,27 @@ import { EditStaffDto, StaffStructured } from '../types/staff';
 
 export const StaffQueryKeys = {
   STAFF_ANY: ['staff'],
+  STAFF_WITH_SERVICE_QUALIFICATION: (serviceId: number) => [
+    'staff',
+    'withService',
+    serviceId,
+  ],
   STAFF_ALL: ['staff', 'all'],
+  STAFF_ALL_WITH_SERVICE: (serviceId: number) => [
+    'staff',
+    'all',
+    'withService',
+    serviceId,
+  ],
   STAFF_DETAIL: (id: number) => ['staff', id],
 };
 
-export function useAllStaff() {
+export function useAllStaff(serviceId?: number) {
   const { data: staff, ...query } = useQuery({
-    queryKey: StaffQueryKeys.STAFF_ALL,
-    queryFn: () => getAllStaff(),
+    queryKey: serviceId
+      ? StaffQueryKeys.STAFF_ALL_WITH_SERVICE(serviceId)
+      : StaffQueryKeys.STAFF_ALL,
+    queryFn: () => getAllStaff(serviceId),
   });
 
   return {

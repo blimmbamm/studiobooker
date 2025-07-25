@@ -18,18 +18,17 @@ import { EditServiceCategoryDto } from '../types/service-category';
 export async function getServicesByCategory() {
   const servicesByCategory = await client.get<ApiServiceCategoryStructured[]>(
     'service-category',
-    200
   );
   return servicesByCategory.map(mapApiToServiceCategoryStructured);
 }
 
 export async function getService(id: number) {
-  const service = await client.get<ApiServiceStructured>(`service/${id}`, 200);
+  const service = await client.get<ApiServiceStructured>(`service/${id}`);
   return mapApiToServiceStructured(service);
 }
 
 export async function editService(id: number, inputs: EditServiceDto) {
-  const service = await client.patch<ApiService>(`service/${id}`, inputs, 2000);
+  const service = await client.patch<ApiService>(`service/${id}`, inputs);
   return mapApiToService(service);
 }
 
@@ -40,7 +39,6 @@ export async function editServiceCategory(
   const category = await client.patch<ApiServiceCategory>(
     `service-category/${id}`,
     inputs,
-    300
   );
 
   return mapApiToServiceCategory(category);
@@ -53,7 +51,6 @@ export async function editServiceServiceCategory(
   const service = await client.patch<ApiService>(
     `service/${id}/category/${categoryId}`,
     {},
-    500
   );
 
   return mapApiToService(service);

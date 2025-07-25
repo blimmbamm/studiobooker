@@ -7,7 +7,6 @@ export async function editWorkingTime(id: number, inputs: EditWorkingTimeDto) {
   const workingTime = await client.patch<ApiWorkingTime>(
     `working-time/${id}`,
     inputs,
-    300
   );
 
   return mapApiToWorkingTime(workingTime);
@@ -20,7 +19,6 @@ export async function editWorkingTimeSetting(
   const workingTime = await client.patch<ApiWorkingTime>(
     `working-time-company-settings/${id}`,
     inputs,
-    300
   );
 
   return mapApiToWorkingTime(workingTime);

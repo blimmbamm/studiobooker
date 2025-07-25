@@ -7,6 +7,11 @@ import { ApiCalendarDay } from '../types/api/calendar-day';
 import { mapApiToCalendarDay } from '../types/api/calendar-day.mapper';
 import { CalendarDay } from '../types/calendar-day';
 import { client } from './client';
+import { ApiAvailableAppointmentSlots } from '../types/api/available-appointment-slots';
+import { mapApiToAvailableAppointmentSlots } from '../types/api/available-appointment-slots.mapper';
+import { AddAppointmentDto } from '../types/appointment';
+import { ApiAppointment } from '../types/api/appointment';
+import { mapApiToAppointment } from '../types/api/appointment.mapper';
 
 export async function getCalendarData({
   from,
@@ -18,11 +23,30 @@ export async function getCalendarData({
   staffIds: number[];
 }) {
   const calendarDays = await client.get<ApiCalendarDay[]>(
-    `appointment?from=${from}&to=${to}&staff=${staffIds.toString()}`,
-    500
+    `appointment?from=${from}&to=${to}&staff=${staffIds.toString()}`
   );
 
   return calendarDays.map(mapApiToCalendarDay);
+}
+
+export async function getAvailableAppointmentSlots(args: {
+  start: Date;
+  serviceId: number;
+  staffId: number;
+}) {
+  const slots = await client.post<ApiAvailableAppointmentSlots[]>(
+    'appointment/available-slots',
+    args
+  );
+  return slots.map(mapApiToAvailableAppointmentSlots);
+}
+
+export async function addAppointment(addAppointmentDto: AddAppointmentDto) {
+  const appointment = await client.post<ApiAppointment>(
+    'appointment',
+    addAppointmentDto
+  );
+  return mapApiToAppointment(appointment);
 }
 
 export function getPlaceholderCalendarData({

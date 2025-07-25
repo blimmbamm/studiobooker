@@ -2,7 +2,6 @@ import {
   Box,
   Typography,
   BoxProps,
-  Button,
   IconButton,
   TextField,
   MenuItem,
@@ -12,6 +11,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 import { useCalendarTimeRange } from '../hooks/useCalendarTimeRange';
 import { useCalendarViewMode, VIEW_MODES } from '../hooks/useCalendarViewMode';
+import AddAppointment from './add-appointment/AddAppointment';
 
 type Props = {} & BoxProps;
 
@@ -31,9 +31,7 @@ export default function CalendarHeader({ height }: Props) {
       alignItems={'center'}
       padding={2}
     >
-      <Button variant="outlined" color="inherit">
-        Today
-      </Button>
+      <AddAppointment />
       <Box flex={1} />
       <IconButton onClick={backward} size="small">
         <KeyboardArrowLeftIcon />

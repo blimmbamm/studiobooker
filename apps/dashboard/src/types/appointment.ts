@@ -14,3 +14,15 @@ export type Appointment = {
   title: string;
   notes: string | null;
 };
+
+export type AddAppointmentDto = {
+  start: Dayjs;
+  duration: number;
+  confirmed: boolean;
+  title: string;
+  notes: string;
+  customerName: string;
+  customerEmail: string;
+  serviceId: number;
+  staffId: number;
+};

@@ -6,13 +6,14 @@ import {
 import { EditStaffDto } from '../types/staff';
 import { client } from './client';
 
-export async function getAllStaff() {
-  const staff = await client.get<ApiStaff[]>('personnel', 300);
+export async function getAllStaff(serviceId?: number) {
+  const path = `personnel${serviceId ? `?serviceId=${serviceId}` : ''}`;
+  const staff = await client.get<ApiStaff[]>(path);
   return staff.map((s) => mapApiToStaff(s));
 }
 
 export async function getStaff(id: number) {
-  const staff = await client.get<ApiStaffStructured>(`personnel/${id}`, 300);
+  const staff = await client.get<ApiStaffStructured>(`personnel/${id}`);
 
   return mapApiToStaffStructured(staff);
 }
@@ -23,7 +24,7 @@ export async function addStaff(name: string) {
 }
 
 export async function editStaff(id: number, inputs: EditStaffDto) {
-  const staff = await client.patch<ApiStaff>(`personnel/${id}`, inputs, 300);
+  const staff = await client.patch<ApiStaff>(`personnel/${id}`, inputs);
   return mapApiToStaff(staff);
 }
 
