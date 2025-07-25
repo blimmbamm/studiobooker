@@ -1,8 +1,4 @@
-import {
-  Service,
-  ServiceStructured,
-  ServiceWithStaffQualification,
-} from '../service';
+import { ServiceStructured, ServiceWithStaffQualification } from '../service';
 import {
   ApiService,
   ApiServiceStructured,
@@ -11,7 +7,7 @@ import {
 import { mapApiToServiceCategory } from './service-category.mapper';
 import { mapApiToStaffWithServiceQualification } from './staff.mapper';
 
-export function mapApiToService(service: ApiService): Service {
+export function mapApiToService(service: ApiService) {
   return { ...service };
 }
 

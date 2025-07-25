@@ -15,9 +15,11 @@ import {
 import { EditServiceDto } from '../types/service';
 import { EditServiceCategoryDto } from '../types/service-category';
 
-export async function getServicesByCategory() {
+export async function getServicesByCategory(onlyActivatedServices?: boolean) {
   const servicesByCategory = await client.get<ApiServiceCategoryStructured[]>(
-    'service-category',
+    `service-category?${
+      onlyActivatedServices ? `activated=${Boolean(onlyActivatedServices)}` : ''
+    }`
   );
   return servicesByCategory.map(mapApiToServiceCategoryStructured);
 }
@@ -38,7 +40,7 @@ export async function editServiceCategory(
 ) {
   const category = await client.patch<ApiServiceCategory>(
     `service-category/${id}`,
-    inputs,
+    inputs
   );
 
   return mapApiToServiceCategory(category);
@@ -50,7 +52,7 @@ export async function editServiceServiceCategory(
 ) {
   const service = await client.patch<ApiService>(
     `service/${id}/category/${categoryId}`,
-    {},
+    {}
   );
 
   return mapApiToService(service);

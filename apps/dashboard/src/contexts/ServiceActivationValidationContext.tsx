@@ -44,7 +44,10 @@ export default function ServiceActivationValidationProvider({
       new Map(prevMap).set(key, message || 'Invalid value')
     );
 
-    scrollTargetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollTargetRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
 
   function resetError(key: keyof Service) {
@@ -59,7 +62,6 @@ export default function ServiceActivationValidationProvider({
 
   useEffect(() => {
     resetErrorMap();
-    console.log('effect');
   }, [service?.id]);
 
   return (

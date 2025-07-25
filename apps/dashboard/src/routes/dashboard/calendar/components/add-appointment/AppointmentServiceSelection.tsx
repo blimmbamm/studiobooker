@@ -16,7 +16,7 @@ export default function AppointmentServiceSelection({
   onSelectService,
   ...stepNavigationProps
 }: Props) {
-  const { serviceCategories, isError, isLoading } = useServicesByCategory();
+  const { serviceCategories, isError, isLoading } = useServicesByCategory(true);
 
   if (isError) return <FallbackMessage message="Failed to load services." />;
 

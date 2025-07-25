@@ -55,20 +55,21 @@ export default function AppointmentCustomerSelectionAndSummary({
   function handleAddAppointment() {
     onFinish?.();
 
-    addAppointmentMutation.mutate({
-      dto: {
-        start: selectedDate,
-        // duration: selectedService.duration,
-        duration: 60,
-        confirmed: false,
-        title: `Appt: ${selectedService.title}`, // could be extended
-        notes,
-        customerName,
-        customerEmail,
-        serviceId: selectedService.id,
-        staffId: selectedStaff.id,
-      },
-    });
+    if (selectedService.duration) {
+      addAppointmentMutation.mutate({
+        dto: {
+          start: selectedDate,
+          duration: selectedService.duration,
+          confirmed: false,
+          title: `Appt: ${selectedService.title}`, // could be extended
+          notes,
+          customerName,
+          customerEmail,
+          serviceId: selectedService.id,
+          staffId: selectedStaff.id,
+        },
+      });
+    }
   }
 
   return (

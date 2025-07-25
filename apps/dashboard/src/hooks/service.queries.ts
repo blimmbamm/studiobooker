@@ -27,10 +27,10 @@ export const ServiceQueryKeys = {
   SERVICE_DETAIL: (id: number) => ['service', id],
 };
 
-export function useServicesByCategory() {
+export function useServicesByCategory(onlyActivatedServices?: boolean) {
   const { data: serviceCategories, ...query } = useQuery({
-    queryKey: ['service', 'all by category'],
-    queryFn: () => getServicesByCategory(),
+    queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
+    queryFn: () => getServicesByCategory(onlyActivatedServices),
   });
 
   return {
