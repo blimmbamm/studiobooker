@@ -6,6 +6,7 @@ import { Service } from '../../../../../types/service';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
+import { Box } from '@mui/material';
 
 type Props = {
   selectedService: Service;
@@ -19,7 +20,9 @@ export default function AppointmentStaffSelection({
   onSelectStaff,
   ...stepNavigationProps
 }: Props) {
-  const { staff, isError, isLoading } = useAllStaff(selectedService?.id);
+  const { staff, noStaff, isError, isLoading } = useAllStaff(
+    selectedService?.id
+  );
 
   if (isError) return <FallbackMessage message="Failed to load staff." />;
 
@@ -27,13 +30,16 @@ export default function AppointmentStaffSelection({
 
   return (
     <>
-      {staff && (
-        <StaffList
-          staff={staff}
-          onClickStaff={onSelectStaff}
-          staffIsSelected={(staff) => staff === selectedStaff}
-        />
-      )}
+      <Box flex={1} overflow={'auto'}>
+        {staff && (
+          <StaffList
+            staff={staff}
+            onClickStaff={onSelectStaff}
+            staffIsSelected={(staff) => staff === selectedStaff}
+          />
+        )}
+        {noStaff && <FallbackMessage message="There is no staff available." />}
+      </Box>
       <AddAppointmentStepNavigation
         {...stepNavigationProps}
         nextDisabled={!Boolean(selectedStaff)}

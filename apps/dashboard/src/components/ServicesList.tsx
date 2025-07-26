@@ -1,4 +1,4 @@
-import { List } from '@mui/material';
+import { List, ListProps } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { ServiceCategoryStructured } from '../types/service-category';
@@ -13,14 +13,16 @@ export type ServicesListProps<T extends ServiceCategoryStructured> = {
   categoryItemIcon?: (category: T) => ReactNode;
   serviceItemIcon?: (service: T['services'][number]) => ReactNode;
   serviceIsSelected?: (service: T['services'][number]) => boolean;
+  listProps?: ListProps;
 };
 
 export function ServicesList<T extends ServiceCategoryStructured>({
   serviceCategories,
+  listProps,
   ...props
 }: ServicesListProps<T>) {
   return (
-    <List disablePadding>
+    <List disablePadding {...listProps}>
       {serviceCategories.map((sc) => (
         <ServicesListItem key={sc.id} serviceCategory={sc} {...props} />
       ))}

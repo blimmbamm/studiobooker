@@ -33,8 +33,13 @@ export function useServicesByCategory(onlyActivatedServices?: boolean) {
     queryFn: () => getServicesByCategory(onlyActivatedServices),
   });
 
+  const noServices = !!serviceCategories?.every(
+    (sc) => sc.services.length === 0
+  );
+
   return {
     ...query,
+    noServices,
     serviceCategories,
   };
 }

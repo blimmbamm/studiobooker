@@ -5,6 +5,7 @@ import { Service } from '../../../../../types/service';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
+import { Box } from '@mui/material';
 
 type Props = {
   selectedService: Service | null;
@@ -16,7 +17,8 @@ export default function AppointmentServiceSelection({
   onSelectService,
   ...stepNavigationProps
 }: Props) {
-  const { serviceCategories, isError, isLoading } = useServicesByCategory(true);
+  const { serviceCategories, noServices, isError, isLoading } =
+    useServicesByCategory(true);
 
   if (isError) return <FallbackMessage message="Failed to load services." />;
 
@@ -24,13 +26,18 @@ export default function AppointmentServiceSelection({
 
   return (
     <>
-      {serviceCategories && (
-        <ServicesList
-          serviceCategories={serviceCategories}
-          onClickService={onSelectService}
-          serviceIsSelected={(service) => selectedService === service}
-        />
-      )}
+      <Box flex={1} overflow={'auto'}>
+        {serviceCategories && (
+          <ServicesList
+            serviceCategories={serviceCategories}
+            onClickService={onSelectService}
+            serviceIsSelected={(service) => selectedService === service}
+          />
+        )}
+        {noServices && (
+          <FallbackMessage message="There are no services available." />
+        )}
+      </Box>
       <AddAppointmentStepNavigation
         {...stepNavigationProps}
         nextDisabled={!Boolean(selectedService)}

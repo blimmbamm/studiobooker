@@ -38,6 +38,7 @@ export function useAllStaff(serviceId?: number) {
   return {
     ...query,
     staff,
+    noStaff: staff?.length === 0,
   };
 }
 

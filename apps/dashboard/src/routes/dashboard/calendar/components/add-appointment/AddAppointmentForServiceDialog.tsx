@@ -1,4 +1,14 @@
-import { Dialog, DialogProps, Stepper, Step, StepLabel } from '@mui/material';
+import {
+  Dialog,
+  DialogProps,
+  Stepper,
+  Step,
+  StepLabel,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import { Dayjs } from 'dayjs';
 
@@ -104,15 +114,27 @@ export default function AddAppointmentForServiceDialog({
   }
 
   return (
-    <Dialog {...dialogProps} onClose={handleClose}>
-      <Stepper activeStep={activeStep}>
-        {steps.map((step, index) => (
-          <Step key={step} completed={activeStep > index}>
-            <StepLabel>{step}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      {content()}
+    <Dialog
+      {...dialogProps}
+      onClose={handleClose}
+      fullWidth
+      slotProps={{ paper: { sx: { height: '100%', maxWidth: 700 } } }}
+    >
+      <DialogTitle component="div" display={'flex'} gap={1}>
+        <Stepper activeStep={activeStep} sx={{ flex: 1 }}>
+          {steps.map((step, index) => (
+            <Step key={step} completed={activeStep > index}>
+              <StepLabel>{step}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <IconButton onClick={handleClose} sx={{ marginLeft: 'auto' }}>
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <DialogContent sx={{ display: 'flex', flexDirection: 'column' }}>
+        {content()}
+      </DialogContent>
     </Dialog>
   );
 }

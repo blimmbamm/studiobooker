@@ -18,20 +18,32 @@ export default function AddAppointmentStepNavigation({
   finishDisabled,
 }: AddAppointmentStepNavigationProps) {
   return (
-    <Box display="flex">
+    <Box display="flex" paddingTop={1}>
       {onPreviousStep && (
-        <Button onClick={onPreviousStep} disabled={previousDisabled}>
+        <Button
+          variant="contained"
+          onClick={onPreviousStep}
+          disabled={previousDisabled}
+        >
           Back
         </Button>
       )}
       <Box flex={1} />
       {onNextStep && (
-        <Button onClick={onNextStep} disabled={nextDisabled}>
+        <Button
+          variant="contained"
+          onClick={onNextStep}
+          disabled={nextDisabled}
+        >
           Next
         </Button>
       )}
       {onFinish && (
-        <Button onClick={onFinish} disabled={finishDisabled}>
+        <Button
+          variant="contained"
+          onClick={onFinish}
+          disabled={finishDisabled}
+        >
           Finish
         </Button>
       )}

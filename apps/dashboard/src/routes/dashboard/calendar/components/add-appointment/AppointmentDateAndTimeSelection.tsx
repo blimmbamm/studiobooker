@@ -82,13 +82,20 @@ export default function AppointmentDateAndTimeSelection({
         <IconButton size="small" onClick={forward}>
           <KeyboardArrowRightIcon />
         </IconButton>
+      </Box>
+      <Box
+        display="grid"
+        gridTemplateColumns={'repeat(7, 1fr)'}
+        justifyItems={'center'}
+        flex={1}
+        overflow={'auto'}
+      >
         <Box />
         {slots?.map(({ day, slots }) => (
           <Box
             key={day.toString()}
             display={'flex'}
             flexDirection={'column'}
-            alignSelf={'normal'}
             gap={0.5}
           >
             {slots.map((slot) => (

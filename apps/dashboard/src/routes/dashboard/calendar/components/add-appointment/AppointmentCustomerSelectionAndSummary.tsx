@@ -27,6 +27,7 @@ export default function AppointmentCustomerSelectionAndSummary({
   onFinish,
   ...stepNavigationProps
 }: Props) {
+  console.log(selectedService);
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [notes, setNotes] = useState('');
@@ -74,56 +75,59 @@ export default function AppointmentCustomerSelectionAndSummary({
 
   return (
     <>
-      <Box
-        display={'grid'}
-        gridTemplateColumns={'auto auto'}
-        alignItems={'center'}
-        rowGap={1}
-        columnGap={3}
-        width={'fit-content'}
-      >
-        <PropertiesTableProperty
-          name="Service"
-          propertyValue={selectedService.title}
-          asTextField={false}
-        />
-        <PropertiesTableProperty
-          name="Staff"
-          propertyValue={selectedStaff.name}
-          asTextField={false}
-        />
-        <PropertiesTableProperty
-          name="Date"
-          propertyValue={selectedDate.format('ddd, DD MMM YYYY HH:mm')}
-          asTextField={false}
-        />
-        <PropertiesTableProperty
-          name="Duration"
-          propertyValue={`${selectedService.duration?.toString()} min`}
-          asTextField={false}
-        />
-        <PropertiesTableProperty
-          name="Price"
-          value={selectedService.price || ''}
-          asTextField={false}
-        />
-        <PropertiesTableProperty
-          name="Customer name"
-          value={customerName}
-          onChange={handleChangeCustomerName}
-          autoFocus
-        />
-        <PropertiesTableProperty
-          name="Customer e-mail"
-          value={customerEmail}
-          onChange={handleChangeCustomerEmail}
-        />
-        <PropertiesTableProperty
-          name="Notes"
-          multiline
-          value={notes}
-          onChange={handleChangeNotes}
-        />
+      <Box flex={1} overflow={'auto'}>
+        <Box
+          display={'grid'}
+          gridTemplateColumns={'auto auto'}
+          alignItems={'center'}
+          rowGap={1}
+          columnGap={3}
+          width={'fit-content'}
+          margin={'auto'}
+        >
+          <PropertiesTableProperty
+            name="Service"
+            propertyValue={selectedService.title}
+            asTextField={false}
+          />
+          <PropertiesTableProperty
+            name="Staff"
+            propertyValue={selectedStaff.name}
+            asTextField={false}
+          />
+          <PropertiesTableProperty
+            name="Date"
+            propertyValue={selectedDate.format('ddd, DD MMM YYYY HH:mm')}
+            asTextField={false}
+          />
+          <PropertiesTableProperty
+            name="Duration"
+            propertyValue={`${selectedService.duration?.toString()} min`}
+            asTextField={false}
+          />
+          <PropertiesTableProperty
+            name="Price"
+            propertyValue={`${selectedService.price?.toString()} €`}
+            asTextField={false}
+          />
+          <PropertiesTableProperty
+            name="Customer name"
+            value={customerName}
+            onChange={handleChangeCustomerName}
+            autoFocus
+          />
+          <PropertiesTableProperty
+            name="Customer e-mail"
+            value={customerEmail}
+            onChange={handleChangeCustomerEmail}
+          />
+          <PropertiesTableProperty
+            name="Notes"
+            multiline
+            value={notes}
+            onChange={handleChangeNotes}
+          />
+        </Box>
       </Box>
       <AddAppointmentStepNavigation
         {...stepNavigationProps}
