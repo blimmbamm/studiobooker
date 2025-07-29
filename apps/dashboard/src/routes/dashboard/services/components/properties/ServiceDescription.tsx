@@ -14,6 +14,7 @@ export default function ServiceDescription({ service }: { service: Service }) {
       value={value}
       onChange={handleChange}
       multiline
+      disabled={service.activated}
     />
   );
 }

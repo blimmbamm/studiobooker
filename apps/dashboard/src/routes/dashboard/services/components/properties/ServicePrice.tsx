@@ -39,6 +39,7 @@ export default function ServicePrice({ service }: { service: Service }) {
       }}
       error={hasError('price')}
       helperText={errorMessage('price')}
+      disabled={service.activated}
     />
   );
 }

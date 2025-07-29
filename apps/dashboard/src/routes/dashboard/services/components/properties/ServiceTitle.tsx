@@ -20,6 +20,7 @@ export default function ServiceTitle({ service }: { service: Service }) {
       error={showError}
       helperText={helperText}
       onBlur={checkErrors}
+      disabled={service.activated}
     />
   );
 }

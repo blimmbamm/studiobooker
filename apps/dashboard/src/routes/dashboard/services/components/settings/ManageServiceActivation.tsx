@@ -1,5 +1,5 @@
-import { FormControlLabel, Switch } from '@mui/material';
-import { SettingsItem } from '@studiobooker/utils';
+import { Box, FormControlLabel, Switch, Typography } from '@mui/material';
+
 import { Service } from '../../../../../types/service';
 import { useEditService } from '../../../../../hooks/service.queries';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
@@ -31,20 +31,20 @@ export default function ManageServiceActivation({ service }: Props) {
   }
 
   return (
-    <SettingsItem
-      title="Service activation"
-      description={`Manage the activation status of this service. 
-        Services can only be edited in edit mode.
-        Services need to be active in order
-        to be available for customers.`}
-    >
+    <Box display="flex" justifyContent={'space-between'}>
+      <Typography>
+        {service.activated
+          ? `Service is activated and visible for customers. 
+        Switch to editing mode to change service settings.`
+          : `Service is currently in editing mode and not visible for customers. `}
+      </Typography>
       <FormControlLabel
         checked={service.activated}
         onChange={handleActivateService}
         control={<Switch color="primary" />}
-        label={service.activated ? 'Active mode' : 'Edit mode'}
+        label={service.activated ? 'Active' : 'Editing'}
         labelPlacement="top"
       />
-    </SettingsItem>
+    </Box>
   );
 }

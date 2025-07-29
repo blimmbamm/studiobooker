@@ -5,6 +5,7 @@ import {
   ListItemText,
   Skeleton,
   IconButton,
+  ListItemTextProps,
 } from '@mui/material';
 import { NavLink, To } from 'react-router-dom';
 import { grey } from '@mui/material/colors';
@@ -30,6 +31,7 @@ type Props<T extends { id: number }> = {
     handleReset: () => void
   ) => React.ReactNode;
   secondaryActionIcon?: React.ReactNode;
+  listItemTextProps?: (item: T) => ListItemTextProps;
 };
 
 export function NavigationList<T extends { id: number }>({
@@ -44,6 +46,7 @@ export function NavigationList<T extends { id: number }>({
   onClick,
   secondaryActionRender,
   secondaryActionIcon,
+  listItemTextProps,
 }: Props<T>) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -111,6 +114,7 @@ export function NavigationList<T extends { id: number }>({
             <ListItemText
               slotProps={{ primary: { noWrap: true } }}
               primary={String(item[labelProperty])}
+              {...listItemTextProps?.(item)}
             />
             {isActive(item) && (
               <NavigateNextIcon

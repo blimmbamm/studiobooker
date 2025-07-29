@@ -23,6 +23,7 @@ export default function ServiceCategory({
       select
       value={value}
       onChange={handleChange}
+      disabled={service.activated}
     >
       {serviceCategories?.map((c) => (
         <MenuItem key={c.id} value={c.id}>

@@ -40,6 +40,7 @@ export default function ServiceDuration({ service }: { service: Service }) {
       }}
       error={hasError('duration')}
       helperText={errorMessage('duration')}
+      disabled={service.activated}
     />
   );
 }

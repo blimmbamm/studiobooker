@@ -44,10 +44,10 @@ export default function ServiceActivationValidationProvider({
       new Map(prevMap).set(key, message || 'Invalid value')
     );
 
-    scrollTargetRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    // scrollTargetRef.current?.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'start',
+    // });
   }
 
   function resetError(key: keyof Service) {

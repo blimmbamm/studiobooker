@@ -95,6 +95,12 @@ export default function ServicesNavigation() {
           fallbackMessage={
             selectedCategory ? 'No services yet.' : 'Select category.'
           }
+          listItemTextProps={(service) => ({
+            sx: {
+              fontStyle: service.activated ? 'normal' : 'italic',
+              opacity: service.activated ? 1 : 0.5,
+            },
+          })}
         />
       </SideNavSection>
     </>

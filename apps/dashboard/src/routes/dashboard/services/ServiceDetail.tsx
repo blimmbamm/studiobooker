@@ -6,6 +6,7 @@ import ServiceStaff from './components/staff/ServiceStaff';
 import ServiceSettings from './components/settings/ServiceSettings';
 import { ServiceProperties } from './components/properties/ServiceProperties';
 import ServiceActivationValidationProvider from '../../../contexts/ServiceActivationValidationContext';
+import ServiceStatus from './components/status/ServiceStatus';
 
 export default function ServiceDetail() {
   const serviceId = useNumericParam('id');
@@ -22,6 +23,7 @@ export default function ServiceDetail() {
 
   return (
     <ServiceActivationValidationProvider service={service}>
+      <ServiceStatus service={service} />
       <ServiceProperties service={service} />
       <Divider />
       <ServiceStaff service={service} />

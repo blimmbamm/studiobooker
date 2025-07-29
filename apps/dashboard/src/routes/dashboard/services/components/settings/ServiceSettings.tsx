@@ -1,7 +1,6 @@
 import { SettingSkeleton, TableSection } from '@studiobooker/utils';
 import { ServiceStructured } from '../../../../../types/service';
 import { SxProps } from '@mui/material';
-import ManageServiceActivation from './ManageServiceActivation';
 import RemoveService from './RemoveService';
 
 type Props = {
@@ -20,7 +19,6 @@ export default function ServiceSettings({ service, sx }: Props) {
       )}
       {service && (
         <>
-          <ManageServiceActivation service={service} />
           <RemoveService service={service} />
         </>
       )}
