@@ -5,15 +5,18 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import { TimePicker } from '@studiobooker/utils';
 import { WorkingTime } from '../../../../../types/working-time';
 import { useStaffWorkingTime } from '../../hooks/useStaffWorkingTime';
+import { Staff } from '../../../../../types/staff';
 
-export default function StaffWorkingTime(props: {
+type Props = {
   workingTime: WorkingTime;
-  staffId: number;
-}) {
-  const { workingTime, staffId } = props;
+  staff: Staff;
+};
 
+export default function StaffWorkingTime({ staff, workingTime }: Props) {
   const { time, handleToggleWorkingTime, handleChangeStart, handleChangeEnd } =
-    useStaffWorkingTime({ staffId, workingTime });
+    useStaffWorkingTime({ staffId: staff.id, workingTime });
+
+  const workingTimeDisabled = !workingTime.activated || staff.activated;
 
   return (
     <>
@@ -22,6 +25,7 @@ export default function StaffWorkingTime(props: {
           onClick={() =>
             handleToggleWorkingTime({ isActivated: workingTime.activated })
           }
+          disabled={staff.activated}
         >
           {workingTime.activated ? (
             <CheckBoxOutlinedIcon />
@@ -34,12 +38,12 @@ export default function StaffWorkingTime(props: {
       <TimePicker
         value={time.start}
         onChange={handleChangeStart}
-        disabled={!workingTime.activated}
+        disabled={workingTimeDisabled}
       />
       <TimePicker
         value={time.end}
         onChange={handleChangeEnd}
-        disabled={!workingTime.activated}
+        disabled={workingTimeDisabled}
       />
     </>
   );

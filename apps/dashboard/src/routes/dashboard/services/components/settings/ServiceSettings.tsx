@@ -1,4 +1,4 @@
-import { SettingSkeleton, TableSection } from '@studiobooker/utils';
+import { SettingsSection } from '@studiobooker/utils';
 import { ServiceStructured } from '../../../../../types/service';
 import { SxProps } from '@mui/material';
 import RemoveService from './RemoveService';
@@ -10,18 +10,8 @@ type Props = {
 
 export default function ServiceSettings({ service, sx }: Props) {
   return (
-    <TableSection title="Settings" columns={service ? 2 : 1} sx={sx}>
-      {!service && (
-        <>
-          <SettingSkeleton />
-          <SettingSkeleton />
-        </>
-      )}
-      {service && (
-        <>
-          <RemoveService service={service} />
-        </>
-      )}
-    </TableSection>
+    <SettingsSection>
+      <RemoveService service={service} />
+    </SettingsSection>
   );
 }

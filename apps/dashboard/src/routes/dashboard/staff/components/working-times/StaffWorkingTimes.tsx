@@ -28,7 +28,7 @@ export default function StaffWorkingHours({ staff, sx }: Props) {
         ))}
       {staff &&
         staff.workingTimes.map((wt) => (
-          <StaffWorkingTime key={wt.id} workingTime={wt} staffId={staff.id} />
+          <StaffWorkingTime key={wt.id} workingTime={wt} staff={staff} />
         ))}
     </TableSection>
   );

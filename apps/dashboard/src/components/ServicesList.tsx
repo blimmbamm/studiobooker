@@ -13,6 +13,8 @@ export type ServicesListProps<T extends ServiceCategoryStructured> = {
   categoryItemIcon?: (category: T) => ReactNode;
   serviceItemIcon?: (service: T['services'][number]) => ReactNode;
   serviceIsSelected?: (service: T['services'][number]) => boolean;
+  serviceIsDisabled?: (service: T['services'][number]) => boolean;
+  categoryIsDisabled?: (category: T) => boolean;
   listProps?: ListProps;
 };
 

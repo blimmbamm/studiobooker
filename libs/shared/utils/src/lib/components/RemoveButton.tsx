@@ -1,13 +1,18 @@
-import { Button } from '@mui/material';
+import { Button, ButtonProps } from '@mui/material';
 
 import { ConfirmDialog, ConfirmDialogProps } from './ConfirmDialog';
 
 type Props = Pick<
   ConfirmDialogProps<typeof Button>,
   'onConfirm' | 'dialogTitle' | 'dialogMessage'
->;
+> & { buttonProps?: ButtonProps };
 
-export function RemoveButton({ onConfirm, dialogTitle, dialogMessage }: Props) {
+export function RemoveButton({
+  onConfirm,
+  dialogTitle,
+  dialogMessage,
+  buttonProps,
+}: Props) {
   return (
     <ConfirmDialog
       triggerComponent={Button}
@@ -15,6 +20,7 @@ export function RemoveButton({ onConfirm, dialogTitle, dialogMessage }: Props) {
         variant: 'outlined',
         color: 'error',
         sx: { backgroundColor: (theme) => theme.palette.error.light },
+        ...buttonProps,
       }}
       onConfirm={onConfirm}
       dialogTitle={dialogTitle}

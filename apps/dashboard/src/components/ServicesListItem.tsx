@@ -29,6 +29,8 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
   categoryItemIcon,
   serviceItemIcon,
   serviceIsSelected,
+  serviceIsDisabled,
+  categoryIsDisabled,
 }: ServicesListItemProps<T>) {
   const { name, services } = serviceCategory;
 
@@ -81,7 +83,10 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
         }}
       >
         {categoryAsItemButton ? (
-          <ListItemButton onClick={handleClickCategory}>
+          <ListItemButton
+            onClick={handleClickCategory}
+            disabled={categoryIsDisabled?.(serviceCategory)}
+          >
             {categoryItemContent}
           </ListItemButton>
         ) : (
@@ -95,6 +100,7 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
               <ListItemButton
                 onClick={() => onClickService?.(s)}
                 selected={serviceIsSelected?.(s)}
+                disabled={serviceIsDisabled?.(s)}
               >
                 {serviceItemIcon && (
                   <ListItemIcon>{serviceItemIcon(s)}</ListItemIcon>

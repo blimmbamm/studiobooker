@@ -6,8 +6,28 @@ import {
 import { EditStaffDto } from '../types/staff';
 import { client } from './client';
 
-export async function getAllStaff(serviceId?: number) {
-  const path = `personnel${serviceId ? `?serviceId=${serviceId}` : ''}`;
+function toSearchParams(params?: Record<string, any>): URLSearchParams {
+  if (!params) return new URLSearchParams();
+
+  const stringParams: Record<string, string> = {};
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      stringParams[key] = String(value);
+    }
+  });
+
+  return new URLSearchParams(stringParams);
+}
+
+export type GetAllStaffSearchParams = {
+  serviceId?: number;
+  activated?: boolean;
+};
+
+export async function getAllStaff(searchParams?: GetAllStaffSearchParams) {
+  const urlSearchParams = new URLSearchParams(toSearchParams(searchParams));
+  const path = `personnel?${urlSearchParams}`;
   const staff = await client.get<ApiStaff[]>(path);
   return staff.map((s) => mapApiToStaff(s));
 }

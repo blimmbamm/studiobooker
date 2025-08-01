@@ -15,6 +15,7 @@ type StaffListProps<T extends Staff> = {
   onClickStaff?: (staff: T) => void;
   staffItemIcon?: (staff: T) => ReactNode;
   staffIsSelected?: (staff: T) => boolean;
+  staffIsDisabled?: (staff: T) => boolean;
 };
 
 export default function StaffList<T extends Staff>({
@@ -22,6 +23,7 @@ export default function StaffList<T extends Staff>({
   onClickStaff,
   staffItemIcon,
   staffIsSelected,
+  staffIsDisabled,
 }: StaffListProps<T>) {
   return (
     <List dense disablePadding sx={{ backgroundColor: grey[100] }}>
@@ -30,6 +32,7 @@ export default function StaffList<T extends Staff>({
           <ListItemButton
             onClick={() => onClickStaff?.(s)}
             selected={staffIsSelected?.(s)}
+            disabled={staffIsDisabled?.(s)}
           >
             {staffItemIcon && <ListItemIcon>{staffItemIcon(s)}</ListItemIcon>}
             <ListItemText

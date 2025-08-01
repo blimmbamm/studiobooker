@@ -2,10 +2,12 @@ import { PropertiesTableProperty } from '@studiobooker/utils';
 import { Staff } from '../../../../../types/staff';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 
-export default function StaffName(props: { staff: Staff }) {
+type Props = { staff: Staff };
+
+export default function StaffName({ staff }: Props) {
   const { value, showError, handleChange, checkErrors, helperText } =
     useStaffProperty({
-      entity: props.staff,
+      entity: staff,
       property: 'name',
       parseProperty: (value) => value,
       submitValueIf: (value) => Boolean(value),
@@ -20,6 +22,8 @@ export default function StaffName(props: { staff: Staff }) {
       error={showError}
       helperText={helperText}
       onBlur={checkErrors}
+      disabled={staff.activated}
+      // tooltip={staff.activated && 'Can only be edited with inactive status.'}
     />
   );
 }

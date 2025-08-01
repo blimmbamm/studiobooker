@@ -19,3 +19,5 @@ export * from './SettingSkeleton';
 export * from './RemoveButton';
 export * from './TimePickerSkeleton';
 export * from './ListSkeleton';
+export * from './SettingsSection';
+export * from './StatusSection';

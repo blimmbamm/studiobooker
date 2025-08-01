@@ -18,7 +18,7 @@ export function Section({
   return (
     <Box component="section" sx={sx}>
       <SectionTitle title={title} />
-      <Box padding={2} {...contentBoxProps}>
+      <Box paddingInline={2} {...contentBoxProps}>
         {children}
       </Box>
     </Box>

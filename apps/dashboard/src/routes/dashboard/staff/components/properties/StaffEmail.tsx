@@ -6,10 +6,12 @@ import {
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 import { Staff } from '../../../../../types/staff';
 
-export default function StaffEmail(props: { staff: Staff }) {
+type Props = { staff: Staff };
+
+export default function StaffEmail({ staff }: Props) {
   const { value, handleChange, showError, checkErrors, helperText } =
     useStaffProperty({
-      entity: props.staff,
+      entity: staff,
       property: 'email',
       parseProperty: (value) => value,
       updateValueIf: isValidPartialEmailOrEmpty,
@@ -25,6 +27,7 @@ export default function StaffEmail(props: { staff: Staff }) {
       onBlur={checkErrors}
       error={showError}
       helperText={helperText}
+      disabled={staff.activated}
     />
   );
 }

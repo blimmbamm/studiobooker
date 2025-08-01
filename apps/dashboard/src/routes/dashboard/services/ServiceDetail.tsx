@@ -24,6 +24,7 @@ export default function ServiceDetail() {
   return (
     <ServiceActivationValidationProvider service={service}>
       <ServiceStatus service={service} />
+      <Divider />
       <ServiceProperties service={service} />
       <Divider />
       <ServiceStaff service={service} />

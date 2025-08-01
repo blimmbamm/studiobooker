@@ -20,9 +20,10 @@ export default function AppointmentStaffSelection({
   onSelectStaff,
   ...stepNavigationProps
 }: Props) {
-  const { staff, noStaff, isError, isLoading } = useAllStaff(
-    selectedService?.id
-  );
+  const { staff, noStaff, isError, isLoading } = useAllStaff({
+    serviceId: selectedService.id,
+    activated: true,
+  });
 
   if (isError) return <FallbackMessage message="Failed to load staff." />;
 

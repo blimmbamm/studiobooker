@@ -2,9 +2,11 @@ import { PropertiesTableProperty } from '@studiobooker/utils';
 import { Staff } from '../../../../../types/staff';
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 
-export default function StaffNotes(props: { staff: Staff }) {
+type Props = { staff: Staff };
+
+export default function StaffNotes({ staff }: Props) {
   const { value, handleChange } = useStaffProperty({
-    entity: props.staff,
+    entity: staff,
     property: 'notes',
     parseProperty: (value) => value,
   });
@@ -15,6 +17,7 @@ export default function StaffNotes(props: { staff: Staff }) {
       multiline
       value={value}
       onChange={handleChange}
+      disabled={staff.activated}
     />
   );
 }

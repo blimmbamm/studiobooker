@@ -5,6 +5,7 @@ import {
   addStaff,
   editStaff,
   getAllStaff,
+  GetAllStaffSearchParams,
   getStaff,
   removeStaff,
 } from '../api/staff.api';
@@ -24,15 +25,20 @@ export const StaffQueryKeys = {
     'withService',
     serviceId,
   ],
+  STAFF_ALL_BY_PARAMS: (searchParams: GetAllStaffSearchParams) => [
+    'staff',
+    'all',
+    JSON.stringify(searchParams),
+  ],
   STAFF_DETAIL: (id: number) => ['staff', id],
 };
 
-export function useAllStaff(serviceId?: number) {
+export function useAllStaff(searchParams?: GetAllStaffSearchParams) {
   const { data: staff, ...query } = useQuery({
-    queryKey: serviceId
-      ? StaffQueryKeys.STAFF_ALL_WITH_SERVICE(serviceId)
+    queryKey: searchParams
+      ? StaffQueryKeys.STAFF_ALL_BY_PARAMS(searchParams)
       : StaffQueryKeys.STAFF_ALL,
-    queryFn: () => getAllStaff(serviceId),
+    queryFn: () => getAllStaff(searchParams),
   });
 
   return {

@@ -68,6 +68,8 @@ export default function StaffServices({ staff, sx }: Props) {
           onClickService={(service) =>
             handleToggleServiceSelection(staff, service)
           }
+          serviceIsDisabled={() => staff.activated}
+          categoryIsDisabled={() => staff.activated}
         />
       )}
     </Section>

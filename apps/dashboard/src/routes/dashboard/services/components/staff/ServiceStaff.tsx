@@ -50,6 +50,7 @@ export default function ServiceStaff({ service }: Props) {
           onClickStaff={(staff) =>
             handleToggleStaffQualification(service, staff)
           }
+          staffIsDisabled={() => service.activated}
         />
       )}
     </Section>

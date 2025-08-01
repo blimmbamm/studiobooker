@@ -6,6 +6,7 @@ import StaffServices from './components/services/StaffServices';
 import StaffWorkingTimes from './components/working-times/StaffWorkingTimes';
 import StaffSettings from './components/settings/StaffSettings';
 import StaffProperties from './components/properties/StaffProperties';
+import StaffStatus from './components/status/StaffStatus';
 
 export default function StaffDetail() {
   const staffId = useNumericParam('id');
@@ -22,6 +23,8 @@ export default function StaffDetail() {
 
   return (
     <>
+      <StaffStatus staff={staff} />
+      <Divider />
       <StaffProperties staff={staff} />
       <Divider />
       <StaffWorkingTimes staff={staff} />
