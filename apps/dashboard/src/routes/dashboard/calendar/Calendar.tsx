@@ -9,9 +9,19 @@ import DayView from './DayView';
 import { useCalendarData } from './hooks/useCalendarData';
 import CalendarLoadingOverlay from './components/CalendarLoadingOverlay';
 import ScrollToAnchor from './components/ScrollToAnchor';
+import AppointmentDetailsDialog from './components/calendar-appointment/AppointmentDetailsDialog';
+import { useState } from 'react';
+import { Appointment } from '../../../types/appointment';
 
 export default function Calendar() {
   const { calendarDays, isFetching } = useCalendarData(); // this could use useViewMode etc. itself
+
+  const [selectedAppointment, setSelectedAppointment] =
+    useState<Appointment | null>(null);
+
+  function handleClickAppointment(appointment: Appointment) {
+    setSelectedAppointment(appointment);
+  }
 
   return (
     <>
@@ -39,13 +49,21 @@ export default function Calendar() {
 
             {/* Actual calendar/appointment data: */}
             {calendarDays.map((day) => (
-              <DayView key={day.dateStr} day={day} />
+              <DayView
+                key={day.dateStr}
+                day={day}
+                onClickAppointment={handleClickAppointment}
+              />
             ))}
 
             {/* Element that gets scrolled into view, 
                 depending on current time: */}
             <ScrollToAnchor />
           </Box>
+          <AppointmentDetailsDialog
+            appointment={selectedAppointment}
+            onClose={() => setSelectedAppointment(null)}
+          />
         </>
       )}
     </>

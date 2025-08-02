@@ -5,6 +5,7 @@ import { Staff } from './staff';
 export type Appointment = {
   id: number;
   start: Dayjs;
+  end: Dayjs;
   startNum: number;
   duration: number;
   confirmed: boolean;

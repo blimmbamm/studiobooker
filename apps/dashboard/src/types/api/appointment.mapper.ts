@@ -8,5 +8,6 @@ export function mapApiToAppointment(data: ApiAppointment): Appointment {
     ...data,
     startNum: start.hour() * 60 + start.minute(),
     start,
+    end: start.add(data.duration, 'minutes'),
   };
 }

@@ -3,9 +3,13 @@ import { Appointment } from '../../../../../types/appointment';
 import { useStaffColors } from '../../contexts/StaffColorContext';
 import { Staff } from '../../../../../types/staff';
 
-type Props = { staff: Staff; appointment: Appointment };
+type Props = { staff: Staff; appointment: Appointment; onClick: () => void };
 
-export default function CalendarAppointment({ staff, appointment }: Props) {
+export default function CalendarAppointment({
+  staff,
+  appointment,
+  onClick,
+}: Props) {
   const staffColorMap = useStaffColors();
 
   return (
@@ -28,6 +32,7 @@ export default function CalendarAppointment({ staff, appointment }: Props) {
           overflow: 'hidden',
           display: 'block',
         }}
+        onClick={onClick}
       >
         <Typography noWrap fontSize={'0.8rem'}>
           {appointment.title}
