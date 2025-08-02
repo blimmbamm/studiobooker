@@ -3,12 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useAllStaff } from '../../../../hooks/staff.queries';
 import { Staff } from '../../../../types/staff';
+import { useAlert } from '@studiobooker/utils';
 
-export function useCalendarStaffSelection() {
+export function useCalendarStaffSelection(maxSelectionSize: number = 10) {
   const [params, setParams] = useSearchParams();
   const { staff } = useAllStaff();
 
   const staffParams = params.get('staff');
+
+  const alert = useAlert();
 
   // This list can include NaNs:
   const parsedStaffIds = staffParams ? staffParams.split(',').map(Number) : [];
@@ -28,6 +31,14 @@ export function useCalendarStaffSelection() {
   }
 
   function toggleStaff(id: number) {
+    if (!staffIds?.includes(id) && staffIds?.length === maxSelectionSize) {
+      alert.show({
+        severity: 'info',
+        message: `Cannot select more than ${maxSelectionSize} staff members.`,
+      });
+      return;
+    }
+
     setParams((pParams) => {
       const pStaffParams = pParams.get('staff');
 

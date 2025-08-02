@@ -1,7 +1,18 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useCalendarStaffSelection } from '../hooks/useCalendarStaffSelection';
 
-const COLORS = ['#FF5733', '#33A1FF', '#3b944bff', '#FFC300', '#8E44AD'];
+const COLORS = [
+  '#EF5350', // Medium Red
+  '#FFA726', // Orange
+  '#FFD54F', // Warm Yellow
+  '#9CCC65', // Leaf Green
+  '#4DB6AC', // Teal
+  '#4FC3F7', // Sky Blue
+  '#64B5F6', // Light Blue
+  '#BA68C8', // Medium Purple
+  '#F06292', // Rosy Pink
+  '#BDBDBD', // Medium Gray
+];
 
 type StaffColorMap = Record<number, string>;
 
