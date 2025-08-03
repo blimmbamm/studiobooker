@@ -1,48 +1,91 @@
 import { useMutation } from '@studiobooker/utils';
-import { AddAppointmentDto } from '../types/appointment';
-import { addAppointment } from '../api/appointment.api';
+import {
+  AddAppointmentDto,
+  Appointment,
+  UpdateAppointmentDto,
+} from '../types/appointment';
+import {
+  addAppointment,
+  cancelAppointment,
+  updateAppointment,
+} from '../api/appointment.api';
 import { QueryKey, useQueryClient } from '@tanstack/react-query';
 
-export function useAddAppointment({ onSuccess }: { onSuccess?: () => void }) {
+function useInvalidateAppointmentQueries() {
   const queryClient = useQueryClient();
+
+  function invalidateAppointmentQueries(appointment: Appointment) {
+    /** Invalidate fitting calendar day queries:
+     * - dto.start must be included in timeRange
+     * - dto.staffId must be included in the staffIds
+     */
+    const fromLastMonday = appointment.start
+      .day(appointment.start.day() === 0 ? -6 : 1)
+      .format('YYYYMMDD');
+    const fromToday = appointment.start.format('YYYYMMDD');
+
+    queryClient.invalidateQueries({
+      predicate: ({ queryKey }: { queryKey: QueryKey }) => {
+        if (
+          Array.isArray(queryKey) &&
+          typeof queryKey[0] === 'object' &&
+          queryKey[0] !== null &&
+          'from' in queryKey[0] &&
+          'to' in queryKey[0] &&
+          Array.isArray(queryKey[1])
+        ) {
+          const [dateRange, staffIds] = queryKey as [
+            { from: string; to: string },
+            number[]
+          ];
+
+          return (
+            [fromLastMonday, fromToday].includes(dateRange.from) &&
+            !!appointment.personnel &&
+            staffIds.includes(appointment.personnel?.id)
+          );
+        }
+
+        return false;
+      },
+    });
+  }
+
+  return invalidateAppointmentQueries;
+}
+
+export function useAddAppointment({ onSuccess }: { onSuccess?: () => void }) {
+  const invalidateAppointmentQueries = useInvalidateAppointmentQueries();
+
   return useMutation({
     mutationFn: ({ dto }: { dto: AddAppointmentDto }) => addAppointment(dto),
-    onSuccess: (_, { dto }) => {
+    onSuccess: (appointment) => {
       onSuccess?.();
 
-      /** Invalidate fitting calendar day queries:
-       * - dto.start must be included in timeRange
-       * - dto.staffId must be included in the staffIds
-       */
-      const fromLastMonday = dto.start
-        .day(dto.start.day() === 0 ? -6 : 1)
-        .format('YYYYMMDD');
-      const fromToday = dto.start.format('YYYYMMDD');
+      invalidateAppointmentQueries(appointment);
+    },
+  });
+}
 
-      queryClient.invalidateQueries({
-        predicate: ({ queryKey }: { queryKey: QueryKey }) => {
-          if (
-            Array.isArray(queryKey) &&
-            typeof queryKey[0] === 'object' &&
-            queryKey[0] !== null &&
-            'from' in queryKey[0] &&
-            'to' in queryKey[0] &&
-            Array.isArray(queryKey[1])
-          ) {
-            const [dateRange, staffIds] = queryKey as [
-              { from: string; to: string },
-              number[]
-            ];
+export function useUpdateAppointment() {
+  const invalidateAppointmentQueries = useInvalidateAppointmentQueries();
 
-            return (
-              [fromLastMonday, fromToday].includes(dateRange.from) &&
-              staffIds.includes(dto.staffId)
-            );
-          }
+  return useMutation({
+    mutationFn: ({ id, dto }: { id: number; dto: UpdateAppointmentDto }) =>
+      updateAppointment(id, dto),
+    onSuccess: (appointment) => {
+      invalidateAppointmentQueries(appointment);
+    },
+  });
+}
 
-          return false;
-        },
-      });
+export function useCancelAppointment() {
+  const invalidateAppointmentQueries = useInvalidateAppointmentQueries();
+
+  return useMutation({
+    mutationFn: ({ id }: { id: number }) => cancelAppointment(id),
+    onSuccess: (appointment) => {
+      invalidateAppointmentQueries(appointment);
     },
   });
 }

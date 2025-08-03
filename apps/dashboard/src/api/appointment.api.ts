@@ -9,7 +9,7 @@ import { CalendarDay } from '../types/calendar-day';
 import { client } from './client';
 import { ApiAvailableAppointmentSlots } from '../types/api/available-appointment-slots';
 import { mapApiToAvailableAppointmentSlots } from '../types/api/available-appointment-slots.mapper';
-import { AddAppointmentDto } from '../types/appointment';
+import { AddAppointmentDto, UpdateAppointmentDto } from '../types/appointment';
 import { ApiAppointment } from '../types/api/appointment';
 import { mapApiToAppointment } from '../types/api/appointment.mapper';
 
@@ -46,6 +46,25 @@ export async function addAppointment(addAppointmentDto: AddAppointmentDto) {
     'appointment',
     addAppointmentDto
   );
+
+  return mapApiToAppointment(appointment);
+}
+
+export async function updateAppointment(id: number, dto: UpdateAppointmentDto) {
+  const appointment = await client.patch<ApiAppointment>(
+    `appointment/${id}`,
+    dto
+  );
+
+  return mapApiToAppointment(appointment);
+}
+
+export async function cancelAppointment(id: number) {
+  const appointment = await client.patch<ApiAppointment>(
+    `appointment/cancel/${id}`,
+    {}
+  );
+
   return mapApiToAppointment(appointment);
 }
 

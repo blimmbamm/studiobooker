@@ -1,3 +1,4 @@
+import { AppointmentStatus } from '../appointment';
 import { ApiService } from './service';
 import { ApiStaff } from './staff';
 
@@ -5,7 +6,7 @@ export type ApiAppointment = {
   id: number;
   start: string;
   duration: number;
-  confirmed: boolean;
+  status: AppointmentStatus;
   personnel?: ApiStaff;
   service?: ApiService;
   customer: string | null;

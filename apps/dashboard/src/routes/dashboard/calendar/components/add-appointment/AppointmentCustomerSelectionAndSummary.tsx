@@ -13,6 +13,7 @@ import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
 import { useAddAppointment } from '../../../../../hooks/appointment.queries';
+import { AppointmentStatus } from '../../../../../types/appointment';
 
 type Props = {
   selectedService: Service;
@@ -60,7 +61,7 @@ export default function AppointmentCustomerSelectionAndSummary({
         dto: {
           start: selectedDate,
           duration: selectedService.duration,
-          confirmed: false,
+          status: AppointmentStatus.CONFIRMED,
           title: `Appt: ${selectedService.title}`, // could be extended
           notes,
           customerName,

@@ -43,11 +43,11 @@ export function ConfirmDialog<P>({
         onClick={() => {
           setOpen(true);
           onClickTrigger?.();
-        }}        
+        }}
       >
         {children}
       </TriggerComponent>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth="xs">
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
           <DialogContentText>{dialogMessage}</DialogContentText>

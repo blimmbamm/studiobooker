@@ -1,8 +1,9 @@
 import { Box, Button, Dialog, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
+import { ConfirmDialog, PropertiesTableProperty } from '@studiobooker/utils';
 import { Appointment } from '../../../../../types/appointment';
-import { PropertiesTableProperty } from '@studiobooker/utils';
+import { useCancelAppointment } from '../../../../../hooks/appointment.queries';
 
 type Props = { appointment: Appointment | null; onClose: () => void };
 
@@ -10,8 +11,16 @@ export default function AppointmentDetailsDialog({
   appointment,
   onClose,
 }: Props) {
+  // TODO: The handler could be moved into the useCancelAppointment hook...
+  const { mutate } = useCancelAppointment();
+
+  function handleCancelAppointment(appointment: Appointment) {
+    mutate({
+      id: appointment.id,
+    });
+  }
+
   if (!appointment) return null;
-  console.log(appointment);
 
   return (
     <Dialog
@@ -75,8 +84,23 @@ export default function AppointmentDetailsDialog({
         />
       </Box>
       <Box display={'flex'} justifyContent={'flex-end'} gap={2}>
-        <Button variant="contained">Cancel appointment</Button>
-        <Button variant="contained">Create follow-up</Button>
+        <ConfirmDialog
+          triggerComponent={Button}
+          triggerProps={{ variant: 'contained' }}
+          dialogTitle="Cancel appointment?"
+          dialogMessage={
+            appointment.customer
+              ? `Cancelling the appointment will send a notification 
+                to the customer. Continue?`
+              : `Appointment will be removed from calendar. Continue?`
+          }
+          onConfirm={() => handleCancelAppointment(appointment)}
+        >
+          Cancel appointment
+        </ConfirmDialog>
+        <Button variant="contained" disabled>
+          Create follow-up
+        </Button>
       </Box>
     </Dialog>
   );

@@ -2,13 +2,19 @@ import { Dayjs } from 'dayjs';
 import { Service } from './service';
 import { Staff } from './staff';
 
+export enum AppointmentStatus {
+  PENDING = 'pending',
+  CONFIRMED = 'confirmed',
+  CANCELLED = 'cancelled',
+}
+
 export type Appointment = {
   id: number;
   start: Dayjs;
   end: Dayjs;
   startNum: number;
   duration: number;
-  confirmed: boolean;
+  status: AppointmentStatus;
   personnel?: Staff;
   service?: Service;
   customer: string | null;
@@ -19,7 +25,7 @@ export type Appointment = {
 export type AddAppointmentDto = {
   start: Dayjs;
   duration: number;
-  confirmed: boolean;
+  status: AppointmentStatus;
   title: string;
   notes: string;
   customerName: string;
@@ -27,3 +33,5 @@ export type AddAppointmentDto = {
   serviceId: number;
   staffId: number;
 };
+
+export type UpdateAppointmentDto = Partial<AddAppointmentDto>;
