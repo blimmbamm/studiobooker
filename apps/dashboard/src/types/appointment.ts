@@ -17,7 +17,8 @@ export type Appointment = {
   status: AppointmentStatus;
   personnel?: Staff;
   service?: Service;
-  customer: string | null;
+  customerName: string | null;
+  customerEmail: string | null;
   title: string;
   notes: string | null;
 };

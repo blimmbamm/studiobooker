@@ -68,6 +68,15 @@ export async function cancelAppointment(id: number) {
   return mapApiToAppointment(appointment);
 }
 
+export async function confirmAppointment(id: number) {
+  const appointment = await client.patch<ApiAppointment>(
+    `appointment/confirm/${id}`,
+    {}
+  );
+
+  return mapApiToAppointment(appointment);
+}
+
 export function getPlaceholderCalendarData({
   from,
   to,

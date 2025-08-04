@@ -9,7 +9,8 @@ export type ApiAppointment = {
   status: AppointmentStatus;
   personnel?: ApiStaff;
   service?: ApiService;
-  customer: string | null;
+  customerName: string | null;
+  customerEmail: string | null;
   title: string;
   notes: string | null;
 };

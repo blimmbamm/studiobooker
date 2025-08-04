@@ -7,6 +7,7 @@ import {
 import {
   addAppointment,
   cancelAppointment,
+  confirmAppointment,
   updateAppointment,
 } from '../api/appointment.api';
 import { QueryKey, useQueryClient } from '@tanstack/react-query';
@@ -88,4 +89,25 @@ export function useCancelAppointment() {
       invalidateAppointmentQueries(appointment);
     },
   });
+}
+
+type UseConfirmAppointmentParams = { onSuccess?: () => void };
+export function useConfirmAppointment({
+  onSuccess,
+}: UseConfirmAppointmentParams) {
+  const invalidateAppointmentQueries = useInvalidateAppointmentQueries();
+
+  const mutation = useMutation({
+    mutationFn: ({ id }: { id: number }) => confirmAppointment(id),
+    onSuccess: (appointment) => {
+      onSuccess?.();
+      invalidateAppointmentQueries(appointment);
+    },
+  });
+
+  function handleConfirmAppointment(appointment: Appointment) {
+    mutation.mutate({ id: appointment.id });
+  }
+
+  return { ...mutation, handleConfirmAppointment };
 }

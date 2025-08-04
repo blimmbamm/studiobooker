@@ -62,7 +62,7 @@ export default function CalendarAppointment({
           {appointment.title}
         </Typography>
         <Typography noWrap fontStyle={'italic'} fontSize={'0.8rem'}>
-          {appointment.customer}
+          {appointment.customerName}
         </Typography>
       </ButtonBase>
     </Box>

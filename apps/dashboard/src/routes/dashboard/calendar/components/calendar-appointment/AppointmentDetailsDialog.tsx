@@ -2,8 +2,14 @@ import { Box, Button, Dialog, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { ConfirmDialog, PropertiesTableProperty } from '@studiobooker/utils';
-import { Appointment } from '../../../../../types/appointment';
-import { useCancelAppointment } from '../../../../../hooks/appointment.queries';
+import {
+  Appointment,
+  AppointmentStatus,
+} from '../../../../../types/appointment';
+import {
+  useCancelAppointment,
+  useConfirmAppointment,
+} from '../../../../../hooks/appointment.queries';
 
 type Props = { appointment: Appointment | null; onClose: () => void };
 
@@ -12,13 +18,20 @@ export default function AppointmentDetailsDialog({
   onClose,
 }: Props) {
   // TODO: The handler could be moved into the useCancelAppointment hook...
+  // just like for confirming appointment
   const { mutate } = useCancelAppointment();
 
   function handleCancelAppointment(appointment: Appointment) {
     mutate({
       id: appointment.id,
     });
+
+    onClose();
   }
+
+  const { handleConfirmAppointment } = useConfirmAppointment({
+    onSuccess: onClose,
+  });
 
   if (!appointment) return null;
 
@@ -75,7 +88,12 @@ export default function AppointmentDetailsDialog({
         <PropertiesTableProperty
           asTextField={false}
           name="Customer"
-          propertyValue={appointment.customer || ''}
+          propertyValue={appointment.customerName || ''}
+        />
+        <PropertiesTableProperty
+          asTextField={false}
+          name="Customer email"
+          propertyValue={appointment.customerEmail || ''}
         />
         <PropertiesTableProperty
           asTextField={false}
@@ -84,22 +102,30 @@ export default function AppointmentDetailsDialog({
         />
       </Box>
       <Box display={'flex'} justifyContent={'flex-end'} gap={2}>
+        {appointment.status === AppointmentStatus.PENDING && (
+          <Button
+            variant="contained"
+            onClick={() => handleConfirmAppointment(appointment)}
+          >
+            Confirm
+          </Button>
+        )}
         <ConfirmDialog
           triggerComponent={Button}
           triggerProps={{ variant: 'contained' }}
           dialogTitle="Cancel appointment?"
           dialogMessage={
-            appointment.customer
+            appointment.customerEmail
               ? `Cancelling the appointment will send a notification 
                 to the customer. Continue?`
               : `Appointment will be removed from calendar. Continue?`
           }
           onConfirm={() => handleCancelAppointment(appointment)}
         >
-          Cancel appointment
+          Cancel
         </ConfirmDialog>
         <Button variant="contained" disabled>
-          Create follow-up
+          Follow-up
         </Button>
       </Box>
     </Dialog>
