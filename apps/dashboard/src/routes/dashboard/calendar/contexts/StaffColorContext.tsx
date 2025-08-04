@@ -2,16 +2,27 @@ import React, { createContext, useContext, useMemo } from 'react';
 import { useCalendarStaffSelection } from '../hooks/useCalendarStaffSelection';
 
 const COLORS = [
-  '#EF5350', // Medium Red
-  '#FFA726', // Orange
-  '#FFD54F', // Warm Yellow
-  '#9CCC65', // Leaf Green
-  '#4DB6AC', // Teal
-  '#4FC3F7', // Sky Blue
-  '#64B5F6', // Light Blue
-  '#BA68C8', // Medium Purple
-  '#F06292', // Rosy Pink
-  '#BDBDBD', // Medium Gray
+  '#f36c60', // Soft Coral Red
+  '#FFB74D', // Moderate Orange
+  '#dbc777', // Mellow Yellow
+  '#AED581', // Balanced Green
+  '#4DD0B0', // Soft Teal
+  '#81D4FA', // Calm Sky Blue
+  '#90CAF9', // Light Blue
+  '#b39ddb', // Light Purple
+  '#F48FB1', // Dusty Pink
+  '#D6D6D6', // Gentle Gray
+
+  // '#F28B82', // Soft Red
+  // '#FBBC04', // Light Orange
+  // '#FFF475', // Soft Yellow
+  // '#CCFF90', // Light Green
+  // '#A7FFEB', // Mint
+  // '#CBF0F8', // Light Cyan
+  // '#AECBFA', // Light Blue
+  // '#D7AEFB', // Lavender
+  // '#FDCFE8', // Pink
+  // '#E8EAED', // Light Gray
 ];
 
 type StaffColorMap = Record<number, string>;

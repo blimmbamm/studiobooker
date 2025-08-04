@@ -1,5 +1,8 @@
-import { Box, ButtonBase, Typography } from '@mui/material';
-import { Appointment } from '../../../../../types/appointment';
+import { Box, ButtonBase, SxProps, Typography } from '@mui/material';
+import {
+  Appointment,
+  AppointmentStatus,
+} from '../../../../../types/appointment';
 import { useStaffColors } from '../../contexts/StaffColorContext';
 import { Staff } from '../../../../../types/staff';
 
@@ -11,6 +14,27 @@ export default function CalendarAppointment({
   onClick,
 }: Props) {
   const staffColorMap = useStaffColors();
+
+  const staffColor = staffColorMap[staff.id];
+
+  const appointmentBackgroundSx: () => SxProps | undefined = () => {
+    switch (appointment.status) {
+      case AppointmentStatus.CONFIRMED:
+        return { bgcolor: staffColor };
+      case AppointmentStatus.PENDING:
+        return {
+          backgroundImage: `repeating-linear-gradient(
+          -45deg,
+          ${staffColor}CC,
+          ${staffColor}CC 5px,
+          ${staffColor} 5px,
+          ${staffColor} 10px
+        )`,
+        };
+      default:
+        return undefined;
+    }
+  };
 
   return (
     <Box
@@ -26,15 +50,15 @@ export default function CalendarAppointment({
         sx={{
           width: '100%',
           height: '100%',
-          bgcolor: staffColorMap[staff.id],
           borderRadius: 1.5,
           p: 0.5,
           overflow: 'hidden',
           display: 'block',
+          ...appointmentBackgroundSx(),
         }}
         onClick={onClick}
       >
-        <Typography noWrap fontSize={'0.8rem'}>
+        <Typography noWrap fontSize={'0.8rem'} fontWeight={'bold'}>
           {appointment.title}
         </Typography>
         <Typography noWrap fontStyle={'italic'} fontSize={'0.8rem'}>
