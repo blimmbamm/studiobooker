@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export const VIEW_MODES = ['week', 'day'] as const;
+export const VIEW_MODES = ['day', 'workweek', 'week'] as const;
 type ViewMode = (typeof VIEW_MODES)[number];
 
 export function useCalendarViewMode() {
@@ -20,19 +20,26 @@ export function useCalendarViewMode() {
   }
 
   function viewModeLabel(viewMode: ViewMode) {
-    return viewMode.charAt(0).toUpperCase() + viewMode.slice(1);
+    switch (viewMode) {
+      case 'day':
+        return 'Day';
+      case 'week':
+        return 'Week';
+      case 'workweek':
+        return 'Work week';
+    }
   }
 
   useEffect(() => {
     if (!viewModeParam || !VIEW_MODES.includes(viewModeParam as ViewMode)) {
-      setViewMode('week');
+      setViewMode('workweek');
     }
   }, [viewModeParam]);
 
   return {
     viewMode: VIEW_MODES.includes(viewModeParam as ViewMode)
       ? (viewModeParam as ViewMode)
-      : 'week',
+      : 'workweek',
     setViewMode,
     viewModeLabel,
   };

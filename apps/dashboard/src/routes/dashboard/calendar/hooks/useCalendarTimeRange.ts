@@ -26,7 +26,7 @@ export function useCalendarTimeRange() {
 
     if (viewMode === 'day') {
       return from.isSame(to);
-    } else if (viewMode === 'week') {
+    } else if (viewMode === 'workweek') {
       return from.day() === 1 && to.day() === 5;
     } else {
       return false;
@@ -75,7 +75,7 @@ export function useCalendarTimeRange() {
     switch (viewMode) {
       case 'day':
         return from.format('MMMM DD, YYYY');
-      case 'week':
+      case 'workweek':
         return `${from.format('MMMM DD')} - ${to.format(
           `${from.month() != to.month() ? 'MMMM ' : ''}DD, YYYY`
         )}`;
@@ -89,7 +89,7 @@ export function useCalendarTimeRange() {
       case 'day':
         setTimeRange(from.add(1, 'days'), to.add(1, 'days'));
         break;
-      case 'week':
+      case 'workweek':
         setTimeRange(from.add(7, 'days'), to.add(7, 'days'));
         break;
       default:
@@ -102,7 +102,7 @@ export function useCalendarTimeRange() {
       case 'day':
         setTimeRange(from.subtract(1, 'days'), to.subtract(1, 'days'));
         break;
-      case 'week':
+      case 'workweek':
         setTimeRange(from.subtract(7, 'days'), to.subtract(7, 'days'));
         break;
       default:

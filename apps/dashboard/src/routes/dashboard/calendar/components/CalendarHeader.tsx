@@ -49,7 +49,7 @@ export default function CalendarHeader({ height }: Props) {
         onChange={(e) => setViewMode(e.target.value)}
       >
         {VIEW_MODES.map((mode) => (
-          <MenuItem key={mode} value={mode}>
+          <MenuItem key={mode} value={mode} disabled={mode === 'week'}>
             {viewModeLabel(mode)}
           </MenuItem>
         ))}
