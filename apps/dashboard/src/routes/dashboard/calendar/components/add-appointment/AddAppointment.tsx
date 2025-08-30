@@ -32,7 +32,7 @@ export default function AddAppointment() {
         onClose={handleCloseMenu}
       >
         <MenuItem onClick={handleOpenDialog}>Service appointment</MenuItem>
-        <MenuItem>Other appointment</MenuItem>
+        <MenuItem disabled>Other appointment</MenuItem>
       </Menu>
       <AddAppointmentForServiceDialog
         open={dialogOpen}
