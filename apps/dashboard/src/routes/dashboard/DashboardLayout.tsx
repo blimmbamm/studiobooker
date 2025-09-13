@@ -1,14 +1,26 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-import { AppBarLayout } from '@studiobooker/utils';
+import { AppBarLayout, ScrollContainerContext } from '@studiobooker/utils';
 import { useLogout } from '../../hooks/auth/useLogout';
+import { useRef } from 'react';
 
 export default function DashboardRoot() {
   const { mutate: logout } = useLogout();
 
+  const scrollContainerRef = useRef<HTMLElement>(null);
+
   return (
-    <AppBarLayout mainContainerSx={{ overflowY: 'scroll' }}>
+    <AppBarLayout
+      mainContent={<Outlet />}
+      mainContainerSx={{ overflowY: 'scroll' }}
+      mainContentRef={scrollContainerRef}
+      mainContentWrapper={({ children }) => (
+        <ScrollContainerContext.Provider value={scrollContainerRef}>
+          {children}
+        </ScrollContainerContext.Provider>
+      )}
+    >
       <Button component={NavLink} to={'calendar'} color="inherit">
         Calendar
       </Button>

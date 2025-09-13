@@ -1,5 +1,6 @@
 import { Box, BoxProps, SxProps } from '@mui/material';
 import { ReactNode } from 'react';
+
 import SectionTitle from './SectionTitle';
 
 type Props = {

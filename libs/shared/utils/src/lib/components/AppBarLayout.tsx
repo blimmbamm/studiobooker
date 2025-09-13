@@ -1,24 +1,31 @@
 import { AppBar, CssBaseline, SxProps, Toolbar } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { Box } from '@mui/system';
-import { PropsWithChildren, useRef } from 'react';
-import { Outlet } from 'react-router-dom';
-import { ScrollContainerContext } from '../contexts';
+import { Fragment, PropsWithChildren, ReactNode, RefObject } from 'react';
 
-type Props = PropsWithChildren & { mainContainerSx?: SxProps };
+type Props = PropsWithChildren & {
+  mainContent: ReactNode;
+  mainContainerSx?: SxProps;
+  mainContentWrapper?: (props: PropsWithChildren) => ReactNode;
+  mainContentRef?: RefObject<HTMLElement | null>;
+};
 
-export function AppBarLayout({ children, mainContainerSx }: Props) {
-  const scrollContainerRef = useRef<HTMLElement>(null);
-
+export function AppBarLayout({
+  children,
+  mainContent,
+  mainContainerSx,
+  mainContentWrapper: MainContentWrapper = Fragment,
+  mainContentRef,
+}: Props) {
   return (
     <Box display={'flex'} flexDirection={'column'} height={'100dvh'}>
       <CssBaseline />
       <AppBar sx={{ zIndex: 2 }} position="static">
         <Toolbar>{children}</Toolbar>
       </AppBar>
-      <ScrollContainerContext.Provider value={scrollContainerRef}>
+      <MainContentWrapper>
         <Box
-          ref={scrollContainerRef}
+          ref={mainContentRef}
           component="main"
           flex={1}
           sx={{
@@ -27,9 +34,9 @@ export function AppBarLayout({ children, mainContainerSx }: Props) {
             backgroundColor: grey[100],
           }}
         >
-          <Outlet />
+          {mainContent}
         </Box>
-      </ScrollContainerContext.Provider>
+      </MainContentWrapper>
     </Box>
   );
 }

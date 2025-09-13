@@ -1,6 +1,6 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useQueryClient, UseQueryResult } from '@tanstack/react-query';
 
-import { useQuery, useMutation } from '@studiobooker/utils';
+import { useQuery, useMutation, QueryError } from '@studiobooker/utils';
 import {
   addCategory,
   addService,
@@ -27,7 +27,17 @@ export const ServiceQueryKeys = {
   SERVICE_DETAIL: (id: number) => ['service', id],
 };
 
-export function useServicesByCategory(onlyActivatedServices?: boolean) {
+export type UseServicesByCategoryResult = Omit<
+  UseQueryResult<ServiceCategoryStructured[], QueryError>,
+  'data'
+> & {
+  serviceCategories: ServiceCategoryStructured[] | undefined;
+  noServices: boolean;
+};
+
+export function useServicesByCategory(
+  onlyActivatedServices?: boolean
+): UseServicesByCategoryResult {
   const { data: serviceCategories, ...query } = useQuery({
     queryKey: ServiceQueryKeys.SERVICES_BY_CATEGORY,
     queryFn: () => getServicesByCategory(onlyActivatedServices),

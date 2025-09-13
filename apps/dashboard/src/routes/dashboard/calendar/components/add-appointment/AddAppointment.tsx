@@ -16,6 +16,8 @@ export default function AddAppointment() {
     setDialogOpen(true);
   }
 
+  // TODO: put mutation logic from summary component here and then pass callback to the dialog component.
+
   return (
     <>
       <Button

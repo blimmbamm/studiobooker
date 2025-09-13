@@ -1,11 +1,12 @@
+'use client';
+
 import {
   useQuery as useTanstackQuery,
   UseQueryOptions,
   UseQueryResult,
   QueryKey,
 } from '@tanstack/react-query';
-
-import { QueryError, QueryErrorType } from '../types/query-error';
+import { QueryError, QueryErrorType } from '../types';
 
 export function useQuery<TData, TKey extends QueryKey = QueryKey>(
   options: UseQueryOptions<TData, QueryError, TData, TKey>
@@ -29,6 +30,6 @@ export function useQuery<TData, TKey extends QueryKey = QueryKey>(
       query.isError && query.error?.type === QueryErrorType.HTTP_NOT_FOUND,
     isOtherError: query.isError /*&&
       (query.error?.type === QueryErrorType.HTTP_OTHER ||
-        query.error?.type === QueryErrorType.OTHER), */
+        query.error?.type === QueryErrorType.OTHER), */,
   };
 }

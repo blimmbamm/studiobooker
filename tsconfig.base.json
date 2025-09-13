@@ -2,7 +2,6 @@
   "compilerOptions": {
     "composite": true,
     "declarationMap": true,
-
     "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
@@ -18,7 +17,6 @@
     "strict": true,
     "target": "es2022",
     "customConditions": ["development"],
-
     "baseUrl": ".",
     "paths": {
       "@studiobooker/utils": ["libs/shared/utils/src/index.ts"]

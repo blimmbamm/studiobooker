@@ -1,11 +1,12 @@
 import { Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 import { AppBarLayout } from '@studiobooker/utils';
 
 export default function AuthLayout() {
   return (
     <AppBarLayout
+      mainContent={<Outlet />}
       mainContainerSx={{ display: 'flex', flexDirection: 'column' }}
     >
       <Button component={NavLink} to={'login'} color="inherit">

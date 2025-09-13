@@ -10,6 +10,7 @@ type UseAvailableAppointmentSlotsParams = {
   staff: Staff;
   date: Dayjs;
 };
+
 export function useAvailableAppointmentSlots({
   service,
   staff,

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   useMutation as useTanstackMutation,
   UseMutationOptions,

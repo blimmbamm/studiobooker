@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, ReactNode, useState } from 'react';
 import {
   Dialog,

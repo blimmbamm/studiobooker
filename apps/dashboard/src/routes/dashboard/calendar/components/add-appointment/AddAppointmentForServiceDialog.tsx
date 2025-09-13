@@ -79,13 +79,15 @@ export default function AddAppointmentForServiceDialog({
         );
       case 1:
         return (
-          <AppointmentStaffSelection
-            selectedService={appointment.service!}
-            selectedStaff={appointment.staff}
-            onSelectStaff={setAppointmentStaff}
-            onNextStep={nextStep}
-            onPreviousStep={previousStep}
-          />
+          appointment.service && (
+            <AppointmentStaffSelection
+              selectedService={appointment.service}
+              selectedStaff={appointment.staff}
+              onSelectStaff={setAppointmentStaff}
+              onNextStep={nextStep}
+              onPreviousStep={previousStep}
+            />
+          )
         );
       case 2:
         return (

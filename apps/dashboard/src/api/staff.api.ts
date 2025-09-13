@@ -29,7 +29,7 @@ export async function getAllStaff(searchParams?: GetAllStaffSearchParams) {
   const urlSearchParams = new URLSearchParams(toSearchParams(searchParams));
   const path = `personnel?${urlSearchParams}`;
   const staff = await client.get<ApiStaff[]>(path);
-  return staff.map((s) => mapApiToStaff(s));
+  return staff.map(mapApiToStaff);
 }
 
 export async function getStaff(id: number) {
