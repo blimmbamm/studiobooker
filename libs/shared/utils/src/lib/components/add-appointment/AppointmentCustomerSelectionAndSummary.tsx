@@ -11,8 +11,6 @@ import { isValidFullEmail, isValidPartialEmailOrEmpty } from '../../validation';
 import { PropertiesTableProperty } from '../PropertiesTableProperty';
 import { AppointmentData } from './AddAppointmentForServiceDialog';
 
-// TODO: Where to put this type?
-
 type Props = {
   selectedService: Service;
   selectedStaff: Staff;

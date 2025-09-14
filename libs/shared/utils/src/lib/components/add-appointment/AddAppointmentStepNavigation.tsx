@@ -4,6 +4,7 @@ export type AddAppointmentStepNavigationProps = {
   onPreviousStep?: () => void;
   onNextStep?: () => void;
   onFinish?: () => void;
+  onClose?: () => void;
   previousDisabled?: boolean;
   nextDisabled?: boolean;
   finishDisabled?: boolean;
@@ -14,6 +15,7 @@ export default function AddAppointmentStepNavigation({
   onPreviousStep,
   onNextStep,
   onFinish,
+  onClose,
   previousDisabled,
   nextDisabled,
   finishDisabled,
@@ -48,6 +50,11 @@ export default function AddAppointmentStepNavigation({
           loading={finishLoading}
         >
           Finish
+        </Button>
+      )}
+      {onClose && (
+        <Button variant="contained" onClick={onClose}>
+          Close
         </Button>
       )}
     </Box>

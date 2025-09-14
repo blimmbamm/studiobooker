@@ -26,7 +26,7 @@ export async function addAppointment(
   const appointment = await client.post<ApiAppointment>(
     'public/appointment',
     args,
-    2000
+    1500
   );
 
   return mapApiToAppointment(appointment);

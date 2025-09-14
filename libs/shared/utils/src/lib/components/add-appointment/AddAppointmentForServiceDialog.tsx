@@ -11,7 +11,7 @@ import {
   IconButton,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dayjs } from 'dayjs';
 
 import AppointmentServiceSelection from './AppointmentServiceSelection';
@@ -22,6 +22,7 @@ import { Service } from '../../types';
 import { Staff } from '../../types/api/staff/staff';
 import { ServiceCategoryStructured } from '../../types/api/service-category/service-category';
 import { AvailableAppointmentSlots } from '../../types/api/appointment-slot/appointment-slot';
+import AppointmentSubmissionSuccess from './AppointmentSubmissionSuccess';
 
 export type ServicesByCategoryQuery = () => {
   serviceCategories?: ServiceCategoryStructured[];
@@ -60,6 +61,7 @@ export type AppointmentData = {
 type Props = Omit<DialogProps, 'onClose'> & {
   initialService?: Service | null;
   initialStep?: number;
+  withSuccessStep?: boolean;
   stepFilter: (label: string) => boolean;
   servicesByCategoryQuery: ServicesByCategoryQuery;
   staffQuery: StaffQuery;
@@ -67,7 +69,7 @@ type Props = Omit<DialogProps, 'onClose'> & {
   onClose: () => void;
   onAddAppointment: (args: {
     appointmentData: AppointmentData;
-    onSuccess: () => void;
+    onSuccess?: () => void;
   }) => void;
   isSubmittingAppointment: boolean;
 };
@@ -81,6 +83,7 @@ export function AddAppointmentForServiceDialog({
   isSubmittingAppointment,
   initialStep,
   initialService = null,
+  withSuccessStep = false,
   stepFilter,
   ...dialogProps
 }: Props) {
@@ -96,6 +99,14 @@ export function AddAppointmentForServiceDialog({
     staff: Staff | null;
     date: Dayjs | null;
   }>(initialAppointment);
+
+  // Reset service if changed in parent component
+  useEffect(() => {
+    setAppointment((prevAppointment) => ({
+      ...prevAppointment,
+      service: initialService,
+    }));
+  }, [initialService]);
 
   function setAppointmentService(service: Service) {
     setAppointment((prevAppointment) => ({ ...prevAppointment, service }));
@@ -116,7 +127,6 @@ export function AddAppointmentForServiceDialog({
 
   function handleClose() {
     onClose?.();
-    reset();
   }
 
   function nextStep() {
@@ -174,10 +184,23 @@ export function AddAppointmentForServiceDialog({
           selectedStaff={appointment.staff}
           selectedDate={appointment.date}
           onPreviousStep={previousStep}
-          onAddAppointment={(appointmentData) =>
-            onAddAppointment({ appointmentData, onSuccess: reset })
-          }
+          onAddAppointment={(appointmentData) => {
+            onAddAppointment({
+              appointmentData,
+              onSuccess: withSuccessStep ? nextStep : undefined,
+            });
+          }}
           isSubmittingAppointment={isSubmittingAppointment}
+        />
+      ),
+    },
+    {
+      label: '',
+      content: (
+        <AppointmentSubmissionSuccess
+          title="Success!"
+          message="Your request was submitted."
+          onClose={handleClose}
         />
       ),
     },
@@ -188,15 +211,20 @@ export function AddAppointmentForServiceDialog({
       {...dialogProps}
       onClose={handleClose}
       fullWidth
-      slotProps={{ paper: { sx: { height: '100%', maxWidth: 700 } } }}
+      slotProps={{
+        transition: { onExited: reset },
+        paper: { sx: { height: '100%', maxWidth: 700 } },
+      }}
     >
       <DialogTitle component="div" display={'flex'} gap={1}>
         <Stepper activeStep={activeStep} sx={{ flex: 1 }}>
-          {steps.map((step, index) => (
-            <Step key={step.label} completed={activeStep > index}>
-              <StepLabel>{step.label}</StepLabel>
-            </Step>
-          ))}
+          {steps
+            .filter(({ label }) => !!label)
+            .map((step, index) => (
+              <Step key={step.label} completed={activeStep > index}>
+                <StepLabel>{step.label}</StepLabel>
+              </Step>
+            ))}
         </Stepper>
         <IconButton onClick={handleClose} sx={{ marginLeft: 'auto' }}>
           <CloseIcon />

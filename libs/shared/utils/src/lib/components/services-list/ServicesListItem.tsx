@@ -12,7 +12,7 @@ import {
 import { useState } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { grey, red } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 import { ServicesListProps } from './ServicesList';
 import { ServiceCategoryStructured } from '../../types/api/service-category/service-category';
@@ -27,13 +27,10 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
   categoryAsItemButton = true,
   expandOnSecondaryAction = false,
   onClickCategory,
-  onClickService,
   categoryItemIcon,
-  serviceItemIcon,
-  serviceIsSelected,
-  serviceIsDisabled,
   categoryIsDisabled,
   renderListItemContent,
+  onCollapseCategory,
 }: ServicesListItemProps<T>) {
   const { name, services } = serviceCategory;
 
@@ -42,10 +39,6 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
   function handleExpand() {
     setOpen((prevOpen) => !prevOpen);
   }
-
-  // Ok, don't know why, but 8.5 (and fractions, at least partially) is making the pattern seamless from one listitem to another:
-  // const x = 8.5/3;
-  const x = 8.5;
 
   const categoryItemContent = (
     <>
@@ -75,15 +68,7 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
             </IconButton>
           )
         }
-        sx={{
-          backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            ${grey[100]},
-            ${grey[100]} ${x}px,
-            ${red[100]} ${x}px,
-            ${red[100]} ${2 * x}px
-          )`,
-        }}
+        sx={{ backgroundColor: grey[300], borderRadius: 1.5 }}
       >
         {categoryAsItemButton ? (
           <ListItemButton
@@ -96,8 +81,11 @@ export default function ServicesListItem<T extends ServiceCategoryStructured>({
           categoryItemContent
         )}
       </ListItem>
-      <Collapse in={open}>
-        <List disablePadding sx={{ backgroundColor: grey[100] }}>
+      <Collapse in={open} onExited={onCollapseCategory}>
+        <List
+          disablePadding
+          sx={{ backgroundColor: grey[100], borderRadius: 1.5 }}
+        >
           {services.map((s) => renderListItemContent(s))}
         </List>
       </Collapse>

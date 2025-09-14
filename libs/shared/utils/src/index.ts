@@ -4,3 +4,4 @@ export * from './lib/contexts';
 export * from './lib/types';
 export * from './lib/http';
 export * from './lib/validation';
+export * from './lib/theme/theme';

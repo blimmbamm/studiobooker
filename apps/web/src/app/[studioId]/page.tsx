@@ -10,10 +10,5 @@ export default async function StudioPage({
 
   const studio = await getStudio(studioId);
 
-  return (
-    <div>
-      <p>Blabla, this is already visible on screen.</p>
-      <StudioDetails studio={studio} />
-    </div>
-  );
+  return <StudioDetails studio={studio} />;
 }

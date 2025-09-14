@@ -5,7 +5,6 @@ import {
   Button,
   ListItem,
   ListItemButton,
-  ListItemText,
   Typography,
 } from '@mui/material';
 import {
@@ -56,7 +55,7 @@ export default function ServiceBooking({
   }
 
   // Maybe useMemo this:
-  const useAvailableAppointmentSlotsQuery = createUseAvailableAppointmentSlots({
+  const availableAppointmentSlotsQuery = createUseAvailableAppointmentSlots({
     queryKey: ({ service, staff, start }) => [
       'appointment-slots',
       service,
@@ -89,7 +88,7 @@ export default function ServiceBooking({
     onSuccess,
   }: {
     appointmentData: AppointmentData;
-    onSuccess: () => void;
+    onSuccess?: () => void;
   }) {
     // TODO: This duration check is kind of ugly
     if (duration) {
@@ -106,10 +105,7 @@ export default function ServiceBooking({
           staffId,
         },
         {
-          onSuccess: () => {
-            setDialogOpen(false);
-            onSuccess();
-          },
+          onSuccess,
         }
       );
     }
@@ -117,8 +113,12 @@ export default function ServiceBooking({
 
   return (
     <>
+      <Typography variant="h5" paddingTop={3} paddingBottom={1}>
+        Our services
+      </Typography>
       <ServicesList
         serviceCategories={services}
+        onCollapseCategory={() => setSelectedService(null)}
         renderListItemContent={(s) =>
           s === selectedService ? (
             <ListItem
@@ -129,18 +129,22 @@ export default function ServiceBooking({
                 <Typography>{s.title}</Typography>
                 <Typography>{`${s.duration} min | EUR ${s.price},-`}</Typography>
               </Box>
-              <Box display={'flex'}>
+              <Box display={'flex'} paddingTop={1}>
                 <Typography>{s.description}</Typography>
                 <Box flex={1} />
-                <Button onClick={() => setDialogOpen(true)}>
+                <Button variant="contained" onClick={() => setDialogOpen(true)}>
                   Book appointment
                 </Button>
               </Box>
             </ListItem>
           ) : (
             <ListItem key={s.id} disablePadding>
-              <ListItemButton onClick={() => setSelectedService(s)}>
-                <ListItemText primary={s.title} />
+              <ListItemButton
+                onClick={() => setSelectedService(s)}
+                sx={{ justifyContent: 'space-between' }}
+              >
+                <Typography>{s.title}</Typography>
+                <Typography>{`${s.duration} min | EUR ${s.price},-`}</Typography>
               </ListItemButton>
             </ListItem>
           )
@@ -150,7 +154,7 @@ export default function ServiceBooking({
         <AddAppointmentForServiceDialog
           servicesByCategoryQuery={() => ({ serviceCategories: services })}
           staffQuery={staffByServiceQuery}
-          availableAppointmentSlotsQuery={useAvailableAppointmentSlotsQuery}
+          availableAppointmentSlotsQuery={availableAppointmentSlotsQuery}
           onAddAppointment={handleAddAppointment}
           open={dialogOpen}
           onClose={() => setDialogOpen(false)}
@@ -158,6 +162,7 @@ export default function ServiceBooking({
           initialStep={1}
           initialService={selectedService}
           stepFilter={(label) => label !== 'Service'}
+          withSuccessStep
         />
       )}
     </>

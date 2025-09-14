@@ -12,9 +12,13 @@ type Props = { studio: StudioInformation };
 
 export default function StudioDetails({ studio }: Props) {
   return (
-    <Box>
-      <Typography>{studio.name}</Typography>
-      <Typography>{studio.description}</Typography>
+    <Box padding={4}>
+      <Typography variant="h4" paddingTop={2}>
+        {studio.name}
+      </Typography>
+      <Typography fontSize={'1.1rem'} paddingTop={2}>
+        {studio.description}
+      </Typography>
       <AlertProvider>
         <QueryClientProvider>
           <ServiceBooking studio={studio} />
