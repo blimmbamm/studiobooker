@@ -20,6 +20,7 @@ export default function AuthProvider(props: PropsWithChildren) {
   const location = useLocation();
 
   const {
+    data,
     isLoading,
     isSuccess: isAuthenticated,
     isError,
@@ -28,6 +29,8 @@ export default function AuthProvider(props: PropsWithChildren) {
     queryKey: ['auth-check'],
     queryFn: checkAuth,
   });
+
+  console.log(data)
 
   useEffect(() => {
     if (isError) {

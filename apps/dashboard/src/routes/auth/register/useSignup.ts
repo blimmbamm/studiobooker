@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useMutation } from '@studiobooker/utils';
+import { isValidFullEmail, useMutation } from '@studiobooker/utils';
 import { signup } from '../../../api/auth.api';
 
 export function useSignup() {
@@ -48,13 +48,6 @@ export function useSignup() {
     setConfirmPasswordIsError(confirmPasswordIsInvalid);
   }
 
-  function isValidFullEmail(value: string) {
-    const validMailRegex =
-      /^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?@[A-Za-z0-9-]+\.[A-Za-z]{2,}$/;
-
-    return validMailRegex.test(value);
-  }
-
   function changeEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
     setEmailIsError(false);
@@ -71,7 +64,9 @@ export function useSignup() {
   }
 
   useEffect(() => {
-    setConfirmPasswordIsError(confirmPasswordIsInvalid);
+    if (confirmPassword) {
+      setConfirmPasswordIsError(confirmPasswordIsInvalid);
+    }
   }, [password]);
 
   function checkErrors() {

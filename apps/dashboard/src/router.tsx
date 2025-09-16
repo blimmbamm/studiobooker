@@ -1,8 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
 import DashboardLayout from './routes/dashboard/DashboardLayout';
-import GuestRoute from './app/GuestRoute';
-import ProtectedRoute from './app/ProtectedRoute';
 import AuthLayout from './routes/auth/AuthLayout';
 import StaffLayout from './routes/dashboard/staff/StaffLayout';
 import RegisterPage from './routes/auth/register/RegisterPage';
@@ -17,6 +15,8 @@ import ServiceDetailStart from './routes/dashboard/services/ServiceDetailStart';
 import SettingsLayout from './routes/dashboard/settings/SettingsLayout';
 import Settings from './routes/dashboard/settings/Settings';
 import CalendarLayout from './routes/dashboard/calendar/CalendarLayout';
+import ProtectedRoute from './components/route-wrapper/ProtectedRoute';
+import GuestRoute from './components/route-wrapper/GuestRoute';
 
 export const router = createBrowserRouter([
   {

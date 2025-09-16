@@ -1,7 +1,7 @@
 import { client } from './client';
 
 export async function checkAuth() {
-  return client.get<{ message: string }>('auth/check');
+  return client.get<{ message: string, id: number }>('auth/check');
 }
 
 export async function signup(email: string, password: string) {
