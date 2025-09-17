@@ -6,7 +6,7 @@ type Props = { staff?: Staff };
 
 export default function StaffStatus({ staff }: Props) {
   const { mutate } = useEditStaff({
-    staffId: staff?.id || 0, // TODO: move staffId to mutate function
+    staffId: staff?.id || 0,
     withOptimisticUpdating: true,
   });
 

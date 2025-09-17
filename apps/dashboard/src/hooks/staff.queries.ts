@@ -49,7 +49,6 @@ export function useAllStaff(searchParams?: GetAllStaffSearchParams) {
   };
 }
 
-// TODO: why is id optional?
 export function useStaff(staffId?: number) {
   const { data: staff, ...query } = useQuery({
     queryKey: StaffQueryKeys.STAFF_DETAIL(staffId!),
@@ -94,7 +93,6 @@ export function useEditStaff({
   onSuccess?: () => void;
   withOptimisticUpdating?: boolean;
 }) {
-  // const {queryClient, invalidateQueries} = useQueryClient();
   const queryClient = useQueryClient();
 
   return useMutation({
