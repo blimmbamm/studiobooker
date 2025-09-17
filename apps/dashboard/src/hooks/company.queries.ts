@@ -1,7 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from '@studiobooker/utils';
-import { editCompanyInfo, getCompany } from '../api/company.api';
-import { EditCompanyInfoDto } from '../types/company-info';
-import { CompanyStructured } from '../types/company';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  editCompanyInfo,
+  getCompany,
+  EditCompanyInfoDto,
+  CompanyStructured,
+} from '@studiobooker/utils';
 
 export const CompanyQueryKeys = {
   COMPANY_STRUCTURED: ['company'],

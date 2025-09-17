@@ -26,6 +26,7 @@ export default function CalendarStaffSelection({ boxProps }: Props) {
 
   const { staff, isLoading, isError } = useAllStaff();
 
+  // TODO: clean this up
   // function* colorIterator(colors: string[]) {
   //   let index = 0;
   //   while (true) {

@@ -1,5 +1,8 @@
 import { Box } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useState } from 'react';
+
+import { Appointment } from '@studiobooker/utils';
 
 import AxisLabels from './components/AxisLabels';
 import GridLines from './components/GridLines';
@@ -10,8 +13,6 @@ import { useCalendarData } from './hooks/useCalendarData';
 import CalendarLoadingOverlay from './components/CalendarLoadingOverlay';
 import ScrollToAnchor from './components/ScrollToAnchor';
 import AppointmentDetailsDialog from './components/calendar-appointment/AppointmentDetailsDialog';
-import { useState } from 'react';
-import { Appointment } from '../../../types/appointment';
 
 export default function Calendar() {
   const { calendarDays, isFetching } = useCalendarData(); // this could use useViewMode etc. itself

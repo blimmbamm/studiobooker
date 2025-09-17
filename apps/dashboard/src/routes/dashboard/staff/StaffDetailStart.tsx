@@ -1,6 +1,7 @@
 import { CircularProgress } from '@mui/material';
 
 import { FallbackMessage } from '@studiobooker/utils';
+
 import { useAllStaff } from '../../../hooks/staff.queries';
 
 export default function StaffDetailStart() {

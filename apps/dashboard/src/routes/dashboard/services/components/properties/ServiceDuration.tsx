@@ -1,13 +1,14 @@
+import { ChangeEvent } from 'react';
 import { InputAdornment } from '@mui/material';
 
 import {
   isPositiveNumberStringOrEmpty,
   PropertiesTableProperty,
+  Service,
 } from '@studiobooker/utils';
-import { Service } from '../../../../../types/service';
+
 import { useServiceProperty } from '../../hooks/useServiceProperty';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
-import { ChangeEvent } from 'react';
 
 export default function ServiceDuration({ service }: { service: Service }) {
   const { value, handleChange } = useServiceProperty({

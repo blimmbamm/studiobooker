@@ -1,10 +1,8 @@
 import { Box, ButtonBase, SxProps, Typography } from '@mui/material';
-import {
-  Appointment,
-  AppointmentStatus,
-} from '../../../../../types/appointment';
+
+import { Staff, Appointment, AppointmentStatus } from '@studiobooker/utils';
+
 import { useStaffColors } from '../../contexts/StaffColorContext';
-import { Staff } from '../../../../../types/staff';
 
 type Props = { staff: Staff; appointment: Appointment; onClick: () => void };
 

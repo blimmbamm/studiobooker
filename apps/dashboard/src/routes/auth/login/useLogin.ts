@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAuth, useMutation } from '@studiobooker/utils';
-
-import { login } from '../../../api/auth.api';
+import { login, useAuth, useMutation } from '@studiobooker/utils';
 
 export function useLogin() {
   const emailRef = useRef<HTMLInputElement>(null);

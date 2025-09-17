@@ -1,24 +1,11 @@
-import { ApiStaff, ApiStaffStructured } from '../types/api/staff';
+import { client } from '../../http';
+import { EditStaffDto } from '../../types';
+import { ApiStaff, ApiStaffStructured } from '../../types/api/staff/staff.api';
 import {
   mapApiToStaff,
   mapApiToStaffStructured,
-} from '../types/api/staff.mapper';
-import { EditStaffDto } from '../types/staff';
-import { client } from './client';
-
-function toSearchParams(params?: Record<string, any>): URLSearchParams {
-  if (!params) return new URLSearchParams();
-
-  const stringParams: Record<string, string> = {};
-
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      stringParams[key] = String(value);
-    }
-  });
-
-  return new URLSearchParams(stringParams);
-}
+} from '../../types/api/staff/staff.mapper';
+import { toSearchParams } from './util';
 
 export type GetAllStaffSearchParams = {
   serviceId?: number;

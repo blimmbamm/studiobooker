@@ -3,12 +3,15 @@ import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlin
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 
-import { Section } from '@studiobooker/utils';
-import { StaffStructured } from '../../../../../types/staff';
+import {
+  Section,
+  StaffStructured,
+  ServiceCategoryForStaff,
+  ServiceWithStaffQualification,
+} from '@studiobooker/utils';
+
 import { useManageStaffServices } from '../../../../../hooks/service.queries';
 import StaffServicesSkeleton from './StaffServicesSkeleton';
-import { ServiceCategoryForStaff } from '../../../../../types/service-category';
-import { ServiceWithStaffQualification } from '../../../../../types/service';
 import { ServicesList } from '../../../../../components/ServicesList';
 
 type Props = {

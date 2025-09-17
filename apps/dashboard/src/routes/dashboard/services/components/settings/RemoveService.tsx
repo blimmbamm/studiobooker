@@ -1,6 +1,7 @@
-import { SettingsItem, RemoveButton } from '@studiobooker/utils';
-import { Service } from '../../../../../types/service';
 import { useNavigate } from 'react-router-dom';
+
+import { SettingsItem, RemoveButton, Service } from '@studiobooker/utils';
+
 import { useRemoveService } from '../../../../../hooks/service.queries';
 
 type Props = {

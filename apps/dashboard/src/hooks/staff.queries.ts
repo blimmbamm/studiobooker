@@ -1,13 +1,16 @@
-import { useQuery, useMutation, useQueryClient } from '@studiobooker/utils';
 import {
+  useQuery,
+  useMutation,
+  useQueryClient,
   addStaff,
   editStaff,
   getAllStaff,
   GetAllStaffSearchParams,
   getStaff,
   removeStaff,
-} from '../api/staff.api';
-import { EditStaffDto, StaffStructured } from '../types/staff';
+  EditStaffDto,
+  StaffStructured,
+} from '@studiobooker/utils';
 
 export const StaffQueryKeys = {
   STAFF_ANY: ['staff'],

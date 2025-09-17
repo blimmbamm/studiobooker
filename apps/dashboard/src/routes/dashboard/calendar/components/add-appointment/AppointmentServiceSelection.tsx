@@ -1,11 +1,12 @@
-import { FallbackMessage, ListSkeleton } from '@studiobooker/utils';
+import { Box } from '@mui/material';
+
+import { FallbackMessage, ListSkeleton, Service } from '@studiobooker/utils';
+
 import { useServicesByCategory } from '../../../../../hooks/service.queries';
 import { ServicesList } from '../../../../../components/ServicesList';
-import { Service } from '../../../../../types/service';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
-import { Box } from '@mui/material';
 
 type Props = {
   selectedService: Service | null;

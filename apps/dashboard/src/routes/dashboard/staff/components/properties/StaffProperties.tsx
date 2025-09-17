@@ -1,5 +1,9 @@
-import { PropertiesTableSection, PropertySkeleton } from '@studiobooker/utils';
-import { StaffStructured } from '../../../../../types/staff';
+import {
+  PropertiesTableSection,
+  PropertySkeleton,
+  StaffStructured,
+} from '@studiobooker/utils';
+
 import StaffName from './StaffName';
 import StaffNotes from './StaffNotes';
 import StaffEmail from './StaffEmail';

@@ -12,8 +12,8 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { grey, red } from '@mui/material/colors';
 
-import { ServiceCategoryStructured } from '../types/service-category';
 import { ServicesListProps } from './ServicesList';
+import { ServiceCategoryStructured } from '@studiobooker/utils';
 
 type ServicesListItemProps<T extends ServiceCategoryStructured> = Omit<
   ServicesListProps<T>,

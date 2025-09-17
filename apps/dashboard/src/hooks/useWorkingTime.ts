@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 
-import { EditWorkingTimeDto, WorkingTime } from '../types/working-time';
+import { EditWorkingTimeDto, WorkingTime } from '@studiobooker/utils';
 
 type UseWorkingTimeParams = {
   workingTime: WorkingTime;

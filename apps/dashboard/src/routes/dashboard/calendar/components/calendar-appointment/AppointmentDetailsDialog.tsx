@@ -1,11 +1,13 @@
 import { Box, Button, Dialog, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { ConfirmDialog, PropertiesTableProperty } from '@studiobooker/utils';
 import {
+  ConfirmDialog,
+  PropertiesTableProperty,
   Appointment,
   AppointmentStatus,
-} from '../../../../../types/appointment';
+} from '@studiobooker/utils';
+
 import {
   useCancelAppointment,
   useConfirmAppointment,

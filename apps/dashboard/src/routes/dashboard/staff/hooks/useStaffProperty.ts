@@ -1,4 +1,5 @@
-import { EditStaffDto, Staff } from '../../../../types/staff';
+import { EditStaffDto, Staff } from '@studiobooker/utils';
+
 import { useEditStaff } from '../../../../hooks/staff.queries';
 import { createUseProperty } from '../../../../hooks/useProperty';
 

@@ -1,19 +1,20 @@
 import { Box } from '@mui/material';
+import { Dayjs } from 'dayjs';
+import { ChangeEvent, useState } from 'react';
+
 import {
   isValidFullEmail,
   isValidPartialEmailOrEmpty,
   PropertiesTableProperty,
+  Service,
+  Staff,
+  AppointmentStatus,
 } from '@studiobooker/utils';
 
-import { Service } from 'apps/dashboard/src/types/service';
-import { Staff } from 'apps/dashboard/src/types/staff';
-import { Dayjs } from 'dayjs';
-import { ChangeEvent, useState } from 'react';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
 import { useAddAppointment } from '../../../../../hooks/appointment.queries';
-import { AppointmentStatus } from '../../../../../types/appointment';
 
 type Props = {
   selectedService: Service;

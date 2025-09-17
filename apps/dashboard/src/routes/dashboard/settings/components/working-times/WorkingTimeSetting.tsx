@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 
-import { TimePicker } from '@studiobooker/utils';
+import { TimePicker, WorkingTime } from '@studiobooker/utils';
+
 import { useWorkingTimeSetting } from '../../hooks/useWorkingTimeSetting';
-import { WorkingTime } from '../../../../../types/working-time';
 
 type Props = { workingTimeSetting: WorkingTime };
 

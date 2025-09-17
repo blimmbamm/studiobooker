@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 
-import { SingleInputDialog } from '@studiobooker/utils';
-import { ServiceCategory } from '../../../../../types/service-category';
+import { SingleInputDialog, ServiceCategory } from '@studiobooker/utils';
+
 import { useEditServiceCategory } from '../../../../../hooks/service.queries';
 
 type Props = {

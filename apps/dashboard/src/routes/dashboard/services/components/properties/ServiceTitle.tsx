@@ -1,6 +1,6 @@
-import { PropertiesTableProperty } from '@studiobooker/utils';
+import { PropertiesTableProperty, Service } from '@studiobooker/utils';
+
 import { useServiceProperty } from '../../hooks/useServiceProperty';
-import { Service } from '../../../../../types/service';
 
 export default function ServiceTitle({ service }: { service: Service }) {
   const { value, handleChange, showError, checkErrors, helperText } =

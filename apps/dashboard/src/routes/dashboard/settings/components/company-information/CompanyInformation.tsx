@@ -1,5 +1,9 @@
-import { PropertySkeleton, PropertiesTableSection } from '@studiobooker/utils';
-import { CompanyStructured } from '../../../../../types/company';
+import {
+  PropertySkeleton,
+  PropertiesTableSection,
+  CompanyStructured,
+} from '@studiobooker/utils';
+
 import CompanyName from './CompanyName';
 import CompanyDescription from './CompanyDescription';
 

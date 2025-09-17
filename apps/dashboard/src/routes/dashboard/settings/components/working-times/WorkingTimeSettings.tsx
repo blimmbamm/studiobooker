@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
-import { TableSection } from '@studiobooker/utils';
-import { CompanyStructured } from '../../../../../types/company';
-import { WEEKDAYS } from '../../../../../constants/weekdays';
+
+import { TableSection, CompanyStructured, WEEKDAYS } from '@studiobooker/utils';
+
 import WorkingTimeSettingSkeleton from './WorkingTimeSettingSkeleton';
 import WorkingTimeSetting from './WorkingTimeSetting';
 

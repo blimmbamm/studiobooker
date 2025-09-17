@@ -1,6 +1,7 @@
-import { SettingsSection } from '@studiobooker/utils';
-import { ServiceStructured } from '../../../../../types/service';
 import { SxProps } from '@mui/material';
+
+import { SettingsSection, ServiceStructured } from '@studiobooker/utils';
+
 import RemoveService from './RemoveService';
 
 type Props = {

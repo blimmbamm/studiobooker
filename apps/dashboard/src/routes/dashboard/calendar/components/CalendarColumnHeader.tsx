@@ -1,7 +1,9 @@
 import { BoxProps, Box, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
+
+import { CalendarDay } from '@studiobooker/utils';
+
 import GridLines from './GridLines';
-import { CalendarDay } from '../../../../types/calendar-day';
 
 type Props = { days: CalendarDay[] } & BoxProps;
 

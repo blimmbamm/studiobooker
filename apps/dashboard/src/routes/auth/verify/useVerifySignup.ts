@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { useMutation } from '@studiobooker/utils';
-import { verifySignup } from '../../../api/auth.api';
+import { useMutation, verifySignup } from '@studiobooker/utils';
 
 export function useVerifySignup() {
   const [token, setToken] = useState('');
@@ -41,6 +40,6 @@ export function useVerifySignup() {
     handleVerifySignup,
     isError,
     isPending: verifySignupMutation.isPending,
-    isSuccess: verifySignupMutation.isSuccess
+    isSuccess: verifySignupMutation.isSuccess,
   };
 }

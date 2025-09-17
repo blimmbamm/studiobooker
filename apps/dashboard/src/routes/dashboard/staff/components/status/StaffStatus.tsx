@@ -1,5 +1,5 @@
-import { StatusSection } from '@studiobooker/utils';
-import { Staff } from '../../../../../types/staff';
+import { StatusSection, Staff } from '@studiobooker/utils';
+
 import { useEditStaff } from '../../../../../hooks/staff.queries';
 
 type Props = { staff?: Staff };
@@ -22,13 +22,15 @@ export default function StaffStatus({ staff }: Props) {
       activeStatusText={
         <>
           With this status, the staff member is visible to customers and
-          bookable. Details and settings can not be edited while the staff member is active.
+          bookable. Details and settings can not be edited while the staff
+          member is active.
         </>
       }
       inactiveStatusText={
         <>
           With this status, the staff member is invisible to customers and not
-          bookable. Details and settings can only be edited while the staff member is inactive.
+          bookable. Details and settings can only be edited while the staff
+          member is inactive.
         </>
       }
       activated={(staff) => staff.activated}

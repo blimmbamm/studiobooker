@@ -1,10 +1,9 @@
 import { Box, SxProps, Typography } from '@mui/material';
 
-import { TableSection } from '@studiobooker/utils';
+import { TableSection, StaffStructured, WEEKDAYS } from '@studiobooker/utils';
+
 import StaffWorkingTime from './StaffWorkingTime';
-import { StaffStructured } from '../../../../../types/staff';
 import StaffWorkingTimeSkeleton from './StaffWorkingTimeSkeleton';
-import { WEEKDAYS } from '../../../../../constants/weekdays';
 
 type Props = {
   staff?: StaffStructured;

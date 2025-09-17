@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
+
 import { useCalendarStaffSelection } from '../hooks/useCalendarStaffSelection';
 
 const COLORS = [

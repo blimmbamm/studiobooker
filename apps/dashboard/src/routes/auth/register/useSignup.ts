@@ -1,8 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { isValidFullEmail, useMutation } from '@studiobooker/utils';
-import { signup } from '../../../api/auth.api';
+import { isValidFullEmail, signup, useMutation } from '@studiobooker/utils';
 
 export function useSignup() {
   const [email, setEmail] = useState('');

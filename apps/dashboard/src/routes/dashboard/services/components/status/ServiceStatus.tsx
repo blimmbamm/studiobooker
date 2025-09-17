@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/material';
-import { Service, ServiceStructured } from '../../../../../types/service';
-import { StatusSection } from '@studiobooker/utils';
+
+import { StatusSection, Service, ServiceStructured } from '@studiobooker/utils';
+
 import { useEditService } from '../../../../../hooks/service.queries';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
 

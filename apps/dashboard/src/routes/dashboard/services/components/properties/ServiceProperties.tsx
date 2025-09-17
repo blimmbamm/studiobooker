@@ -1,11 +1,16 @@
-import { PropertySkeleton, PropertiesTableSection } from '@studiobooker/utils';
-import { ServiceStructured } from '../../../../../types/service';
+import { Box } from '@mui/material';
+
+import {
+  PropertySkeleton,
+  PropertiesTableSection,
+  ServiceStructured,
+} from '@studiobooker/utils';
+
 import ServiceTitle from './ServiceTitle';
 import ServiceDescription from './ServiceDescription';
 import ServiceDuration from './ServiceDuration';
 import ServicePrice from './ServicePrice';
 import ServiceCategory from './ServiceCategory';
-import { Box } from '@mui/material';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
 
 export function ServiceProperties({

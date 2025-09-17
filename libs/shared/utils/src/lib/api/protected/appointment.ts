@@ -1,17 +1,19 @@
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import { client } from '../../http';
+import { ApiCalendarDay } from '../../types/api/calendar-day/calendar-day.api';
+import { mapApiToCalendarDay } from '../../types/api/calendar-day/calendar-day.mapper';
+import {
+  AddAppointmentDto,
+  ApiAppointment,
+  ApiAvailableAppointmentSlots,
+  mapApiToAppointment,
+  mapApiToAvailableAppointmentSlots,
+  UpdateAppointmentDto,
+} from '../../types';
+import { CalendarDay } from '../../types/api/calendar-day/calendar-day';
 
 dayjs.extend(isSameOrBefore);
-
-import { ApiCalendarDay } from '../types/api/calendar-day';
-import { mapApiToCalendarDay } from '../types/api/calendar-day.mapper';
-import { CalendarDay } from '../types/calendar-day';
-import { client } from './client';
-import { ApiAvailableAppointmentSlots } from '../types/api/available-appointment-slots';
-import { mapApiToAvailableAppointmentSlots } from '../types/api/available-appointment-slots.mapper';
-import { AddAppointmentDto, UpdateAppointmentDto } from '../types/appointment';
-import { ApiAppointment } from '../types/api/appointment';
-import { mapApiToAppointment } from '../types/api/appointment.mapper';
 
 export async function getCalendarData({
   from,

@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   SideNavSection,
   useNumericParam,
   NavigationList,
+  ServiceCategoryStructured,
 } from '@studiobooker/utils';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { useServicesByCategory } from '../../../../../hooks/service.queries';
-import { ServiceCategoryStructured } from '../../../../../types/service-category';
 import AddCategory from './AddCategory';
 import CategoryOptionsMenu from './CategoryOptionsMenu';
 import AddService from './AddService';

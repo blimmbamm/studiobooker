@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   Typography,
@@ -12,11 +13,8 @@ import timezone from 'dayjs/plugin/timezone';
 
 dayjs.extend(timezone);
 
-import { FallbackMessage } from '@studiobooker/utils';
-import { Service } from '../../../../../types/service';
-import { Staff } from '../../../../../types/staff';
+import { FallbackMessage, Service, Staff } from '@studiobooker/utils';
 import { useAvailableAppointmentSlots } from '../../hooks/useAvailableAppointmentSlots';
-import { useState } from 'react';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';

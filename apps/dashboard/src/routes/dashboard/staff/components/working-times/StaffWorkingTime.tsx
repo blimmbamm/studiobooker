@@ -2,10 +2,9 @@ import { Box, IconButton, Typography } from '@mui/material';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 
-import { TimePicker } from '@studiobooker/utils';
-import { WorkingTime } from '../../../../../types/working-time';
+import { TimePicker, WorkingTime, Staff } from '@studiobooker/utils';
+
 import { useStaffWorkingTime } from '../../hooks/useStaffWorkingTime';
-import { Staff } from '../../../../../types/staff';
 
 type Props = {
   workingTime: WorkingTime;

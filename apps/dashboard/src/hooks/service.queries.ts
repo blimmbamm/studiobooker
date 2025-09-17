@@ -5,8 +5,6 @@ import {
   useMutation,
   QueryError,
   useQueryClient,
-} from '@studiobooker/utils';
-import {
   addCategory,
   addService,
   addStaffToService,
@@ -18,13 +16,14 @@ import {
   removeCategory,
   removeService,
   removeStaffFromService,
-} from '../api/service.api';
-import { StaffStructured, StaffWithServiceQualification } from '../types/staff';
-import { EditServiceDto, Service, ServiceStructured } from '../types/service';
-import {
+  StaffStructured,
+  StaffWithServiceQualification,
+  EditServiceDto,
+  Service,
+  ServiceStructured,
   EditServiceCategoryDto,
   ServiceCategoryStructured,
-} from '../types/service-category';
+} from '@studiobooker/utils';
 
 export const ServiceQueryKeys = {
   SERVICE_ALL: ['service'],

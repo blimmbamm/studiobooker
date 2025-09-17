@@ -1,7 +1,7 @@
 import { List, ListProps } from '@mui/material';
 import { ReactNode } from 'react';
 
-import { ServiceCategoryStructured } from '../types/service-category';
+import { ServiceCategoryStructured } from '@studiobooker/utils';
 import ServicesListItem from './ServicesListItem';
 
 export type ServicesListProps<T extends ServiceCategoryStructured> = {

@@ -1,5 +1,8 @@
-import { PropertiesTableProperty } from '@studiobooker/utils';
-import { CompanyStructured } from '../../../../../types/company';
+import {
+  PropertiesTableProperty,
+  CompanyStructured,
+} from '@studiobooker/utils';
+
 import { useCompanyInfoProperty } from '../../hooks/useCompanyInfoProperty';
 
 type Props = { company: CompanyStructured };

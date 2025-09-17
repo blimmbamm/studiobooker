@@ -1,7 +1,10 @@
 import { MenuItem } from '@mui/material';
 
-import { PropertiesTableProperty } from '@studiobooker/utils';
-import { ServiceStructured } from '../../../../../types/service';
+import {
+  PropertiesTableProperty,
+  ServiceStructured,
+} from '@studiobooker/utils';
+
 import { useServicesByCategory } from '../../../../../hooks/service.queries';
 import { useSelectServiceCategory } from '../../hooks/useSelectServiceCategory';
 

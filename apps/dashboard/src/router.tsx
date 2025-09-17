@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
+import { AuthProvider } from '@studiobooker/utils';
+
 import DashboardLayout from './routes/dashboard/DashboardLayout';
 import AuthLayout from './routes/auth/AuthLayout';
 import StaffLayout from './routes/dashboard/staff/StaffLayout';
@@ -16,7 +18,6 @@ import Settings from './routes/dashboard/settings/Settings';
 import CalendarLayout from './routes/dashboard/calendar/CalendarLayout';
 import ProtectedRoute from './components/route-wrapper/ProtectedRoute';
 import GuestRoute from './components/route-wrapper/GuestRoute';
-import { AuthProvider } from '@studiobooker/utils';
 
 export const router = createBrowserRouter([
   {

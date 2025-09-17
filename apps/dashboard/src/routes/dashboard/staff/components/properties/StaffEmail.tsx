@@ -2,9 +2,10 @@ import {
   isValidFullEmailOrEmpty,
   isValidPartialEmailOrEmpty,
   PropertiesTableProperty,
+  Staff,
 } from '@studiobooker/utils';
+
 import { useStaffProperty } from '../../hooks/useStaffProperty';
-import { Staff } from '../../../../../types/staff';
 
 type Props = { staff: Staff };
 

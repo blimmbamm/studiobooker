@@ -1,12 +1,12 @@
-import { ApiWorkingTime } from '../types/api/working-time';
-import { mapApiToWorkingTime } from '../types/api/working-time.mapper';
-import { EditWorkingTimeDto } from '../types/working-time';
-import { client } from './client';
+import { client } from '../../http';
+import { EditWorkingTimeDto } from '../../types/api/working-time/working-time';
+import { ApiWorkingTime } from '../../types/api/working-time/working-time.api';
+import { mapApiToWorkingTime } from '../../types/api/working-time/working-time.mapper';
 
 export async function editWorkingTime(id: number, inputs: EditWorkingTimeDto) {
   const workingTime = await client.patch<ApiWorkingTime>(
     `working-time/${id}`,
-    inputs,
+    inputs
   );
 
   return mapApiToWorkingTime(workingTime);
@@ -18,7 +18,7 @@ export async function editWorkingTimeSetting(
 ) {
   const workingTime = await client.patch<ApiWorkingTime>(
     `working-time-company-settings/${id}`,
-    inputs,
+    inputs
   );
 
   return mapApiToWorkingTime(workingTime);

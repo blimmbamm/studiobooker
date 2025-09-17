@@ -6,7 +6,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Service } from '../types/service';
+
+import { Service } from '@studiobooker/utils';
 
 type ServiceActivationValidationContextType = {
   hasError: (key: keyof Service) => boolean;

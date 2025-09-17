@@ -1,6 +1,7 @@
 import { Divider } from '@mui/material';
 
 import { FallbackMessage, useNumericParam } from '@studiobooker/utils';
+
 import { useService } from '../../../hooks/service.queries';
 import ServiceStaff from './components/staff/ServiceStaff';
 import ServiceSettings from './components/settings/ServiceSettings';

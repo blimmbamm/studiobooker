@@ -1,16 +1,16 @@
-import { useMutation, useQueryClient } from '@studiobooker/utils';
+import { QueryKey } from '@tanstack/react-query';
+
 import {
-  AddAppointmentDto,
-  Appointment,
-  UpdateAppointmentDto,
-} from '../types/appointment';
-import {
+  useMutation,
+  useQueryClient,
   addAppointment,
   cancelAppointment,
   confirmAppointment,
   updateAppointment,
-} from '../api/appointment.api';
-import { QueryKey } from '@tanstack/react-query';
+  AddAppointmentDto,
+  Appointment,
+  UpdateAppointmentDto,
+} from '@studiobooker/utils';
 
 function useInvalidateAppointmentQueries() {
   const queryClient = useQueryClient();

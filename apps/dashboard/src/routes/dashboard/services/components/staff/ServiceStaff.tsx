@@ -1,11 +1,16 @@
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 
-import { ListSkeleton, Section } from '@studiobooker/utils';
-import { Service, ServiceStructured } from '../../../../../types/service';
+import {
+  ListSkeleton,
+  Section,
+  Service,
+  ServiceStructured,
+  StaffWithServiceQualification,
+} from '@studiobooker/utils';
+
 import { useManageServiceStaff } from '../../../../../hooks/service.queries';
 import StaffList from '../../../../../components/StaffList';
-import { StaffWithServiceQualification } from '../../../../../types/staff';
 
 type Props = {
   service?: ServiceStructured;

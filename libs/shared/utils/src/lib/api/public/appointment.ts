@@ -1,13 +1,13 @@
+import { client } from '../../http';
 import {
   AddAppointmentDto,
   ApiAppointment,
   ApiAvailableAppointmentSlots,
   mapApiToAppointment,
   mapApiToAvailableAppointmentSlots,
-} from '@studiobooker/utils';
-import { client } from './client';
+} from '../../types';
 
-export async function getAvailableAppointmentSlots(args: {
+export async function getAvailableAppointmentSlotsPublic(args: {
   companyId: number;
   serviceId: number;
   staffId: number;
@@ -20,7 +20,7 @@ export async function getAvailableAppointmentSlots(args: {
   return slots.map(mapApiToAvailableAppointmentSlots);
 }
 
-export async function addAppointment(
+export async function addAppointmentPublic(
   args: AddAppointmentDto & { companyId: number }
 ) {
   const appointment = await client.post<ApiAppointment>(

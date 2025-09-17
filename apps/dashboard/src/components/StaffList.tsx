@@ -6,9 +6,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { Staff } from '@studiobooker/utils';
 import { ReactNode } from 'react';
-
-import { Staff } from '../types/staff';
 
 type StaffListProps<T extends Staff> = {
   staff: T[];

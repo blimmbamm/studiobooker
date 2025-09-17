@@ -1,5 +1,5 @@
-import { PropertiesTableProperty } from '@studiobooker/utils';
-import { Staff } from '../../../../../types/staff';
+import { PropertiesTableProperty, Staff } from '@studiobooker/utils';
+
 import { useStaffProperty } from '../../hooks/useStaffProperty';
 
 type Props = { staff: Staff };

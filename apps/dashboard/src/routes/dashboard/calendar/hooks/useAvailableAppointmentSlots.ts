@@ -1,9 +1,11 @@
 import { Dayjs } from 'dayjs';
 
-import { useQuery } from '@studiobooker/utils';
-import { getAvailableAppointmentSlots } from '../../../../api/appointment.api';
-import { Service } from 'apps/dashboard/src/types/service';
-import { Staff } from 'apps/dashboard/src/types/staff';
+import {
+  getAvailableAppointmentSlots,
+  useQuery,
+  Service,
+  Staff,
+} from '@studiobooker/utils';
 
 type UseAvailableAppointmentSlotsParams = {
   service: Service;

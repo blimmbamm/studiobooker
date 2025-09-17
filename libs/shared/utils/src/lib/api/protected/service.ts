@@ -1,19 +1,20 @@
+import { client } from '../../http';
 import {
-  mapApiToServiceCategory,
-  mapApiToServiceCategoryStructured,
-} from '../types/api/service-category.mapper';
+  ApiService,
+  ApiServiceStructured,
+  EditServiceCategoryDto,
+  EditServiceDto,
+  mapApiToService,
+  mapApiToServiceStructured,
+} from '../../types';
 import {
   ApiServiceCategory,
   ApiServiceCategoryStructured,
-} from '../types/api/service-category';
-import { client } from './client';
-import { ApiService, ApiServiceStructured } from '../types/api/service';
+} from '../../types/api/service-category/service-category.api';
 import {
-  mapApiToService,
-  mapApiToServiceStructured,
-} from '../types/api/service.mapper';
-import { EditServiceDto } from '../types/service';
-import { EditServiceCategoryDto } from '../types/service-category';
+  mapApiToServiceCategory,
+  mapApiToServiceCategoryStructured,
+} from '../../types/api/service-category/service-category.mapper';
 
 export async function getServicesByCategory(onlyActivatedServices?: boolean) {
   const servicesByCategory = await client.get<ApiServiceCategoryStructured[]>(

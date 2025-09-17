@@ -1,10 +1,13 @@
-import { useQuery, useAlert } from '@studiobooker/utils';
-import { useCalendarStaffSelection } from './useCalendarStaffSelection';
-import { useCalendarTimeRange } from './useCalendarTimeRange';
 import {
+  useQuery,
+  useAlert,
   getCalendarData,
   getPlaceholderCalendarData,
-} from '../../../../api/appointment.api';
+} from '@studiobooker/utils';
+
+import { useCalendarStaffSelection } from './useCalendarStaffSelection';
+import { useCalendarTimeRange } from './useCalendarTimeRange';
+
 import { useEffect } from 'react';
 
 export function useCalendarData() {

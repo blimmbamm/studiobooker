@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 
-import { CalendarDay } from '../../../types/calendar-day';
 import CalendarAppointment from './components/calendar-appointment/CalendarAppointment';
-import { Appointment } from '../../../types/appointment';
+import { Appointment, CalendarDay } from '@studiobooker/utils';
 
 type Props = {
   day: CalendarDay;

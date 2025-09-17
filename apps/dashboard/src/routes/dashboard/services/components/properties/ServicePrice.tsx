@@ -1,14 +1,16 @@
+import { ChangeEvent } from 'react';
 import { InputAdornment } from '@mui/material';
 
-import { isPositiveNumberStringOrEmpty, PropertiesTableProperty } from '@studiobooker/utils';
-import { Service } from '../../../../../types/service';
+import {
+  isPositiveNumberStringOrEmpty,
+  PropertiesTableProperty,
+  Service,
+} from '@studiobooker/utils';
+
 import { useServiceProperty } from '../../hooks/useServiceProperty';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
-import { ChangeEvent } from 'react';
 
 export default function ServicePrice({ service }: { service: Service }) {
-
-
   const { value, handleChange } = useServiceProperty({
     entity: service,
     property: 'price',

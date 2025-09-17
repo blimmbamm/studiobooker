@@ -16,13 +16,12 @@ import {
   createUseAvailableAppointmentSlots,
   useMutation,
   AppointmentData,
+  getStaffByServicePublic,
+  getAvailableAppointmentSlotsPublic,
+  addAppointmentPublic,
 } from '@studiobooker/utils';
 import { useState } from 'react';
-import { getStaffByService } from '../api/staff';
-import {
-  addAppointment,
-  getAvailableAppointmentSlots,
-} from '../api/appointment';
+
 import {
   AddAppointmentDto,
   AppointmentStatus,
@@ -43,7 +42,8 @@ export default function ServiceBooking({
   function staffByServiceQuery(service: Service) {
     const { data: staff, ...query } = useQuery({
       queryKey: ['service-staff', service.id],
-      queryFn: () => getStaffByService({ companyId, serviceId: service.id }),
+      queryFn: () =>
+        getStaffByServicePublic({ companyId, serviceId: service.id }),
       // staleTime: 1000 * 60 * 5, // If staleTime is 0, staff gets refetched when re-opening the dialog because query gets newly subscribed
     });
 
@@ -63,7 +63,7 @@ export default function ServiceBooking({
       start.format('YYYY-MM-DD'),
     ],
     queryFn: ({ service, staff, start }) =>
-      getAvailableAppointmentSlots({
+      getAvailableAppointmentSlotsPublic({
         companyId,
         serviceId: service.id,
         staffId: staff.id,
@@ -73,7 +73,7 @@ export default function ServiceBooking({
 
   const { mutate, isPending: isSubmittingAppointment } = useMutation({
     mutationFn: (dto: AddAppointmentDto) =>
-      addAppointment({ companyId, ...dto }),
+      addAppointmentPublic({ companyId, ...dto }),
   });
 
   function handleAddAppointment({

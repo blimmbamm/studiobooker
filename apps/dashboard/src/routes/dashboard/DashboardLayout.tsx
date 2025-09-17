@@ -1,9 +1,10 @@
+import { useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { AppBarLayout, ScrollContainerContext } from '@studiobooker/utils';
+
 import { useLogout } from '../../hooks/auth/useLogout';
-import { useRef } from 'react';
 
 export default function DashboardRoot() {
   const { mutate: logout } = useLogout();

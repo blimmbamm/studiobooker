@@ -1,12 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { EditWorkingTimeDto, WorkingTime } from '../types/working-time';
-import { editWorkingTime, editWorkingTimeSetting } from '../api/working-time';
-import { useDebouncedCallback, useQueryClient } from '@studiobooker/utils';
-
-import { StaffStructured } from '../types/staff';
+import {
+  useDebouncedCallback,
+  useQueryClient,
+  editWorkingTime,
+  editWorkingTimeSetting,
+  EditWorkingTimeDto,
+  WorkingTime,
+  StaffStructured,
+  CompanyStructured,
+} from '@studiobooker/utils';
 import { CompanyQueryKeys } from './company.queries';
-import { CompanyStructured } from '../types/company';
 
 export function useEditWorkingTime({
   workingTimeId,

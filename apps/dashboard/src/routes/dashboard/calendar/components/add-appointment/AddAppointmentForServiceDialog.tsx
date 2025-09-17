@@ -14,10 +14,9 @@ import { Dayjs } from 'dayjs';
 
 import AppointmentServiceSelection from './AppointmentServiceSelection';
 import AppointmentStaffSelection from './AppointmentStaffSelection';
-import { Service } from '../../../../../types/service';
-import { Staff } from '../../../../../types/staff';
 import AppointmentDateAndTimeSelection from './AppointmentDateAndTimeSelection';
 import AppointmentCustomerSelectionAndSummary from './AppointmentCustomerSelectionAndSummary';
+import { Service, Staff } from '@studiobooker/utils';
 
 type Props = Omit<DialogProps, 'onClose'> & {
   onClose: () => void;

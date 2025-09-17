@@ -1,9 +1,12 @@
 import AddIcon from '@mui/icons-material/Add';
-
-import { SingleInputDialog } from '@studiobooker/utils';
-import { useAddService } from '../../../../../hooks/service.queries';
-import { ServiceCategoryStructured } from '../../../../../types/service-category';
 import { IconButton } from '@mui/material';
+
+import {
+  SingleInputDialog,
+  ServiceCategoryStructured,
+} from '@studiobooker/utils';
+
+import { useAddService } from '../../../../../hooks/service.queries';
 
 type Props = {
   category?: ServiceCategoryStructured;
