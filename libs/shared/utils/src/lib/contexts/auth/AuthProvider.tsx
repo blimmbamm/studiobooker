@@ -1,9 +1,10 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '../../hooks';
-import { checkAuth } from '../../api/auth';
 import { CircularProgress } from '@mui/material';
+
+import { useQuery } from '../../hooks';
 import { AuthContext } from './AuthContext';
+import { checkAuth } from '../../api/protected';
 
 export function AuthProvider(props: PropsWithChildren) {
   const navigate = useNavigate();
