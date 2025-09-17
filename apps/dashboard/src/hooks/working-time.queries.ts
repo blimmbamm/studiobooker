@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { EditWorkingTimeDto, WorkingTime } from '../types/working-time';
 import { editWorkingTime, editWorkingTimeSetting } from '../api/working-time';
-import { useDebouncedCallback } from '@studiobooker/utils';
+import { useDebouncedCallback, useQueryClient } from '@studiobooker/utils';
 
 import { StaffStructured } from '../types/staff';
 import { CompanyQueryKeys } from './company.queries';

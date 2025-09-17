@@ -1,6 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
-
-import { useQuery, useMutation } from '@studiobooker/utils';
+import { useQuery, useMutation, useQueryClient } from '@studiobooker/utils';
 import {
   addStaff,
   editStaff,
@@ -48,6 +46,7 @@ export function useAllStaff(searchParams?: GetAllStaffSearchParams) {
   };
 }
 
+// TODO: why is id optional?
 export function useStaff(staffId?: number) {
   const { data: staff, ...query } = useQuery({
     queryKey: StaffQueryKeys.STAFF_DETAIL(staffId!),
@@ -72,7 +71,7 @@ export function useAddStaff(
   return useMutation({
     mutationFn: (variables: { name: string }) => addStaff(variables.name),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: StaffQueryKeys.STAFF_ANY });
+      queryClient.invalidateQueries({ queryKey: StaffQueryKeys.STAFF_ALL });
       args.onSuccess?.();
     },
     onError: () => {
@@ -92,6 +91,7 @@ export function useEditStaff({
   onSuccess?: () => void;
   withOptimisticUpdating?: boolean;
 }) {
+  // const {queryClient, invalidateQueries} = useQueryClient();
   const queryClient = useQueryClient();
 
   return useMutation({

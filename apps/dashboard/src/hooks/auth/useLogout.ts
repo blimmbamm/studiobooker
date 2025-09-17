@@ -1,7 +1,9 @@
-import { useMutation } from '@studiobooker/utils';
-import { logout } from '../../api/auth.api';
-import { useAuth } from '../../contexts/AuthContext';
-import { useQueryClient } from '@tanstack/react-query';
+import {
+  logout,
+  useAuth,
+  useMutation,
+  useQueryClient,
+} from '@studiobooker/utils';
 
 export function useLogout() {
   const { synchronizeAuth } = useAuth();

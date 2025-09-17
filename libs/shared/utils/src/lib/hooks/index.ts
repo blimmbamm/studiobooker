@@ -4,3 +4,4 @@ export * from './useMutation';
 export * from './useNumericParam';
 export * from './useInputWithAutomaticAndDebouncedSubmission';
 export * from './useAvailableAppointmentSlots';
+export * from './useQueryClient';

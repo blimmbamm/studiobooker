@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from '@studiobooker/utils';
+import { useMutation, useQuery, useQueryClient } from '@studiobooker/utils';
 import { editCompanyInfo, getCompany } from '../api/company.api';
 import { EditCompanyInfoDto } from '../types/company-info';
-import { useQueryClient } from '@tanstack/react-query';
 import { CompanyStructured } from '../types/company';
 
 export const CompanyQueryKeys = {

@@ -7,21 +7,29 @@ import {
   QueryKey,
 } from '@tanstack/react-query';
 import { QueryError, QueryErrorType } from '../types';
+import { useOptionalAuth } from '../contexts';
 
-export function useQuery<TData, TKey extends QueryKey = QueryKey>(
-  options: UseQueryOptions<TData, QueryError, TData, TKey>
+export function useQuery<TData>(
+  options: UseQueryOptions<TData, QueryError, TData, QueryKey>
 ): UseQueryResult<TData, QueryError> & {
   isNotFoundError: boolean;
   isOtherError: boolean;
 } {
-  const query = useTanstackQuery<TData, QueryError, TData, TKey>({
-    ...options,
+  const { queryKey, ...otherOptions } = options;
+
+  const auth = useOptionalAuth();
+
+  const queryKeyWithAuthId = auth ? [auth.id, ...queryKey] : queryKey;
+  console.log(queryKeyWithAuthId);
+
+  const query = useTanstackQuery<TData, QueryError, TData, QueryKey>({
+    ...otherOptions,
+    queryKey: queryKeyWithAuthId,
     retry: (count, error) =>
       error.type === QueryErrorType.OTHER
         ? count < 3
         : error.status >= 500 && count < 3,
-    // networkMode: 'always',
-    ...options,
+    // networkMode: 'always', // TODO: What is this used for again?
   });
 
   return {

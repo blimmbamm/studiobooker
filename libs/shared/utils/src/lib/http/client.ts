@@ -65,3 +65,5 @@ export class HttpClient {
     return this._fetch<T>({ path, method: 'DELETE', body });
   }
 }
+
+export const client = new HttpClient('http://localhost:3001/');

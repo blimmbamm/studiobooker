@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useMutation } from '@studiobooker/utils';
+import { useAuth, useMutation } from '@studiobooker/utils';
 
-import { useAuth } from '../../../contexts/AuthContext';
 import { login } from '../../../api/auth.api';
 
 export function useLogin() {

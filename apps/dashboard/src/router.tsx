@@ -7,7 +7,6 @@ import RegisterPage from './routes/auth/register/RegisterPage';
 import LoginPage from './routes/auth/login/LoginPage';
 import StaffDetailStart from './routes/dashboard/staff/StaffDetailStart';
 import StaffDetail from './routes/dashboard/staff/StaffDetail';
-import AuthProvider from './contexts/AuthContext';
 import VerifySignupPage from './routes/auth/verify/VerifySignupPage';
 import ServicesLayout from './routes/dashboard/services/ServicesLayout';
 import ServiceDetail from './routes/dashboard/services/ServiceDetail';
@@ -17,6 +16,7 @@ import Settings from './routes/dashboard/settings/Settings';
 import CalendarLayout from './routes/dashboard/calendar/CalendarLayout';
 import ProtectedRoute from './components/route-wrapper/ProtectedRoute';
 import GuestRoute from './components/route-wrapper/GuestRoute';
+import { AuthProvider } from '@studiobooker/utils';
 
 export const router = createBrowserRouter([
   {

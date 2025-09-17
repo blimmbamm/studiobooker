@@ -1,6 +1,11 @@
-import { useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import { UseQueryResult } from '@tanstack/react-query';
 
-import { useQuery, useMutation, QueryError } from '@studiobooker/utils';
+import {
+  useQuery,
+  useMutation,
+  QueryError,
+  useQueryClient,
+} from '@studiobooker/utils';
 import {
   addCategory,
   addService,
