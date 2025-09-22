@@ -21,7 +21,6 @@ export function AuthProvider(props: PropsWithChildren) {
     queryFn: checkAuth,
   });
 
-  console.log(data);
   const { id } = data || {};
 
   useEffect(() => {

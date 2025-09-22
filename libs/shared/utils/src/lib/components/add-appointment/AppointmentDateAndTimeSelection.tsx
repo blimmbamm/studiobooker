@@ -42,7 +42,6 @@ export default function AppointmentDateAndTimeSelection({
   ...stepNavigationProps
 }: Props) {
   const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log(clientTimeZone);
 
   const startOfToday = dayjs().tz(clientTimeZone).startOf('day');
   const [startDate, setStartDate] = useState(startOfToday);

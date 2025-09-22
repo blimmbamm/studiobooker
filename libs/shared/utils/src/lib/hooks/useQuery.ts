@@ -20,7 +20,6 @@ export function useQuery<TData>(
   const auth = useOptionalAuth();
 
   const queryKeyWithAuthId = auth ? [auth.id, ...queryKey] : queryKey;
-  console.log(queryKeyWithAuthId);
 
   const query = useTanstackQuery<TData, QueryError, TData, QueryKey>({
     ...otherOptions,

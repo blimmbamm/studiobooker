@@ -9,7 +9,7 @@ import {
   IconButton,
   ListItemTextProps,
 } from '@mui/material';
-import { NavLink, To } from 'react-router-dom';
+import { NavLink, To, useLocation } from 'react-router-dom';
 import { grey } from '@mui/material/colors';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -54,6 +54,8 @@ export function NavigationList<T extends { id: number }>({
 
   const [selectedItem, setSelectedItem] = useState<T | null>(null);
 
+  const {search} = useLocation();
+
   function handleSecondaryAction(event: MouseEvent<HTMLElement>, item: T) {
     event.preventDefault();
     setAnchorEl(event.currentTarget);
@@ -79,7 +81,7 @@ export function NavigationList<T extends { id: number }>({
           disablePadding
           key={item.id}
           component={navigateTo ? NavLink : 'li'}
-          to={navigateTo?.(item)}
+          to={`${navigateTo?.(item)}${search}`}
           sx={{
             color: 'inherit',
             ...(secondaryActionRender

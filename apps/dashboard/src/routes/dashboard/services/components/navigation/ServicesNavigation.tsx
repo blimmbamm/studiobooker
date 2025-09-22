@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
   SideNavSection,
@@ -16,49 +16,34 @@ import AddService from './AddService';
 export default function ServicesNavigation() {
   const { serviceCategories, isLoading, isError } = useServicesByCategory();
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<ServiceCategoryStructured>();
+  const [params, setParams] = useSearchParams();
+  const categoryId = params.get('category');
+
+  const selectedCategory = serviceCategories?.find(
+    (c) => c.id.toString() == categoryId
+  );
 
   const serviceId = useNumericParam('id');
 
   const navigate = useNavigate();
 
-  function handleSwitchCategory(category: ServiceCategoryStructured) {
-    setSelectedCategory(category);
-
-    /**
-     * if there is a service id via route params, and if this id does not belong
-     * to the selected category, navigate to just /dashboard/services
-     */
-    if (serviceId && !category?.services.find((s) => s.id === serviceId)) {
-      navigate('/dashboard/services');
-    }
+  function handleSelectCategory(category: ServiceCategoryStructured) {
+    setParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set('category', category.id.toString());
+      return newParams;
+    });
   }
 
   useEffect(() => {
-    if (serviceId) {
-      /**
-       * If there is a service id in the url, set selected category
-       * to the category that contains the service. This is needed
-       * to auto-select the proper category if page is loaded with
-       * service detail, that is /dashboard/services/:id
-       */
-      setSelectedCategory(
-        serviceCategories?.find((sc) =>
-          sc.services.map((s) => s.id).includes(serviceId)
-        )
-      );
-    } else {
-      /**
-       * If user is on just /dashboard/services, update selected category
-       * if underlying data changes, for example, if a service is added
-       * into the category.
-       */
-      setSelectedCategory((prevCategory) =>
-        serviceCategories?.find((sc) => sc.id === prevCategory?.id)
-      );
+    if (
+      selectedCategory &&
+      serviceId &&
+      !selectedCategory?.services.find((s) => s.id === serviceId)
+    ) {
+      navigate({ pathname: '.', search: params.toString() });
     }
-  }, [serviceCategories, serviceId]);
+  }, [selectedCategory, serviceId]);
 
   return (
     <>
@@ -70,7 +55,7 @@ export default function ServicesNavigation() {
           data={serviceCategories}
           labelProperty="name"
           isActive={(category) => category === selectedCategory}
-          onClick={handleSwitchCategory}
+          onClick={handleSelectCategory}
           fallbackMessage="No categories yet."
           secondaryActionRender={(category, anchorEl, handleClose) => (
             <CategoryOptionsMenu

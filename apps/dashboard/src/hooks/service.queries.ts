@@ -340,7 +340,7 @@ export function useEditServiceServiceCategory(args?: {
               ?.services.push(serviceToMove);
           }
 
-          return newData;
+          return newData.sort(createSorter('name'));
         }
       );
 
@@ -367,6 +367,24 @@ export function useEditServiceServiceCategory(args?: {
       args?.onSuccess?.();
     },
   });
+}
+
+function createSorter<T, K extends keyof T>(
+  key: K,
+  order: 'asc' | 'desc' = 'asc'
+): (a: T, b: T) => number {
+  return function (a, b) {
+    const valA = a[key];
+    const valB = b[key];
+
+    if (valA == null && valB == null) return 0;
+    if (valA == null) return order === 'asc' ? 1 : -1;
+    if (valB == null) return order === 'asc' ? -1 : 1;
+
+    if (valA < valB) return order === 'asc' ? -1 : 1;
+    if (valA > valB) return order === 'asc' ? 1 : -1;
+    return 0;
+  };
 }
 
 export function useEditServiceCategory({

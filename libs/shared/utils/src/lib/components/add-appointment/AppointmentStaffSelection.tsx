@@ -27,7 +27,6 @@ export default function AppointmentStaffSelection({
   ...stepNavigationProps
 }: Props) {
   const { staff, noStaff, isError, isLoading } = staffQuery(selectedService);
-  console.log(staff);
 
   if (isError) return <FallbackMessage message="Failed to load staff." />;
 
