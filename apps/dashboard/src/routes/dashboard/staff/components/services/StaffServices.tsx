@@ -10,9 +10,9 @@ import {
   ServiceWithStaffQualification,
 } from '@studiobooker/utils';
 
-import { useManageStaffServices } from '../../../../../hooks/service.queries';
 import StaffServicesSkeleton from './StaffServicesSkeleton';
 import { ServicesList } from '../../../../../components/ServicesList';
+import { useManageStaffServices } from '../../../../../hooks/queries/service.queries';
 
 type Props = {
   staff?: StaffStructured;

@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAlert, Staff } from '@studiobooker/utils';
-
-import { useAllStaff } from '../../../../hooks/staff.queries';
+import { useAllStaff } from '../../../../hooks/queries/staff.queries';
 
 export function useCalendarStaffSelection(maxSelectionSize: number = 10) {
   const [params, setParams] = useSearchParams();

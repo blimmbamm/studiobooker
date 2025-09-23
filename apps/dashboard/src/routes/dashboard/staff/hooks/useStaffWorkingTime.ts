@@ -1,7 +1,7 @@
 import { WorkingTime } from '@studiobooker/utils';
 
-import { useEditWorkingTime } from '../../../../hooks/working-time.queries';
-import { useWorkingTime } from '../../../../hooks/useWorkingTime';
+import { useEditWorkingTime } from '../../../../hooks/queries/working-time.queries';
+import { useWorkingTime } from '../../../../hooks/working-time/useWorkingTime';
 
 export function useStaffWorkingTime({
   staffId,

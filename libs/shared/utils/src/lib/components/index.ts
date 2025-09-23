@@ -25,3 +25,4 @@ export * from './services-list';
 export * from './add-appointment';
 export * from './staff-list/StaffList';
 export * from './CenteredMessage';
+export * from './CenteredLayoutBox';

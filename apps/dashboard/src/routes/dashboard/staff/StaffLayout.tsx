@@ -1,17 +1,13 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-import StaffNavigation from './components/navigation/StaffNavigation';
+import { CenteredLayoutBox } from '@studiobooker/utils';
 
+import StaffNavigation from './components/navigation/StaffNavigation';
 
 export default function StaffLayout() {
   return (
-    <Box
-      maxWidth={1000}
-      margin={'auto'}
-      sx={{ backgroundColor: 'white' }}
-      minHeight={'100%'}
-    >
+    <CenteredLayoutBox>
       <StaffNavigation />
       <Box
         marginLeft={'250px'}
@@ -21,6 +17,6 @@ export default function StaffLayout() {
       >
         <Outlet />
       </Box>
-    </Box>
+    </CenteredLayoutBox>
   );
 }

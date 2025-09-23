@@ -24,6 +24,7 @@ import {
   EditServiceCategoryDto,
   ServiceCategoryStructured,
 } from '@studiobooker/utils';
+import { StaffQueryKeys } from './staff.queries';
 
 export const ServiceQueryKeys = {
   SERVICE_ALL: ['service'],
@@ -60,7 +61,7 @@ export function useServicesByCategory(
 
 export function useService(id?: number) {
   const { data: service, ...query } = useQuery({
-    queryKey: ['service', id],
+    queryKey: ServiceQueryKeys.SERVICE_DETAIL(id!),
     queryFn: () => getService(id!),
     enabled: !!id,
   });
@@ -118,14 +119,13 @@ export function useManageStaffServices() {
         ? addStaffToService(serviceId, staffId)
         : removeStaffFromService(serviceId, staffId),
     onMutate: ({ staffId, select, serviceId }) => {
-      queryClient.cancelQueries({ queryKey: ['staff', staffId] });
+      const queryKey = StaffQueryKeys.STAFF_DETAIL(staffId);
 
-      const prevStaff = queryClient.getQueryData<StaffStructured>([
-        'staff',
-        staffId,
-      ]);
+      queryClient.cancelQueries({ queryKey });
 
-      queryClient.setQueryData<StaffStructured>(['staff', staffId], (data) => {
+      const prevStaff = queryClient.getQueryData<StaffStructured>(queryKey);
+
+      queryClient.setQueryData<StaffStructured>(queryKey, (data) => {
         if (!data) return data;
 
         const newData: StaffStructured = {
@@ -142,13 +142,15 @@ export function useManageStaffServices() {
 
         return newData;
       });
-      return { prevStaff };
+      return { prevStaff, queryKey };
     },
-    onSuccess: (_, { staffId }) => {
-      queryClient.invalidateQueries({ queryKey: ['staff', staffId] });
+    onSuccess: (_, __, { queryKey }) => {
+      queryClient.invalidateQueries({ queryKey });
     },
-    onError: (_error, { staffId }, context) => {
-      queryClient.setQueryData(['staff', staffId], context?.prevStaff);
+    onError: (_, __, context) => {
+      if (context?.queryKey) {
+        queryClient.setQueryData(context?.queryKey, context?.prevStaff);
+      }
     },
   });
 }
@@ -241,7 +243,7 @@ export function useEditService({
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['service'] });
+      queryClient.invalidateQueries({ queryKey: ServiceQueryKeys.SERVICE_ALL });
       onSuccess?.();
     },
     onError: (_error, _variables, context) => {

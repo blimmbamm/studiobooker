@@ -1,7 +1,10 @@
-import { CompanyInfo, EditCompanyInfoDto } from '@studiobooker/utils';
+import {
+  CompanyInfo,
+  createUseProperty,
+  EditCompanyInfoDto,
+} from '@studiobooker/utils';
 
-import { useEditCompanyInfo } from '../../../../hooks/company.queries';
-import { createUseProperty } from '../../../../hooks/useProperty';
+import { useEditCompanyInfo } from '../../../../hooks/queries/company.queries';
 
 export const useCompanyInfoProperty = createUseProperty<
   EditCompanyInfoDto,

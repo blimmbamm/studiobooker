@@ -7,11 +7,10 @@ import {
   Appointment,
   AppointmentStatus,
 } from '@studiobooker/utils';
-
 import {
   useCancelAppointment,
   useConfirmAppointment,
-} from '../../../../../hooks/appointment.queries';
+} from '../../../../../hooks/queries/appointment.queries';
 
 type Props = { appointment: Appointment | null; onClose: () => void };
 

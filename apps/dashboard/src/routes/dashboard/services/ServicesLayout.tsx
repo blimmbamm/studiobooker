@@ -1,16 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import { CenteredLayoutBox } from '@studiobooker/utils';
+
 import ServicesNavigation from './components/navigation/ServicesNavigation';
 
 export default function ServicesLayout() {
   return (
-    <Box
-      maxWidth={1000}
-      margin={'auto'}
-      sx={{ backgroundColor: 'white' }}
-      minHeight={'100%'}
-    >
+    <CenteredLayoutBox>
       <ServicesNavigation />
       <Box
         marginLeft={'500px'}
@@ -20,6 +17,6 @@ export default function ServicesLayout() {
       >
         <Outlet />
       </Box>
-    </Box>
+    </CenteredLayoutBox>
   );
 }

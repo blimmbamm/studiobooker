@@ -1,7 +1,7 @@
 import { WorkingTime } from '@studiobooker/utils';
 
-import { useWorkingTime } from '../../../../hooks/useWorkingTime';
-import { useEditWorkingTimeSetting } from '../../../../hooks/working-time.queries';
+import { useEditWorkingTimeSetting } from '../../../../hooks/queries/working-time.queries';
+import { useWorkingTime } from '../../../../hooks/working-time/useWorkingTime';
 
 type UseWorkingTimeSettingParams = {
   workingTime: WorkingTime;

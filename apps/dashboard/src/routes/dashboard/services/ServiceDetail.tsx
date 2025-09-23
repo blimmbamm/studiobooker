@@ -2,12 +2,12 @@ import { Divider } from '@mui/material';
 
 import { FallbackMessage, useNumericParam } from '@studiobooker/utils';
 
-import { useService } from '../../../hooks/service.queries';
 import ServiceStaff from './components/staff/ServiceStaff';
 import ServiceSettings from './components/settings/ServiceSettings';
 import { ServiceProperties } from './components/properties/ServiceProperties';
 import ServiceActivationValidationProvider from '../../../contexts/ServiceActivationValidationContext';
 import ServiceStatus from './components/status/ServiceStatus';
+import { useService } from '../../../hooks/queries/service.queries';
 
 export default function ServiceDetail() {
   const serviceId = useNumericParam('id');

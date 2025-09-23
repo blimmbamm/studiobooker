@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { SingleInputDialog } from '@studiobooker/utils';
 
-import { useAddStaff } from '../../../../../hooks/staff.queries';
+import { useAddStaff } from '../../../../../hooks/queries/staff.queries';
 
 export default function AddStaff() {
   const { mutate, error, isError, isPending, isSuccess, reset } = useAddStaff();

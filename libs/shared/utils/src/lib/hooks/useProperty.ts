@@ -1,9 +1,7 @@
 import { UseMutationResult } from '@tanstack/react-query';
 
-import {
-  QueryError,
-  useInputWithAutomaticAndDebouncedSubmission,
-} from '@studiobooker/utils';
+import { QueryError } from '../types';
+import { useInputWithAutomaticAndDebouncedSubmission } from './useInputWithAutomaticAndDebouncedSubmission';
 
 export function createUseProperty<TEditDto, TEntity extends TEditDto>({
   editMutation,

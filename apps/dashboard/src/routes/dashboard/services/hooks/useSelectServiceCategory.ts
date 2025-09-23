@@ -1,6 +1,6 @@
 import { useInputWithAutomaticAndDebouncedSubmission } from '@studiobooker/utils';
 
-import { useEditServiceServiceCategory } from '../../../../hooks/service.queries';
+import { useEditServiceServiceCategory } from '../../../../hooks/queries/service.queries';
 
 export function useSelectServiceCategory({
   serviceId,

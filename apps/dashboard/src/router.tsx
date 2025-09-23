@@ -66,10 +66,10 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Settings />,
               },
-              {
-                path: 'reset-password',
-                element: <div>Reset password</div>,
-              },
+              // {
+              //   path: 'reset-password',
+              //   element: <div>Reset password</div>,
+              // },
             ],
           },
         ],
@@ -92,6 +92,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <div>Not found</div>,
+    element: <Navigate to={'/auth/login'} />,
   },
 ]);

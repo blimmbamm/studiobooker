@@ -5,8 +5,8 @@ import {
   ServiceStructured,
 } from '@studiobooker/utils';
 
-import { useServicesByCategory } from '../../../../../hooks/service.queries';
 import { useSelectServiceCategory } from '../../hooks/useSelectServiceCategory';
+import { useServicesByCategory } from '../../../../../hooks/queries/service.queries';
 
 export default function ServiceCategory({
   service,

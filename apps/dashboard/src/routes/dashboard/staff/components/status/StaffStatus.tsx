@@ -1,6 +1,6 @@
 import { StatusSection, Staff } from '@studiobooker/utils';
 
-import { useEditStaff } from '../../../../../hooks/staff.queries';
+import { useEditStaff } from '../../../../../hooks/queries/staff.queries';
 
 type Props = { staff?: Staff };
 

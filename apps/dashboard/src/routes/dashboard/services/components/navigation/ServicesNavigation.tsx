@@ -8,10 +8,10 @@ import {
   ServiceCategoryStructured,
 } from '@studiobooker/utils';
 
-import { useServicesByCategory } from '../../../../../hooks/service.queries';
 import AddCategory from './AddCategory';
 import CategoryOptionsMenu from './CategoryOptionsMenu';
 import AddService from './AddService';
+import { useServicesByCategory } from '../../../../../hooks/queries/service.queries';
 
 export default function ServicesNavigation() {
   const { serviceCategories, isLoading, isError } = useServicesByCategory();

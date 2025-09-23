@@ -11,6 +11,7 @@ import {
   CompanyStructured,
 } from '@studiobooker/utils';
 import { CompanyQueryKeys } from './company.queries';
+import { StaffQueryKeys } from './staff.queries';
 
 export function useEditWorkingTime({
   workingTimeId,
@@ -25,14 +26,13 @@ export function useEditWorkingTime({
     mutationFn: ({ inputs }: { inputs: EditWorkingTimeDto }) =>
       editWorkingTime(workingTimeId, inputs),
     onMutate: ({ inputs }) => {
-      queryClient.cancelQueries({ queryKey: ['staff', staffId] });
+      const queryKey = StaffQueryKeys.STAFF_DETAIL(staffId);
 
-      const prevStaff = queryClient.getQueryData<StaffStructured>([
-        'staff',
-        staffId,
-      ]);
+      queryClient.cancelQueries({ queryKey });
 
-      queryClient.setQueryData<StaffStructured>(['staff', staffId], (data) => {
+      const prevStaff = queryClient.getQueryData<StaffStructured>(queryKey);
+
+      queryClient.setQueryData<StaffStructured>(queryKey, (data) => {
         if (!data) return data;
 
         const optimisticallyUpdatedStaff: StaffStructured = {
@@ -44,13 +44,15 @@ export function useEditWorkingTime({
 
         return optimisticallyUpdatedStaff;
       });
-      return { prevStaff };
+      return { prevStaff, queryKey };
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['staff', staffId] });
+    onSuccess: (_, __, { queryKey }) => {
+      queryClient.invalidateQueries({ queryKey });
     },
     onError: (_error, _variables, context) => {
-      queryClient.setQueryData(['staff', staffId], context?.prevStaff);
+      if (context?.queryKey) {
+        queryClient.setQueryData(context.queryKey, context?.prevStaff);
+      }
     },
   });
 

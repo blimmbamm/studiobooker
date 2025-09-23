@@ -14,7 +14,7 @@ import {
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
-import { useAddAppointment } from '../../../../../hooks/appointment.queries';
+import { useAddAppointment } from '../../../../../hooks/queries/appointment.queries';
 
 type Props = {
   selectedService: Service;

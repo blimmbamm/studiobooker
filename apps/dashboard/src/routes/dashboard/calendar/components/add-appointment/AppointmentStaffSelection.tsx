@@ -7,11 +7,11 @@ import {
   Service,
 } from '@studiobooker/utils';
 
-import { useAllStaff } from '../../../../../hooks/staff.queries';
 import StaffList from '../../../../../components/StaffList';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
+import { useAllStaff } from '../../../../../hooks/queries/staff.queries';
 
 type Props = {
   selectedService: Service;

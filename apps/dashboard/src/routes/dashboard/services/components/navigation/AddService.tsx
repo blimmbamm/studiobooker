@@ -5,8 +5,8 @@ import {
   SingleInputDialog,
   ServiceCategoryStructured,
 } from '@studiobooker/utils';
+import { useAddService } from '../../../../../hooks/queries/service.queries';
 
-import { useAddService } from '../../../../../hooks/service.queries';
 
 type Props = {
   category?: ServiceCategoryStructured;

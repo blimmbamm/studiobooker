@@ -2,8 +2,8 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { SingleInputDialog } from '@studiobooker/utils';
+import { useAddCategory } from '../../../../../hooks/queries/service.queries';
 
-import { useAddCategory } from '../../../../../hooks/service.queries';
 
 export default function AddCategory() {
   const { mutate, error, isError, isPending, isSuccess, reset } =

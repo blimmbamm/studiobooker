@@ -2,8 +2,8 @@ import { SxProps } from '@mui/material';
 
 import { StatusSection, Service, ServiceStructured } from '@studiobooker/utils';
 
-import { useEditService } from '../../../../../hooks/service.queries';
 import { useServiceActivationValidation } from '../../../../../contexts/ServiceActivationValidationContext';
+import { useEditService } from '../../../../../hooks/queries/service.queries';
 
 type Props = {
   service?: ServiceStructured;

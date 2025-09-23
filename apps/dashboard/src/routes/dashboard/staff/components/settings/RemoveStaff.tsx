@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { SettingsItem, RemoveButton, Staff } from '@studiobooker/utils';
 
-import { useRemoveStaff } from '../../../../../hooks/staff.queries';
+import { useRemoveStaff } from '../../../../../hooks/queries/staff.queries';
 
 type Props = {
   staff?: Staff;

@@ -46,10 +46,10 @@ export default function CategoryOptionsMenu({
       <RenameCategory
         component={MenuItem}
         category={category}
-        onClick={() => {
+        onOpenDialog={() => {
           setMenuVisibility('hidden');
         }}
-        onClose={handleClose}
+        onCloseDialog={handleClose}
       >
         <ListItemIcon>
           <EditIcon fontSize="small" />

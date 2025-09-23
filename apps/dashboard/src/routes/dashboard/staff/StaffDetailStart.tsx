@@ -1,8 +1,7 @@
 import { CircularProgress } from '@mui/material';
 
 import { FallbackMessage } from '@studiobooker/utils';
-
-import { useAllStaff } from '../../../hooks/staff.queries';
+import { useAllStaff } from '../../../hooks/queries/staff.queries';
 
 export default function StaffDetailStart() {
   const { isLoading, staff, isError } = useAllStaff();
@@ -14,7 +13,7 @@ export default function StaffDetailStart() {
   }
 
   if (isError) {
-    return <FallbackMessage message='Something went wrong...'/>
+    return <FallbackMessage message="Something went wrong..." />;
   }
 
   return (

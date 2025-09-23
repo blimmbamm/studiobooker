@@ -2,30 +2,30 @@ import { FunctionComponent, ReactNode } from 'react';
 
 import { SingleInputDialog, ServiceCategory } from '@studiobooker/utils';
 
-import { useEditServiceCategory } from '../../../../../hooks/service.queries';
+import { useEditServiceCategory } from '../../../../../hooks/queries/service.queries';
 
 type Props = {
   component: FunctionComponent;
   category: ServiceCategory;
   children: ReactNode;
-  onClick?: () => void;
-  onClose?: () => void;
+  onOpenDialog?: () => void;
+  onCloseDialog?: () => void;
 };
 
 export default function RenameCategory({
   component,
   category,
   children,
-  onClick,
-  onClose,
+  onOpenDialog,
+  onCloseDialog,
 }: Props) {
   const { mutate, error, isError, isPending, isSuccess, reset } =
     useEditServiceCategory({ withOptimisticUpdating: true });
 
   return (
     <SingleInputDialog
-      onClick={onClick}
-      onClose={onClose}
+      onClick={onOpenDialog}
+      onClose={onCloseDialog}
       triggerComponent={component}
       triggerProps={{}}
       defaultValue={category.name}

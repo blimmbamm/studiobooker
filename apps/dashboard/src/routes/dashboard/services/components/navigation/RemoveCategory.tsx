@@ -2,7 +2,7 @@ import { FunctionComponent, ReactNode } from 'react';
 
 import { ConfirmDialog, ServiceCategory } from '@studiobooker/utils';
 
-import { useRemoveCategory } from '../../../../../hooks/service.queries';
+import { useRemoveCategory } from '../../../../../hooks/queries/service.queries';
 
 type Props<P> = {
   component: FunctionComponent<P>;

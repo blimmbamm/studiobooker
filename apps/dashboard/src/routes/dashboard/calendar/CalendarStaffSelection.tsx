@@ -15,9 +15,9 @@ import {
   SideNavSection,
 } from '@studiobooker/utils';
 import { useCalendarStaffSelection } from './hooks/useCalendarStaffSelection';
-import { useAllStaff } from '../../../hooks/staff.queries';
 import { grey } from '@mui/material/colors';
 import { useStaffColors } from './contexts/StaffColorContext';
+import { useAllStaff } from '../../../hooks/queries/staff.queries';
 
 type Props = { boxProps?: BoxProps };
 

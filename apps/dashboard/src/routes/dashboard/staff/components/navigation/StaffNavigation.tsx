@@ -4,8 +4,8 @@ import {
   useNumericParam,
 } from '@studiobooker/utils';
 
-import { useAllStaff } from '../../../../../hooks/staff.queries';
 import AddStaff from './AddStaff';
+import { useAllStaff } from '../../../../../hooks/queries/staff.queries';
 
 export default function StaffNavigation() {
   const { isLoading, staff, isError } = useAllStaff();
