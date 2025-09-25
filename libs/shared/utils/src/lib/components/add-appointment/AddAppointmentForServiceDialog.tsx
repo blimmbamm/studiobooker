@@ -62,7 +62,7 @@ type Props = Omit<DialogProps, 'onClose'> & {
   initialService?: Service | null;
   initialStep?: number;
   withSuccessStep?: boolean;
-  stepFilter: (label: string) => boolean;
+  stepFilter?: (label: string) => boolean;
   servicesByCategoryQuery: ServicesByCategoryQuery;
   staffQuery: StaffQuery;
   availableAppointmentSlotsQuery: AvailableAppointmentSlotsQuery;
@@ -84,7 +84,7 @@ export function AddAppointmentForServiceDialog({
   initialStep,
   initialService = null,
   withSuccessStep = false,
-  stepFilter,
+  stepFilter = () => true,
   ...dialogProps
 }: Props) {
   const [activeStep, setActiveStep] = useState(0);
@@ -187,7 +187,7 @@ export function AddAppointmentForServiceDialog({
           onAddAppointment={(appointmentData) => {
             onAddAppointment({
               appointmentData,
-              onSuccess: withSuccessStep ? nextStep : undefined,
+              onSuccess: withSuccessStep ? nextStep : handleClose,
             });
           }}
           isSubmittingAppointment={isSubmittingAppointment}
