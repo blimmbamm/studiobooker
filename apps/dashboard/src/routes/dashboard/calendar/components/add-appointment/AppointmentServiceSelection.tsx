@@ -1,8 +1,12 @@
-import { Box } from '@mui/material';
+import { Box, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
-import { FallbackMessage, ListSkeleton, Service } from '@studiobooker/utils';
+import {
+  FallbackMessage,
+  ListSkeleton,
+  Service,
+  ServicesList,
+} from '@studiobooker/utils';
 
-import { ServicesList } from '../../../../../components/ServicesList';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
@@ -31,8 +35,16 @@ export default function AppointmentServiceSelection({
         {serviceCategories && (
           <ServicesList
             serviceCategories={serviceCategories}
-            onClickService={onSelectService}
-            serviceIsSelected={(service) => selectedService === service}
+            renderListItemContent={(service) => (
+              <ListItem key={service.id} disablePadding>
+                <ListItemButton
+                  onClick={() => onSelectService(service)}
+                  selected={service === selectedService}
+                >
+                  <ListItemText primary={service.title} />
+                </ListItemButton>
+              </ListItem>
+            )}
           />
         )}
         {noServices && (

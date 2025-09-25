@@ -1,3 +1,5 @@
+'use client';
+
 import { PropsWithChildren, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';

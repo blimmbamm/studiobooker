@@ -1,4 +1,10 @@
-import { SxProps } from '@mui/material';
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  SxProps,
+} from '@mui/material';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
@@ -8,10 +14,10 @@ import {
   StaffStructured,
   ServiceCategoryForStaff,
   ServiceWithStaffQualification,
+  ServicesList,
 } from '@studiobooker/utils';
 
 import StaffServicesSkeleton from './StaffServicesSkeleton';
-import { ServicesList } from '../../../../../components/ServicesList';
 import { useManageStaffServices } from '../../../../../hooks/queries/service.queries';
 
 type Props = {
@@ -22,7 +28,7 @@ type Props = {
 export default function StaffServices({ staff, sx }: Props) {
   const manageStaffServicesMutation = useManageStaffServices();
 
-  function categorySelectionCheckbox({ services }: ServiceCategoryForStaff) {
+  function CategorySelectionCheckbox({ services }: ServiceCategoryForStaff) {
     return services.every((s) => s.staffIsQualifiedForService) ? (
       <CheckBoxOutlinedIcon />
     ) : services.some((s) => s.staffIsQualifiedForService) ? (
@@ -32,7 +38,7 @@ export default function StaffServices({ staff, sx }: Props) {
     );
   }
 
-  function serviceItemIcon(service: ServiceWithStaffQualification) {
+  function ServiceItemIcon(service: ServiceWithStaffQualification) {
     return service.staffIsQualifiedForService ? (
       <CheckBoxOutlinedIcon />
     ) : (
@@ -55,8 +61,9 @@ export default function StaffServices({ staff, sx }: Props) {
     <Section
       title="Services"
       contentBoxProps={{
-        width: 'fit-content',
-        minWidth: '75%',
+        width: '100%',
+        // width: 'fit-content',
+        // minWidth: '75%',
       }}
       sx={sx}
     >
@@ -64,15 +71,21 @@ export default function StaffServices({ staff, sx }: Props) {
       {staff && (
         <ServicesList
           serviceCategories={staff.serviceCategories}
-          categoryAsItemButton={true}
+          categoryAsItemButton
           expandOnSecondaryAction
-          categoryItemIcon={categorySelectionCheckbox}
-          serviceItemIcon={serviceItemIcon}
-          onClickService={(service) =>
-            handleToggleServiceSelection(staff, service)
-          }
-          serviceIsDisabled={() => staff.activated}
+          categoryItemIcon={CategorySelectionCheckbox}
           categoryIsDisabled={() => staff.activated}
+          renderListItemContent={(service) => (
+            <ListItem key={service.id} disablePadding>
+              <ListItemButton
+                onClick={() => handleToggleServiceSelection(staff, service)}
+                disabled={staff.activated}
+              >
+                <ListItemIcon>{ServiceItemIcon(service)}</ListItemIcon>
+                <ListItemText primary={service.title} />
+              </ListItemButton>
+            </ListItem>
+          )}
         />
       )}
     </Section>

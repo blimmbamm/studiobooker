@@ -5,9 +5,9 @@ import {
   ListSkeleton,
   Staff,
   Service,
+  StaffList,
 } from '@studiobooker/utils';
 
-import StaffList from '../../../../../components/StaffList';
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';

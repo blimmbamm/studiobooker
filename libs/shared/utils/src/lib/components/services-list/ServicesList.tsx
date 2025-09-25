@@ -11,11 +11,7 @@ export type ServicesListProps<T extends ServiceCategoryStructured> = {
   categoryAsItemButton?: boolean;
   expandOnSecondaryAction?: boolean;
   onClickCategory?: () => void;
-  onClickService?: (service: T['services'][number]) => void;
   categoryItemIcon?: (category: T) => ReactNode;
-  serviceItemIcon?: (service: T['services'][number]) => ReactNode;
-  serviceIsSelected?: (service: T['services'][number]) => boolean;
-  serviceIsDisabled?: (service: T['services'][number]) => boolean;
   categoryIsDisabled?: (category: T) => boolean;
   listProps?: ListProps;
   renderListItemContent: (s: T['services'][number]) => ReactNode;

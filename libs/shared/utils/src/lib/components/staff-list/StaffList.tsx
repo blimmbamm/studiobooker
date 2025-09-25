@@ -17,7 +17,7 @@ type StaffListProps<T extends Staff> = {
   staffIsDisabled?: (staff: T) => boolean;
 };
 
-export default function StaffList<T extends Staff>({
+export function StaffList<T extends Staff>({
   staff,
   onClickStaff,
   staffItemIcon,

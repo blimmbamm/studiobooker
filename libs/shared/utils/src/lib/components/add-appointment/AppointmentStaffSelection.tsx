@@ -10,7 +10,7 @@ import { Staff } from '../../types/api/staff/staff';
 import { FallbackMessage } from '../FallbackMessage';
 import { ListSkeleton } from '../ListSkeleton';
 import { StaffQuery } from './AddAppointmentForServiceDialog';
-import StaffList from '../staff-list/StaffList';
+import { StaffList } from '../staff-list/StaffList';
 
 type Props = {
   selectedService: Service;

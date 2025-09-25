@@ -6,10 +6,10 @@ import {
   Section,
   Service,
   ServiceStructured,
+  StaffList,
   StaffWithServiceQualification,
 } from '@studiobooker/utils';
 
-import StaffList from '../../../../../components/StaffList';
 import { useManageServiceStaff } from '../../../../../hooks/queries/service.queries';
 
 type Props = {
