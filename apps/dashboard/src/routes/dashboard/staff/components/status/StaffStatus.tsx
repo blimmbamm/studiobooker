@@ -1,8 +1,14 @@
-import { StatusSection, Staff } from '@studiobooker/utils';
+import {
+  StatusSection,
+  Staff,
+  StaffStructured,
+  useAlert,
+} from '@studiobooker/utils';
 
 import { useEditStaff } from '../../../../../hooks/queries/staff.queries';
+import { useStaffActivationValidation } from '../../../../../contexts/StaffActivationValidationContext';
 
-type Props = { staff?: Staff };
+type Props = { staff?: StaffStructured };
 
 export default function StaffStatus({ staff }: Props) {
   const { mutate } = useEditStaff({
@@ -10,10 +16,40 @@ export default function StaffStatus({ staff }: Props) {
     withOptimisticUpdating: true,
   });
 
+  const { setError } = useStaffActivationValidation();
+
+  const { show } = useAlert();
+
+  const hasNoWorkingTimes = staff?.workingTimes.every((wt) => !wt.activated);
+
+  const hasNoServiceCapability = staff?.serviceCategories.every((c) =>
+    c.services.every((s) => !s.staffIsQualifiedForService)
+  );
+
   function handleToggleStaffActivation(staff: Staff) {
-    mutate({
-      input: { activated: !staff.activated },
-    });
+    if (!hasNoServiceCapability && !hasNoWorkingTimes) {
+      mutate({
+        input: { activated: !staff.activated },
+      });
+    }
+
+    if(hasNoWorkingTimes || hasNoServiceCapability) {
+      show({severity: 'error', message: 'Staff cannot be activated, check reasons below.'})
+    }
+
+    if (hasNoWorkingTimes) {
+      setError(
+        'working-times',
+        'Staff members with no working times cannot be activated.'
+      );
+    }
+
+    if (hasNoServiceCapability) {
+      setError(
+        'services',
+        'Staff members without any service capability cannot be activated.'
+      );
+    }
   }
 
   return (

@@ -81,14 +81,12 @@ export default function ServiceActivationValidationProvider({
 }
 
 export function useServiceActivationValidation() {
-  const serviceActivationValidationContext = useContext(
-    ServiceActivationValidationContext
-  );
+  const context = useContext(ServiceActivationValidationContext);
 
-  if (!serviceActivationValidationContext)
+  if (!context)
     throw new Error(
       'useServiceActivationValidation must be used within ServiceActivationValidationProvider'
     );
 
-  return serviceActivationValidationContext;
+  return context;
 }

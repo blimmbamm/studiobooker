@@ -2,9 +2,17 @@ import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { JSX } from 'react';
 
-type Props = { title: string; actionComponent?: JSX.Element };
+type Props = {
+  title: string;
+  actionComponent?: JSX.Element;
+  sectionError?: string;
+};
 
-export default function SectionTitle({ title, actionComponent }: Props) {
+export default function SectionTitle({
+  title,
+  actionComponent,
+  sectionError,
+}: Props) {
   return (
     <Box
       display="flex"
@@ -13,7 +21,14 @@ export default function SectionTitle({ title, actionComponent }: Props) {
       alignItems="center"
       padding={2}
     >
-      <Typography variant="h5">{title}</Typography>
+      <Box>
+        <Typography variant="h5">{title}</Typography>
+        {sectionError && (
+          <Typography variant="caption" color="error">
+            {sectionError}
+          </Typography>
+        )}
+      </Box>
       {actionComponent && actionComponent}
     </Box>
   );

@@ -8,6 +8,7 @@ import StaffSettings from './components/settings/StaffSettings';
 import StaffProperties from './components/properties/StaffProperties';
 import StaffStatus from './components/status/StaffStatus';
 import { useStaff } from '../../../hooks/queries/staff.queries';
+import StaffActivationValidationProvider from '../../../contexts/StaffActivationValidationContext';
 
 export default function StaffDetail() {
   const staffId = useNumericParam('id');
@@ -23,7 +24,7 @@ export default function StaffDetail() {
   }
 
   return (
-    <>
+    <StaffActivationValidationProvider staff={staff}>
       <StaffStatus staff={staff} />
       <Divider />
       <StaffProperties staff={staff} />
@@ -33,6 +34,6 @@ export default function StaffDetail() {
       <StaffServices staff={staff} />
       <Divider />
       <StaffSettings staff={staff} sx={{ marginBottom: 5 }} />
-    </>
+    </StaffActivationValidationProvider>
   );
 }

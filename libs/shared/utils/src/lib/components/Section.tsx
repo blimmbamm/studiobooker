@@ -7,6 +7,7 @@ type Props = {
   title: string;
   children: ReactNode;
   contentBoxProps?: BoxProps;
+  sectionError?: string;
   sx?: SxProps;
 };
 
@@ -14,11 +15,12 @@ export function Section({
   title,
   children,
   contentBoxProps,
+  sectionError,
   sx,
 }: Props) {
   return (
     <Box component="section" sx={sx}>
-      <SectionTitle title={title} />
+      <SectionTitle title={title} sectionError={sectionError} />
       <Box paddingInline={2} {...contentBoxProps}>
         {children}
       </Box>

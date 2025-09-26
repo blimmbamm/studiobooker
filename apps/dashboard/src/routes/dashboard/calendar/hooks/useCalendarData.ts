@@ -17,7 +17,7 @@ export function useCalendarData() {
   const { show } = useAlert();
 
   const { data: calendarDays, ...query } = useQuery({
-    queryKey: [timeRange, staffIds],
+    queryKey: [timeRange, staffIds?.sort()],
     queryFn: () =>
       getCalendarData({
         from: timeRange!.from,

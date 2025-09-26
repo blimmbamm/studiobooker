@@ -19,6 +19,7 @@ import {
 
 import StaffServicesSkeleton from './StaffServicesSkeleton';
 import { useManageStaffServices } from '../../../../../hooks/queries/service.queries';
+import { useStaffActivationValidation } from '../../../../../contexts/StaffActivationValidationContext';
 
 type Props = {
   staff?: StaffStructured;
@@ -27,6 +28,8 @@ type Props = {
 
 export default function StaffServices({ staff, sx }: Props) {
   const manageStaffServicesMutation = useManageStaffServices();
+
+  const { errorMessage, resetError } = useStaffActivationValidation();
 
   function CategorySelectionCheckbox({ services }: ServiceCategoryForStaff) {
     return services.every((s) => s.staffIsQualifiedForService) ? (
@@ -50,6 +53,8 @@ export default function StaffServices({ staff, sx }: Props) {
     staff: StaffStructured,
     service: ServiceWithStaffQualification
   ) {
+    resetError('services');
+
     manageStaffServicesMutation.mutate({
       staffId: staff.id,
       select: !service.staffIsQualifiedForService,
@@ -60,6 +65,7 @@ export default function StaffServices({ staff, sx }: Props) {
   return (
     <Section
       title="Services"
+      sectionError={errorMessage('services')}
       contentBoxProps={{
         width: '100%',
         // width: 'fit-content',

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { AppBarLayout, ScrollContainerContext } from '@studiobooker/utils';
@@ -10,6 +10,8 @@ export default function DashboardRoot() {
   const { mutate: logout } = useLogout();
 
   const scrollContainerRef = useRef<HTMLElement>(null);
+
+  const { pathname, search } = useLocation();
 
   return (
     <AppBarLayout
@@ -22,7 +24,11 @@ export default function DashboardRoot() {
         </ScrollContainerContext.Provider>
       )}
     >
-      <Button component={NavLink} to={'calendar'} color="inherit">
+      <Button
+        component={NavLink}
+        to={`calendar${pathname.includes('calendar') ? search : ''}`}
+        color="inherit"
+      >
         Calendar
       </Button>
       <Button component={NavLink} to={'staff'} color="inherit">

@@ -12,7 +12,7 @@ type Props = {
 
 export default function ServiceStatus({ service, sx }: Props) {
   const { mutate } = useEditService({
-    serviceId: service?.id || 0, // TODO: move serviceId to mutate function
+    serviceId: service?.id || 0,
     withOptimisticUpdating: true,
   });
 
@@ -25,7 +25,7 @@ export default function ServiceStatus({ service, sx }: Props) {
       }
 
       if (!service.price) {
-        setError('price', 'Must be set in order to activate service');
+        setError('price', 'Must be set in order to activate service.');
       }
     } else {
       mutate({ input: { activated: !service.activated } });

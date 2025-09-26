@@ -1,7 +1,14 @@
 'use client';
 
 import { Alert, AlertColor, Snackbar } from '@mui/material';
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 type AlertContextType = {
   show: (args: AlertOptions) => void;
@@ -32,16 +39,21 @@ export function AlertProvider({ children }: PropsWithChildren) {
     setAlert((prev) => ({ ...prev, open: false }));
   }
 
-  function show({
-    message,
-    severity = 'error',
-    autoHideDuration = 3000,
-  }: AlertOptions) {
-    setAlert({ open: true, severity, message, autoHideDuration });
-  }
+  const show = useCallback(
+    ({
+      message,
+      severity = 'error',
+      autoHideDuration = 3000,
+    }: AlertOptions) => {
+      setAlert({ open: true, severity, message, autoHideDuration });
+    },
+    []
+  );
+
+  const value = useMemo(() => ({ show }), [show]);
 
   return (
-    <AlertContext.Provider value={{ show }}>
+    <AlertContext.Provider value={value}>
       {children}
       <Snackbar
         open={alert.open}

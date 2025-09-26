@@ -5,6 +5,7 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import { TimePicker, WorkingTime, Staff } from '@studiobooker/utils';
 
 import { useStaffWorkingTime } from '../../hooks/useStaffWorkingTime';
+import { useStaffActivationValidation } from '../../../../../contexts/StaffActivationValidationContext';
 
 type Props = {
   workingTime: WorkingTime;
@@ -15,15 +16,18 @@ export default function StaffWorkingTime({ staff, workingTime }: Props) {
   const { time, handleToggleWorkingTime, handleChangeStart, handleChangeEnd } =
     useStaffWorkingTime({ staffId: staff.id, workingTime });
 
+  const { resetError } = useStaffActivationValidation();
+
   const workingTimeDisabled = !workingTime.activated || staff.activated;
 
   return (
     <>
       <Box display="flex" alignItems={'center'}>
         <IconButton
-          onClick={() =>
-            handleToggleWorkingTime({ isActivated: workingTime.activated })
-          }
+          onClick={() => {
+            resetError('working-times');
+            handleToggleWorkingTime({ isActivated: workingTime.activated });
+          }}
           disabled={staff.activated}
         >
           {workingTime.activated ? (
