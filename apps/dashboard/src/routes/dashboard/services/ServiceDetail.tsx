@@ -8,11 +8,14 @@ import { ServiceProperties } from './components/properties/ServiceProperties';
 import ServiceActivationValidationProvider from '../../../contexts/ServiceActivationValidationContext';
 import ServiceStatus from './components/status/ServiceStatus';
 import { useService } from '../../../hooks/queries/service.queries';
+import { usePageTitle } from '../../../hooks/meta-data/usePageTitle';
 
 export default function ServiceDetail() {
   const serviceId = useNumericParam('id');
 
   const { service, isNotFoundError, isOtherError } = useService(serviceId);
+
+  usePageTitle(`Services - ${service?.title || '...'}`);
 
   if (!serviceId || isNotFoundError) {
     return <FallbackMessage message="The requested service does not exist." />;

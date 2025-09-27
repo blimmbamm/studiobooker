@@ -2,8 +2,11 @@ import { TextField } from '@mui/material';
 
 import { AuthForm } from '@studiobooker/utils';
 import { useLogin } from './useLogin';
+import { usePageTitle } from '../../../hooks/meta-data/usePageTitle';
 
 export default function LoginPage() {
+  usePageTitle('Login');
+
   const {
     emailRef,
     passwordRef,

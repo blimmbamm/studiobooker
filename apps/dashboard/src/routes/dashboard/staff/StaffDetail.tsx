@@ -9,11 +9,14 @@ import StaffProperties from './components/properties/StaffProperties';
 import StaffStatus from './components/status/StaffStatus';
 import { useStaff } from '../../../hooks/queries/staff.queries';
 import StaffActivationValidationProvider from '../../../contexts/StaffActivationValidationContext';
+import { usePageTitle } from '../../../hooks/meta-data/usePageTitle';
 
 export default function StaffDetail() {
   const staffId = useNumericParam('id');
 
   const { staff, isNotFoundError, isOtherError } = useStaff(staffId);
+
+  usePageTitle(`Staff - ${staff ? staff.name : '...'}`);
 
   if (!staffId || isNotFoundError) {
     return <FallbackMessage message="The requested staff does not exist." />;

@@ -9,8 +9,11 @@ import {
 
 import { AuthForm, CenteredCard } from '@studiobooker/utils';
 import { useVerifySignup } from './useVerifySignup';
+import { usePageTitle } from '../../../hooks/meta-data/usePageTitle';
 
 export default function VerifySignupPage() {
+  usePageTitle('Sign up - verify');
+
   const location: Location<{ email?: string }> = useLocation();
 
   const email = location.state?.email;

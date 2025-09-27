@@ -4,8 +4,11 @@ import { Outlet } from 'react-router-dom';
 import { CenteredLayoutBox } from '@studiobooker/utils';
 
 import StaffNavigation from './components/navigation/StaffNavigation';
+import { usePageTitle } from '../../../hooks/meta-data/usePageTitle';
 
 export default function StaffLayout() {
+  usePageTitle('Staff');
+
   return (
     <CenteredLayoutBox>
       <StaffNavigation />
