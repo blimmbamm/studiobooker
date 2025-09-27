@@ -31,7 +31,7 @@ export default function CalendarColumnHeader({ days, ...boxProps }: Props) {
           textAlign="center"
           flex={1}
         >
-          {day.date.format('MMM D')}
+          {day.date.format('dd, MMM D')}
         </Typography>
       ))}
     </Box>
