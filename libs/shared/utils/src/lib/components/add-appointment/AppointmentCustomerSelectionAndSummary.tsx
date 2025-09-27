@@ -65,11 +65,10 @@ export default function AppointmentCustomerSelectionAndSummary({
       <Box flex={1} overflow={'auto'}>
         <Box
           display={'grid'}
-          gridTemplateColumns={'auto auto'}
+          gridTemplateColumns={'max-content auto'}
           alignItems={'center'}
           rowGap={1}
           columnGap={3}
-          width={'fit-content'}
           margin={'auto'}
         >
           <PropertiesTableProperty

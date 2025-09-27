@@ -5,6 +5,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { PropsWithChildren } from 'react';
 
 type Props = {
@@ -38,13 +39,17 @@ export function PropertiesTableProperty({
           </TextField>
         ) : (
           <Box
-            height={40}
+            minHeight={40}
             display={'flex'}
+            minWidth={120}
             alignItems={'center'}
-            // paddingBlock={1.0625} // this would be 8.5 (depending on spacing)
+            paddingBlock={1}
             paddingInline={1.75}
+            border={'1px solid'}
+            borderColor={grey[300]}
+            borderRadius={1}
           >
-            <Typography>{propertyValue}</Typography>
+            <Typography lineHeight={1}>{propertyValue}</Typography>
           </Box>
         )}
       </Tooltip>

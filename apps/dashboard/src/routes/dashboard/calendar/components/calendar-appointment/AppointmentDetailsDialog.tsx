@@ -62,11 +62,11 @@ export default function AppointmentDetailsDialog({
       </Box>
       <Box
         display={'grid'}
-        gridTemplateColumns={'auto auto'}
+        gridTemplateColumns={'max-content auto'}
         alignItems={'Center'}
         rowGap={1}
         columnGap={3}
-        width={'fit-content'}
+        width={'1ßß%'}
         overflow={'auto'}
         paddingBlock={2}
         paddingInline={1}
