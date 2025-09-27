@@ -1,12 +1,8 @@
 'use client';
 
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  TextField,
-} from '@mui/material';
+import { Box, Dialog, IconButton, TextField } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import {
   FormEvent,
   FunctionComponent,
@@ -91,9 +87,11 @@ export function SingleInputDialog<P>({
         component="form"
         onClose={handleClose}
         onSubmit={handleSubmit}
+        disableRestoreFocus
       >
-        <DialogContent>
+        <Box p={2} sx={{ display: 'flex', alignItems: 'start', gap: 0.5 }}>
           <TextField
+            size="small"
             inputRef={inputRef}
             defaultValue={defaultValue}
             placeholder={placeholder}
@@ -101,14 +99,15 @@ export function SingleInputDialog<P>({
             helperText={helperText}
             onChange={handleChange}
             error={isError}
+            autoFocus
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" variant="contained" loading={isPending}>
-            Ok
-          </Button>
-        </DialogActions>
+          <IconButton type="submit" loading={isPending}>
+            <CheckIcon />
+          </IconButton>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
       </Dialog>
     </>
   );
