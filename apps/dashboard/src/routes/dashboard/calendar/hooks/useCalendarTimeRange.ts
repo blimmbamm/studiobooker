@@ -50,12 +50,15 @@ export function useCalendarTimeRange() {
   }
 
   function setTimeRange(from: Dayjs, to: Dayjs) {
-    setParams((pParams) => {
-      const newParams = new URLSearchParams(pParams);
-      newParams.set('from', from.format('YYYYMMDD'));
-      newParams.set('to', to.format('YYYYMMDD'));
-      return newParams;
-    });
+    setParams(
+      (pParams) => {
+        const newParams = new URLSearchParams(pParams);
+        newParams.set('from', from.format('YYYYMMDD'));
+        newParams.set('to', to.format('YYYYMMDD'));
+        return newParams;
+      },
+      { replace: true }
+    );
   }
 
   useEffect(() => {

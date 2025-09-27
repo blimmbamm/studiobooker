@@ -11,11 +11,14 @@ export function useCalendarViewMode() {
   function setViewMode(viewMode: string) {
     // Update if allowed
     if (VIEW_MODES.includes(viewMode as ViewMode)) {
-      setParams((pParams) => {
-        const newParams = new URLSearchParams(pParams);
-        newParams.set('view', viewMode);
-        return newParams;
-      });
+      setParams(
+        (pParams) => {
+          const newParams = new URLSearchParams(pParams);
+          newParams.set('view', viewMode);
+          return newParams;
+        },
+        { replace: true }
+      );
     }
   }
 
