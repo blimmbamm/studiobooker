@@ -4,6 +4,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  ListProps,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { ReactNode } from 'react';
@@ -15,6 +16,7 @@ type StaffListProps<T extends Staff> = {
   staffItemIcon?: (staff: T) => ReactNode;
   staffIsSelected?: (staff: T) => boolean;
   staffIsDisabled?: (staff: T) => boolean;
+  listProps?: ListProps;
 };
 
 export function StaffList<T extends Staff>({
@@ -23,11 +25,20 @@ export function StaffList<T extends Staff>({
   staffItemIcon,
   staffIsSelected,
   staffIsDisabled,
+  listProps,
 }: StaffListProps<T>) {
   return (
-    <List dense disablePadding sx={{ backgroundColor: grey[100] }}>
+    <List
+      disablePadding
+      sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}
+      {...listProps}
+    >
       {staff.map((s) => (
-        <ListItem key={s.id} disablePadding>
+        <ListItem
+          key={s.id}
+          disablePadding
+          sx={{ backgroundColor: grey[300], borderRadius: 1.5 }}
+        >
           <ListItemButton
             onClick={() => onClickStaff?.(s)}
             selected={staffIsSelected?.(s)}

@@ -41,11 +41,13 @@ export default function ServiceStaff({ service }: Props) {
   return (
     <Section
       title="Staff"
-      contentBoxProps={{
-        width: 'fit-content',
-        minWidth: '75%',
-        maxWidth: '100%',
-      }}
+      contentBoxProps={
+        {
+          // width: 'fit-content',
+          // minWidth: '75%',
+          // maxWidth: '100%',
+        }
+      }
     >
       {!service && <ListSkeleton />}
       {service && (
@@ -56,6 +58,7 @@ export default function ServiceStaff({ service }: Props) {
             handleToggleStaffQualification(service, staff)
           }
           staffIsDisabled={() => service.activated}
+          listProps={{ dense: true }}
         />
       )}
     </Section>
