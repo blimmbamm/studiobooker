@@ -32,7 +32,7 @@ export async function getCalendarData({
 }
 
 export async function getAvailableAppointmentSlots(args: {
-  start: Date; // TODO: could this be Dayjs?
+  start: Date; // this could be Dayjs
   serviceId: number;
   staffId: number;
 }) {

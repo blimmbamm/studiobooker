@@ -18,17 +18,9 @@ export default function AppointmentDetailsDialog({
   appointment,
   onClose,
 }: Props) {
-  // TODO: The handler could be moved into the useCancelAppointment hook...
-  // just like for confirming appointment
-  const { mutate } = useCancelAppointment();
-
-  function handleCancelAppointment(appointment: Appointment) {
-    mutate({
-      id: appointment.id,
-    });
-
-    onClose();
-  }
+  const { handleCancelAppointment } = useCancelAppointment({
+    onSuccess: onClose,
+  });
 
   const { handleConfirmAppointment } = useConfirmAppointment({
     onSuccess: onClose,

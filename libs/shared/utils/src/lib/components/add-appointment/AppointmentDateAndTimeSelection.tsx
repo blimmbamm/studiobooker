@@ -20,8 +20,7 @@ dayjs.extend(timezone);
 import AddAppointmentStepNavigation, {
   AddAppointmentStepNavigationProps,
 } from './AddAppointmentStepNavigation';
-import { Service } from '../../types'; // TODO: Service and Staff should be imported from same location
-import { Staff } from '../../types/api/staff/staff';
+import { Service, Staff } from '../../types';
 import { FallbackMessage } from '../FallbackMessage';
 import { AvailableAppointmentSlotsQuery } from './AddAppointmentForServiceDialog';
 

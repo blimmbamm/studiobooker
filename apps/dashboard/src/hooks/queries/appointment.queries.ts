@@ -80,15 +80,28 @@ export function useUpdateAppointment() {
   });
 }
 
-export function useCancelAppointment() {
+type UseCancelAppointmentParams = { onSuccess?: () => void };
+export function useCancelAppointment({
+  onSuccess,
+}: UseCancelAppointmentParams) {
   const invalidateAppointmentQueries = useInvalidateAppointmentQueries();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: ({ id }: { id: number }) => cancelAppointment(id),
     onSuccess: (appointment) => {
       invalidateAppointmentQueries(appointment);
+      onSuccess?.();
     },
   });
+
+  function handleCancelAppointment(appointment: Appointment) {
+    mutation.mutate({ id: appointment.id });
+  }
+
+  return {
+    ...mutation,
+    handleCancelAppointment,
+  };
 }
 
 type UseConfirmAppointmentParams = { onSuccess?: () => void };
@@ -100,8 +113,8 @@ export function useConfirmAppointment({
   const mutation = useMutation({
     mutationFn: ({ id }: { id: number }) => confirmAppointment(id),
     onSuccess: (appointment) => {
-      onSuccess?.();
       invalidateAppointmentQueries(appointment);
+      onSuccess?.();
     },
   });
 

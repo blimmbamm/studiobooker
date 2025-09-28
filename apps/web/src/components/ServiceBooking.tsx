@@ -38,7 +38,6 @@ export default function ServiceBooking({
 
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
-  // TODO: go with function or const approach?
   function staffByServiceQuery(service: Service) {
     const { data: staff, ...query } = useQuery({
       queryKey: ['service-staff', service.id],
@@ -90,7 +89,7 @@ export default function ServiceBooking({
     appointmentData: AppointmentData;
     onSuccess?: () => void;
   }) {
-    // TODO: This duration check is kind of ugly
+    // This duration check is kind of ugly, but okay..
     if (duration) {
       mutate(
         {

@@ -8,14 +8,15 @@ import {
 } from '@mui/material';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { grey } from '@mui/material/colors';
 
 import {
   FallbackMessage,
   NavigationListSkeleton,
   SideNavSection,
 } from '@studiobooker/utils';
+
 import { useCalendarStaffSelection } from './hooks/useCalendarStaffSelection';
-import { grey } from '@mui/material/colors';
 import { useStaffColors } from './contexts/StaffColorContext';
 import { useAllStaff } from '../../../hooks/queries/staff.queries';
 
@@ -26,21 +27,7 @@ export default function CalendarStaffSelection({ boxProps }: Props) {
 
   const { staff, isLoading, isError } = useAllStaff();
 
-  // TODO: clean this up
-  // function* colorIterator(colors: string[]) {
-  //   let index = 0;
-  //   while (true) {
-  //     console.log(index)
-  //     yield colors[index % colors.length];
-  //     index++;
-  //   }
-  // }
-
-  // // Usage
-  // const colors = ['red', 'blue', 'green'];
-  // const iterator = colorIterator(colors);
-  // '#33FF57'
-  const staffColorMap = useStaffColors()
+  const staffColorMap = useStaffColors();
 
   function content() {
     if (isLoading) return <NavigationListSkeleton />;

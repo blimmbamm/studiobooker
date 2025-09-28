@@ -3,6 +3,8 @@ import { ChangeEvent, useState } from 'react';
 import { useMutation, verifySignup } from '@studiobooker/utils';
 
 export function useVerifySignup() {
+  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   const [token, setToken] = useState('');
 
   // Whether token input should be displayed in error state:
@@ -17,7 +19,7 @@ export function useVerifySignup() {
 
   const verifySignupMutation = useMutation({
     mutationFn: ({ email, token }: { email: string; token: string }) =>
-      verifySignup(email, token),
+      verifySignup(email, token, clientTimeZone),
     onSuccess: () => {},
     onError: () => {
       setIsError(true);

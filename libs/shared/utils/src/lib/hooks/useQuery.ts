@@ -28,15 +28,16 @@ export function useQuery<TData>(
       error.type === QueryErrorType.OTHER
         ? count < 3
         : error.status >= 500 && count < 3,
-    // networkMode: 'always', // TODO: What is this used for again?
+    // networkMode: 'always',
+    // By default, useQuery only tries to fetch if
+    // online. To simulate errors because of network, mode can be set to 'always'
+    // and then switch to offline mode in the browser.
   });
 
   return {
     ...query,
     isNotFoundError:
       query.isError && query.error?.type === QueryErrorType.HTTP_NOT_FOUND,
-    isOtherError: query.isError /*&&
-      (query.error?.type === QueryErrorType.HTTP_OTHER ||
-        query.error?.type === QueryErrorType.OTHER), */,
+    isOtherError: query.isError,
   };
 }
