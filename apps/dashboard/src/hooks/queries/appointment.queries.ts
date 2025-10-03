@@ -29,13 +29,15 @@ function useInvalidateAppointmentQueries() {
       predicate: ({ queryKey }: { queryKey: QueryKey }) => {
         if (
           Array.isArray(queryKey) &&
-          typeof queryKey[0] === 'object' &&
-          queryKey[0] !== null &&
-          'from' in queryKey[0] &&
-          'to' in queryKey[0] &&
-          Array.isArray(queryKey[1])
+          typeof queryKey[1] === 'object' &&
+          queryKey[1] !== null &&
+          'from' in queryKey[1] &&
+          'to' in queryKey[1] &&
+          Array.isArray(queryKey[2])
         ) {
-          const [dateRange, staffIds] = queryKey as [
+          console.log(queryKey);
+          const [_companyId, dateRange, staffIds] = queryKey as [
+            any,
             { from: string; to: string },
             number[]
           ];

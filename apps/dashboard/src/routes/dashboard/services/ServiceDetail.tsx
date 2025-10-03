@@ -33,7 +33,7 @@ export default function ServiceDetail() {
       <Divider />
       <ServiceStaff service={service} />
       <Divider />
-      <ServiceSettings service={service} />
+      <ServiceSettings service={service} sx={{ marginBottom: 5 }} />
     </ServiceActivationValidationProvider>
   );
 }

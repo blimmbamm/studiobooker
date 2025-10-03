@@ -32,13 +32,14 @@ export default function StaffServices({ staff, sx }: Props) {
   const { errorMessage, resetError } = useStaffActivationValidation();
 
   function CategorySelectionCheckbox({ services }: ServiceCategoryForStaff) {
-    return services.every((s) => s.staffIsQualifiedForService) ? (
-      <CheckBoxOutlinedIcon />
-    ) : services.some((s) => s.staffIsQualifiedForService) ? (
-      <IndeterminateCheckBoxOutlinedIcon />
-    ) : (
-      <CheckBoxOutlineBlankOutlinedIcon />
-    );
+    if (services.length === 0) return <CheckBoxOutlineBlankOutlinedIcon />;
+
+    if (services.every((s) => s.staffIsQualifiedForService))
+      return <CheckBoxOutlinedIcon />;
+    if (services.some((s) => s.staffIsQualifiedForService))
+      return <IndeterminateCheckBoxOutlinedIcon />;
+
+    return <CheckBoxOutlineBlankOutlinedIcon />;
   }
 
   function ServiceItemIcon(service: ServiceWithStaffQualification) {

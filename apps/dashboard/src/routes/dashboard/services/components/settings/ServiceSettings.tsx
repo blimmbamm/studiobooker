@@ -11,7 +11,7 @@ type Props = {
 
 export default function ServiceSettings({ service, sx }: Props) {
   return (
-    <SettingsSection>
+    <SettingsSection sx={sx}>
       <RemoveService service={service} />
     </SettingsSection>
   );

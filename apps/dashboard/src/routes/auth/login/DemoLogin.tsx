@@ -1,13 +1,22 @@
-import { Button } from '@mui/material';
-import { login, useAuth, useMutation } from '@studiobooker/utils';
+import {
+  login,
+  NavButton,
+  useAlert,
+  useAuth,
+  useMutation,
+} from '@studiobooker/utils';
 
 export default function DemoLogin() {
   const { synchronizeAuth } = useAuth();
+
+  const { show } = useAlert();
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       login(email, password),
     onSuccess: synchronizeAuth,
+    onError: () =>
+      show({ severity: 'error', message: "Hmm, this didn't work. :(" }),
     useDefaultErrorHandling: false,
   });
 
@@ -19,12 +28,8 @@ export default function DemoLogin() {
   }
 
   return (
-    <Button
-      color="inherit"
-      onClick={handleDemoLogin}
-      loading={loginMutation.isPending}
-    >
+    <NavButton onClick={handleDemoLogin} loading={loginMutation.isPending}>
       Check out demo
-    </Button>
+    </NavButton>
   );
 }

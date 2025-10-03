@@ -111,7 +111,7 @@ export function NavigationList<T extends { id: number }>({
           <ListItemButton
             onClick={() => onClick?.(item)}
             sx={{
-              backgroundColor: isActive(item) ? grey[200] : 'inherit',
+              backgroundColor: isActive(item) ? grey[300] : 'inherit',
             }}
             className="list-item-button"
           >

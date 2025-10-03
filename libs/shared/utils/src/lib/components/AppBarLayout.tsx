@@ -21,7 +21,7 @@ export function AppBarLayout({
     <Box display={'flex'} flexDirection={'column'} height={'100dvh'}>
       <CssBaseline />
       <AppBar sx={{ zIndex: 2 }} position="static">
-        <Toolbar>{children}</Toolbar>
+        <Toolbar sx={{ gap: 1, justifyContent: 'center' }}>{children}</Toolbar>
       </AppBar>
       <MainContentWrapper>
         <Box

@@ -26,3 +26,4 @@ export * from './staff-list/StaffList';
 export * from './add-appointment';
 export * from './CenteredMessage';
 export * from './CenteredLayoutBox';
+export * from './NavButton';

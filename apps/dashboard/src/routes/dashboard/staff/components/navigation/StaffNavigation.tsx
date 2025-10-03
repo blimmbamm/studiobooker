@@ -25,8 +25,8 @@ export default function StaffNavigation() {
         navigateTo={(staffMember) => staffMember.id.toString()}
         listItemTextProps={(staffMember) => ({
           sx: {
-            fontStyle: staffMember.activated ? 'noramal' : 'italic',
-            opacity: staffMember.activated ? 1 : 0.5,
+            fontStyle: staffMember.activated ? 'normal' : 'italic',
+            opacity: staffMember.activated ? 1 : 0.8,
           },
         })}
       />
