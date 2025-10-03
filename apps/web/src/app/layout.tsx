@@ -1,9 +1,7 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { Box, Button, ThemeProvider } from '@mui/material';
-import { AppBarLayout, initClient, theme } from '@studiobooker/utils';
+import { Box, ThemeProvider } from '@mui/material';
+import { AppBarLayout, NavButton, theme } from '@studiobooker/utils';
 import Link from 'next/link';
-
-initClient(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001/');
 
 export default function RootLayout({
   children,
@@ -29,24 +27,22 @@ export default function RootLayout({
                 </Box>
               }
             >
-              <Button component={Link} href={'/'} color="inherit">
+              <NavButton component={Link} href={'/'}>
                 Studiobooker
-              </Button>
-              <Button
+              </NavButton>
+              <NavButton
                 component={Link}
                 href={`/${process.env.EXAMPLE_STUDIO_ID}`}
-                color="inherit"
               >
                 Example studio
-              </Button>
-              <Button
+              </NavButton>
+              <NavButton
                 component={Link}
                 href={process.env.URL_DASHBOARD}
                 target="_blank"
-                color="inherit"
               >
                 Get studiobooker
-              </Button>
+              </NavButton>
             </AppBarLayout>
           </AppRouterCacheProvider>
         </ThemeProvider>

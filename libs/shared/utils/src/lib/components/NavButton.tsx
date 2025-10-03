@@ -3,12 +3,14 @@ import { Button, ButtonProps } from '@mui/material';
 
 type Props = {
   to?: To;
+  target?: string;
 } & ButtonProps;
 
 export function NavButton({
   children,
   component = 'button',
   to,
+  target,
   ...otherProps
 }: Props) {
   return (
@@ -17,6 +19,7 @@ export function NavButton({
       sx={{ fontSize: 'large', paddingInline: 3 }}
       {...otherProps}
       to={to}
+      target={target}
     >
       {children}
     </Button>

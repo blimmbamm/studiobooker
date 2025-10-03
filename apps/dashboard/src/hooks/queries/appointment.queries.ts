@@ -35,7 +35,6 @@ function useInvalidateAppointmentQueries() {
           'to' in queryKey[1] &&
           Array.isArray(queryKey[2])
         ) {
-          console.log(queryKey);
           const [_companyId, dateRange, staffIds] = queryKey as [
             any,
             { from: string; to: string },

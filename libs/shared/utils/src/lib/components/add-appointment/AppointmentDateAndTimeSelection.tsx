@@ -61,7 +61,7 @@ export default function AppointmentDateAndTimeSelection({
     }
   );
 
-  if (isPending) return <CircularProgress />;
+  if (isPending) return <CircularProgress sx={{ margin: 'auto' }} />;
 
   if (isError)
     return <FallbackMessage message="Failed to load available slots." />;
