@@ -1,7 +1,8 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import { AppBarLayout } from '@studiobooker/utils';
+import DemoLogin from './login/DemoLogin';
 
 export default function AuthLayout() {
   return (
@@ -15,6 +16,8 @@ export default function AuthLayout() {
       <Button component={NavLink} to={'register'} color="inherit">
         Signup
       </Button>
+      <Box flex={1} />
+      <DemoLogin />
     </AppBarLayout>
   );
 }
