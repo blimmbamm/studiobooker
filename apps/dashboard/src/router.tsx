@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <Navigate to={'staff'} /> },
+          { index: true, element: <Navigate to={'calendar'} /> },
           { path: 'calendar', element: <CalendarLayout /> },
           {
             path: 'staff',
