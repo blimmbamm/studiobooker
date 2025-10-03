@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { client } from '../../http';
+import { getClient } from '../../http';
 import {
   ApiStudioInformation,
   mapApiToStudioInformation,
@@ -8,7 +8,7 @@ import {
 
 export async function getStudioPublic(studioId: string) {
   try {
-    const data = await client.get<ApiStudioInformation>(
+    const data = await getClient().get<ApiStudioInformation>(
       `public/studio/${studioId}`,
       200
     );

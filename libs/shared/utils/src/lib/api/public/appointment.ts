@@ -1,4 +1,4 @@
-import { client } from '../../http';
+import { getClient } from '../../http';
 import {
   AddAppointmentDto,
   ApiAppointment,
@@ -13,7 +13,7 @@ export async function getAvailableAppointmentSlotsPublic(args: {
   staffId: number;
   start: Date;
 }) {
-  const slots = await client.post<ApiAvailableAppointmentSlots[]>(
+  const slots = await getClient().post<ApiAvailableAppointmentSlots[]>(
     'public/available-appointment-slots',
     args
   );
@@ -23,7 +23,7 @@ export async function getAvailableAppointmentSlotsPublic(args: {
 export async function addAppointmentPublic(
   args: AddAppointmentDto & { companyId: number }
 ) {
-  const appointment = await client.post<ApiAppointment>(
+  const appointment = await getClient().post<ApiAppointment>(
     'public/appointment',
     args,
     1500

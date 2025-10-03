@@ -1,7 +1,9 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Box, Button, ThemeProvider } from '@mui/material';
-import { AppBarLayout, theme } from '@studiobooker/utils';
+import { AppBarLayout, initClient, theme } from '@studiobooker/utils';
 import Link from 'next/link';
+
+initClient(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001/');
 
 export default function RootLayout({
   children,

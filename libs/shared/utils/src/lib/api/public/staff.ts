@@ -1,4 +1,4 @@
-import { client } from '../../http';
+import { getClient } from '../../http';
 import { ApiStaff } from '../../types/api/staff/staff.api';
 import { mapApiToStaff } from '../../types/api/staff/staff.mapper';
 
@@ -9,7 +9,7 @@ export async function getStaffByServicePublic({
   companyId: number;
   serviceId: number;
 }) {
-  const staff = await client.post<ApiStaff[]>('public/service-personnel', {
+  const staff = await getClient().post<ApiStaff[]>('public/service-personnel', {
     companyId,
     serviceId,
   });

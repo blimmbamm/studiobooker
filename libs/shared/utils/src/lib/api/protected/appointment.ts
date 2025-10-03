@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { client } from '../../http';
+import { getClient } from '../../http';
 import { ApiCalendarDay } from '../../types/api/calendar-day/calendar-day.api';
 import { mapApiToCalendarDay } from '../../types/api/calendar-day/calendar-day.mapper';
 import {
@@ -24,7 +24,7 @@ export async function getCalendarData({
   to: string;
   staffIds: number[];
 }) {
-  const calendarDays = await client.get<ApiCalendarDay[]>(
+  const calendarDays = await getClient().get<ApiCalendarDay[]>(
     `appointment?from=${from}&to=${to}&staff=${staffIds.toString()}`
   );
 
@@ -36,7 +36,7 @@ export async function getAvailableAppointmentSlots(args: {
   serviceId: number;
   staffId: number;
 }) {
-  const slots = await client.post<ApiAvailableAppointmentSlots[]>(
+  const slots = await getClient().post<ApiAvailableAppointmentSlots[]>(
     'appointment/available-slots',
     args
   );
@@ -44,7 +44,7 @@ export async function getAvailableAppointmentSlots(args: {
 }
 
 export async function addAppointment(addAppointmentDto: AddAppointmentDto) {
-  const appointment = await client.post<ApiAppointment>(
+  const appointment = await getClient().post<ApiAppointment>(
     'appointment',
     addAppointmentDto
   );
@@ -53,7 +53,7 @@ export async function addAppointment(addAppointmentDto: AddAppointmentDto) {
 }
 
 export async function updateAppointment(id: number, dto: UpdateAppointmentDto) {
-  const appointment = await client.patch<ApiAppointment>(
+  const appointment = await getClient().patch<ApiAppointment>(
     `appointment/${id}`,
     dto
   );
@@ -62,7 +62,7 @@ export async function updateAppointment(id: number, dto: UpdateAppointmentDto) {
 }
 
 export async function cancelAppointment(id: number) {
-  const appointment = await client.patch<ApiAppointment>(
+  const appointment = await getClient().patch<ApiAppointment>(
     `appointment/cancel/${id}`,
     {}
   );
@@ -71,7 +71,7 @@ export async function cancelAppointment(id: number) {
 }
 
 export async function confirmAppointment(id: number) {
-  const appointment = await client.patch<ApiAppointment>(
+  const appointment = await getClient().patch<ApiAppointment>(
     `appointment/confirm/${id}`,
     {}
   );

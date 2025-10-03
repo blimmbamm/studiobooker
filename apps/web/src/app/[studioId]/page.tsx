@@ -1,5 +1,7 @@
-import { getStudioPublic } from '@studiobooker/utils';
+import { getStudioPublic, initClient } from '@studiobooker/utils';
 import StudioDetails from '../../components/StudioDetails';
+
+initClient(process.env.BACKEND_URL || 'http://localhost:3001/');
 
 export default async function StudioPage({
   params,

@@ -66,4 +66,14 @@ export class HttpClient {
   }
 }
 
-export const client = new HttpClient('http://localhost:3001/');
+let client: HttpClient | undefined;
+
+export function initClient(baseUrl: string) {
+  client = new HttpClient(baseUrl);
+}
+
+export function getClient(): HttpClient {
+  if (!client) throw new Error('Api client not initialized.');
+
+  return client;
+}
