@@ -2,6 +2,14 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Box, ThemeProvider } from '@mui/material';
 import { AppBarLayout, NavButton, theme } from '@studiobooker/utils';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: 'Studiobooker | %s',
+    default: 'Studiobooker',
+  },
+};
 
 export default function RootLayout({
   children,
