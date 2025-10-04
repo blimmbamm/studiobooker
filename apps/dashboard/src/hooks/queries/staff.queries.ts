@@ -11,6 +11,7 @@ import {
   EditStaffDto,
   StaffStructured,
 } from '@studiobooker/utils';
+import { useMemo } from 'react';
 
 export const StaffQueryKeys = {
   STAFF_ANY: ['staff'],
@@ -35,10 +36,17 @@ export const StaffQueryKeys = {
 };
 
 export function useAllStaff(searchParams?: GetAllStaffSearchParams) {
+  // Actually, this is not necessary:
+  const queryKey = useMemo(
+    () =>
+      searchParams
+        ? StaffQueryKeys.STAFF_ALL_BY_PARAMS(searchParams)
+        : StaffQueryKeys.STAFF_ALL,
+    [searchParams]
+  );
+
   const { data: staff, ...query } = useQuery({
-    queryKey: searchParams
-      ? StaffQueryKeys.STAFF_ALL_BY_PARAMS(searchParams)
-      : StaffQueryKeys.STAFF_ALL,
+    queryKey,
     queryFn: () => getAllStaff(searchParams),
   });
 

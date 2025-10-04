@@ -9,8 +9,7 @@ import {
 export async function getStudioPublic(studioId: string) {
   try {
     const data = await getClient().get<ApiStudioInformation>(
-      `public/studio/${studioId}`,
-      200
+      `public/studio/${studioId}`
     );
 
     return mapApiToStudioInformation(data);

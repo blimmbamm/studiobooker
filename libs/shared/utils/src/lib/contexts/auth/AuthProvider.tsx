@@ -21,6 +21,7 @@ export function AuthProvider(props: PropsWithChildren) {
   } = useQuery({
     queryKey: ['auth-check'],
     queryFn: checkAuth,
+    staleTime: 0,
   });
 
   const { id } = data || {};

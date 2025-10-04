@@ -5,5 +5,5 @@ export async function checkAuth() {
 }
 
 export async function logout() {
-  return getClient().post<{ message: string }>('auth/logout');
+  return getClient().post<{ message: string }>('auth/logout', {});
 }
