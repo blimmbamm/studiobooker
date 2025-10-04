@@ -14,6 +14,7 @@ export async function getStudioPublic(studioId: string) {
 
     return mapApiToStudioInformation(data);
   } catch (error) {
+    console.error(error);
     if (error instanceof QueryError && error.status === 404) {
       notFound();
     } else {
