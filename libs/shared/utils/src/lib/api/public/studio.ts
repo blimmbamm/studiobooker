@@ -12,14 +12,13 @@ export async function getStudioPublic(studioId: string) {
       `public/studio/${studioId}`,
       200
     );
-    console.warn(data)
 
     return mapApiToStudioInformation(data);
   } catch (error) {
+    console.error(error);
     if (error instanceof QueryError && error.status === 404) {
       notFound();
     } else {
-      console.error('real error', error)
       throw error;
     }
   }
