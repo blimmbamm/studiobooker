@@ -10,7 +10,7 @@ import {
 import { useLogout } from '../../hooks/auth/useLogout';
 
 export default function DashboardRoot() {
-  const { mutate: logout } = useLogout();
+  const { mutate: logout, isPending } = useLogout();
 
   const scrollContainerRef = useRef<HTMLElement>(null);
 
@@ -42,7 +42,9 @@ export default function DashboardRoot() {
       <NavButton component={NavLink} to={'settings'}>
         Settings
       </NavButton>
-      <NavButton onClick={() => logout()}>Logout</NavButton>
+      <NavButton loading={isPending} onClick={() => logout()}>
+        Logout
+      </NavButton>
     </AppBarLayout>
   );
 }
