@@ -4,9 +4,14 @@ import { cache } from 'react';
 
 initClient(process.env.BACKEND_URL || 'http://localhost:3001/');
 
-const getStudioPublicCached = cache((studioId: string) =>
-  getStudioPublic(studioId)
-);
+const getStudioPublicCached = cache((studioId: string) => {
+  try {
+    return getStudioPublic(studioId);
+  } catch (error) {
+    console.log(error);
+    throw error
+  }
+});
 
 export async function generateMetadata({
   params,
@@ -14,6 +19,7 @@ export async function generateMetadata({
   params: Promise<{ studioId: string }>;
 }) {
   const { studioId } = await params;
+
   const studio = await getStudioPublicCached(studioId);
 
   return {
