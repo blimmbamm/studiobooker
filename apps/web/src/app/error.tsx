@@ -10,7 +10,7 @@ export default function Error({ error }: ErrorPageProps) {
   return (
     <CenteredMessage
       message="Something went wrong. :("
-      description={error.message}
+      // description={error.message}
     />
   );
 }
