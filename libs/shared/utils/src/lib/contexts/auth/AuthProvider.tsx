@@ -1,8 +1,8 @@
 'use client';
 
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 
 import { useQuery } from '../../hooks';
 import { AuthContext } from './AuthContext';
@@ -36,11 +36,23 @@ export function AuthProvider(props: PropsWithChildren) {
     }
   }, [isAuthenticated, isError, navigate]);
 
+  const [extraMessage, setExtraMessage] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setExtraMessage(true), 2000);
+    return () => clearTimeout(timeout);
+  }, []);
+
   if (isLoading) {
     return (
-      <CircularProgress
-        sx={{ display: 'block', margin: 'auto', marginTop: '20dvh' }}
-      />
+      <Stack marginTop={'20dvh'} textAlign={'center'} gap={3}>
+        <CircularProgress sx={{ margin: 'auto' }} />
+        {extraMessage && (
+          <Typography fontSize={'1.5rem'}>
+            Be patient, the backend service is booting. 😊
+          </Typography>
+        )}
+      </Stack>
     );
   }
 
