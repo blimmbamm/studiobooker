@@ -2,9 +2,6 @@
   "files": [],
   "references": [
     {
-      "path": "../../libs/shared/utils"
-    },
-    {
       "path": "./tsconfig.app.json"
     },
     {

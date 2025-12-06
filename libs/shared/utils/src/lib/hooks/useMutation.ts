@@ -20,7 +20,7 @@ export function useMutation<TData, TVariables, TContext = unknown>(
 
   return useTanstackMutation({
     ...restOptions,
-    onError: (error, variables, context) => {
+    onError: (error, variables, onMutateResult, context) => {
       if (useDefaultErrorHandling) {
         alert.show({
           message: "Hmm, this didn't work :(",
@@ -29,7 +29,7 @@ export function useMutation<TData, TVariables, TContext = unknown>(
       }
 
       if (onError) {
-        onError(error, variables, context);
+        onError(error, variables, onMutateResult, context);
       }
     },
   });
