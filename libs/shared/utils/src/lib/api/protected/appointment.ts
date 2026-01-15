@@ -27,6 +27,8 @@ export async function getCalendarData({
   const calendarDays = await getClient().get<ApiCalendarDay[]>(
     `appointment?from=${from}&to=${to}&staff=${staffIds.toString()}`
   );
+  console.log(calendarDays)
+  console.log(calendarDays.map(mapApiToCalendarDay))
 
   return calendarDays.map(mapApiToCalendarDay);
 }

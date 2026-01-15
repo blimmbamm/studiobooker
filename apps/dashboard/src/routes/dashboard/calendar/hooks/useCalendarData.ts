@@ -25,6 +25,7 @@ export function useCalendarData() {
         staffIds: staffIds!,
       }),
     enabled: Boolean(timeRange && staffIds && staffIds.length > 0),
+    staleTime: 0, // this is needed otherwise defaultOptions' staleTime of Infinity will always keep initialData
     initialData:
       timeRange &&
       getPlaceholderCalendarData({ from: timeRange.from, to: timeRange.to }),
