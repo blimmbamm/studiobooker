@@ -62,8 +62,10 @@ export function useEditCompanyInfo({
         queryClient.setQueryData(context.queryKey, context.prevCompany);
       }
     },
-    onSuccess: (_d, _v, { queryKey }) => {
-      queryClient.invalidateQueries({ queryKey });
+    onSuccess: (_d, _v, context) => {
+      if (context) {
+        queryClient.invalidateQueries({ queryKey: context.queryKey });
+      }
     },
   });
 }

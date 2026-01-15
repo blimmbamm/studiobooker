@@ -4,7 +4,6 @@ import {
   useQuery,
   useMutation,
   QueryError,
-  useQueryClient,
   addCategory,
   addService,
   addStaffToService,
@@ -23,6 +22,7 @@ import {
   ServiceStructured,
   EditServiceCategoryDto,
   ServiceCategoryStructured,
+  useQueryClient,
 } from '@studiobooker/utils';
 import { StaffQueryKeys } from './staff.queries';
 
@@ -234,6 +234,7 @@ export function useEditService({
           if (!data) return data;
 
           const newData = structuredClone(data);
+
           return { ...newData, ...input };
         });
 
