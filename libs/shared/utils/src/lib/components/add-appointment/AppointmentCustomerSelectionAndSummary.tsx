@@ -28,6 +28,7 @@ export default function AppointmentCustomerSelectionAndSummary({
   isSubmittingAppointment,
   ...stepNavigationProps
 }: Props) {
+  console.log(selectedDate)
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [notes, setNotes] = useState('');
